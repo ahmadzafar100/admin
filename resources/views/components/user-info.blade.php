@@ -4,7 +4,7 @@
     </a>
 
     <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-        <img src="{{url('img/avatars/avatar.jpg')}}" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+        <img src="{{asset('img/avatars/avatar.jpg')}}" class="avatar img-fluid rounded me-1" alt="Admin" /> <span class="text-dark">Admin</span>
     </a>
     <div class="dropdown-menu dropdown-menu-end">
         <a class="dropdown-item" href="{{url('/profile')}}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
@@ -13,6 +13,6 @@
         <a class="dropdown-item" href="{{url('/')}}"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
         <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{url('/login')}}">Log out</a>
+        <a class="dropdown-item" href="{{url('/')}}">Logout</a>
     </div>
 </li>

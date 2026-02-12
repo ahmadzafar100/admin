@@ -13,6 +13,8 @@
                                 <h5 class="card-title mb-0">Empty card</h5>
                             </div>
                             <div class="card-body">
+                                <label>Name</label>
+                                <input type="text" class="form-control">
                             </div>
                         </div>
                     </div>
