@@ -10,4 +10,13 @@ class AuthController extends Controller
     {
         return view('login');
     }
+
+    function validate(Request $r) {
+        $r->validate([
+            'username'=>'required',
+            'password'=>'required'
+        ]);
+
+        
+    }
 }

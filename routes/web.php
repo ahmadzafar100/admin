@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
     return view('login');
 }); */
 
-Route::get('/', [AuthController::class, 'login']);
+Route::get('/admin/login', [AuthController::class, 'login']);
+Route::post('/admin/login', [AuthController::class, 'validate']);
 
 Route::view('/profile', 'profile');
 Route::view('/blank', 'blank');

@@ -33,14 +33,21 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="m-sm-3">
-									<form>
+									<form method="post" action="{{url('/admin/login')}}">
+										@csrf
 										<div class="mb-3">
 											<label class="form-label">Username</label>
 											<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" />
+											@error('username')
+												<span class="text-danger">{{ $message }}</span>
+											@enderror
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Password</label>
 											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
+											@error('username')
+												<span class="text-danger">{{ $message }}</span>
+											@enderror
 										</div>
 										<div>
 											<div class="form-check align-items-center">
@@ -49,7 +56,7 @@
 											</div>
 										</div>
 										<div class="d-grid gap-2 mt-3">
-											<a href="{{url('/dashboard')}}" class="btn btn-lg btn-primary">Login</a>
+											<button type="submit" class="btn btn-lg btn-primary">Login</button>
 										</div>
 									</form>
 								</div>
