@@ -29,4 +29,10 @@ class AuthController extends Controller
         Session::put('user', $row);
         return redirect('/admin/dashboard');
     }
+
+    function logout()
+    {
+        Session::flush();
+        return redirect('/admin/login');
+    }
 }

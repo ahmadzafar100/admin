@@ -7,12 +7,7 @@
         <img src="{{asset('img/avatars/avatar.jpg')}}" class="avatar img-fluid rounded me-1" alt="Admin" /> <span class="text-dark">Admin</span>
     </a>
     <div class="dropdown-menu dropdown-menu-end">
-        <a class="dropdown-item" href="{{url('/profile')}}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{url('/')}}"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-        <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{url('/admin/login')}}">Logout</a>
+        <a class="dropdown-item" href="{{url('/admin/profile')}}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+        <a class="dropdown-item" href="{{url('/admin/logout')}}"><i class="align-middle me-1" data-feather="log-out"></i> Logout</a>
     </div>
 </li>

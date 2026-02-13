@@ -40,6 +40,11 @@
 											{{session('err_msg')}}
 										</div>
 										@endif
+										@if(session()->has('success_msg'))
+										<div class="text-success">
+											{{session('success_msg')}}
+										</div>
+										@endif
 										<div class="mb-3">
 											<label class="form-label">Username</label>
 											<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" />
