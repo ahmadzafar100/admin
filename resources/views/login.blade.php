@@ -35,18 +35,23 @@
 								<div class="m-sm-3">
 									<form method="post" action="{{url('/admin/login')}}">
 										@csrf
+										@if(session()->has('err_msg'))
+										<div class="text-danger">
+											{{session('err_msg')}}
+										</div>
+										@endif
 										<div class="mb-3">
 											<label class="form-label">Username</label>
 											<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" />
 											@error('username')
-												<span class="text-danger">{{ $message }}</span>
+											<span class="text-danger">{{ $message }}</span>
 											@enderror
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Password</label>
 											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
-											@error('username')
-												<span class="text-danger">{{ $message }}</span>
+											@error('password')
+											<span class="text-danger">{{ $message }}</span>
 											@enderror
 										</div>
 										<div>
