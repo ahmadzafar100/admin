@@ -36,6 +36,18 @@ class ProfileController extends Controller
 
     function update_password(Request $r)
     {
+        $r->validate(
+            [
+                'current_pass' => 'required',
+                'new_pass' => 'required',
+                'confirm_pass' => 'required',
+            ],
+            [
+                'current_pass.required' => 'Current password is required.',
+                'new_pass.required' => 'New password is required.',
+                'confirm_pass.required' => 'Password confirmation is required.',
+            ]
+        );
         if (!Hash::check($r->current_pass, session('user')->password)) {
             Session::flash('err_msg', 'Your current password is incorrect.');
             return redirect('/admin/change-password');
