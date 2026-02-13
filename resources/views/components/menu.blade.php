@@ -10,14 +10,8 @@
     </li>
 
     <li class="sidebar-item">
-        <a class="sidebar-link" href="{{url('/profile')}}">
-            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
-        </a>
-    </li>
-
-    <li class="sidebar-item">
-        <a class="sidebar-link" href="{{url('/blank')}}">
-            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
+        <a class="sidebar-link" href="{{url('/admin/manage-category')}}">
+            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Category</span>
         </a>
     </li>
 </ul>

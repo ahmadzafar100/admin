@@ -23,10 +23,13 @@ class ProfileController extends Controller
             'mobile' => $r->mobile
         ]);
 
-        if ($update) {
-            Session::flash('success_msg', 'Profile updated.');
+        if (!$update) {
+            Session::flash('err_msg', 'Profile not updated.');
             return redirect('/admin/profile');
         }
+
+        Session::flash('success_msg', 'Profile updated.');
+        return redirect('/admin/profile');
     }
 
     function change_password()
@@ -62,10 +65,13 @@ class ProfileController extends Controller
             'password' => $newPassword,
         ]);
 
-        if ($update) {
-            Session::flush();
-            Session::flash('success_msg', 'Password changed successfully. Please login again.');
+        if (!$update) {
+            Session::flash('err_msg', 'Password not changed.');
             return redirect('/admin/login');
         }
+
+        Session::flush();
+        Session::flash('success_msg', 'Password changed successfully. Please login again.');
+        return redirect('/admin/login');
     }
 }

@@ -22,21 +22,21 @@
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Current Password</label>
-                                            <input type="password" class="form-control" name="current_pass">
+                                            <input type="password" class="form-control" name="current_pass" value="{{old('current_pass')}}">
                                             @error('current_pass')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>New Password</label>
-                                            <input type="password" class="form-control" name="new_pass">
+                                            <input type="password" class="form-control" name="new_pass" value="{{old('new_pass')}}">
                                             @error('new_pass')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Confirm Password</label>
-                                            <input type="password" class="form-control" name="confirm_pass">
+                                            <input type="password" class="form-control" name="confirm_pass" value="{{old('confirm_pass')}}">
                                             @error('confirm_pass')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
