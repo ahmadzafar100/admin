@@ -9,15 +9,20 @@ class ProfileController extends Controller
 {
     function index()
     {
-        return view('profile');
+        $user = DB::table('users')->where('id', session('user')->id)->first();
+        return view('profile', ['data' => $user]);
     }
 
     function update(Request $r)
     {
-        $update = DB::table('users')->insert([
+        $update = DB::table('users')->where('id', session('user')->id)->update([
             'name' => $r->name,
             'email' => $r->email,
             'mobile' => $r->mobile
         ]);
+
+        if ($update) {
+            return redirect('/admin/profile');
+        }
     }
 }
