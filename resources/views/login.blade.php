@@ -15,6 +15,7 @@
 	<title>Admin Login</title>
 
 	<link href="{{asset('css/app.css')}}" rel="stylesheet">
+	<link href="{{asset('css/alert.css')}}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -36,12 +37,12 @@
 									<form method="post" action="{{url('/admin/login')}}">
 										@csrf
 										@if(session()->has('err_msg'))
-										<div class="text-danger">
+										<div class="alert alert-danger">
 											{{session('err_msg')}}
 										</div>
 										@endif
 										@if(session()->has('success_msg'))
-										<div class="text-success">
+										<div class="alert alert-success">
 											{{session('success_msg')}}
 										</div>
 										@endif

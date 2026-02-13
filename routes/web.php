@@ -18,4 +18,6 @@ Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::view('/admin/dashboard', 'dashboard');
     Route::get('/admin/profile', [ProfileController::class, 'index']);
     Route::post('/admin/profile-update', [ProfileController::class, 'update']);
+    Route::get('/admin/change-password', [ProfileController::class, 'change_password']);
+    Route::post('/admin/update-pass', [ProfileController::class, 'update_password']);
 });

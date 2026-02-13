@@ -14,6 +14,16 @@
                             <div class="card-body">
                                 <form action="/admin/profile-update" method="post">
                                     @csrf
+                                    @if(session()->has('err_msg'))
+                                    <div class="alert alert-danger">
+                                        {{session('err_msg')}}
+                                    </div>
+                                    @endif
+                                    @if(session()->has('success_msg'))
+                                    <div class="alert alert-danger">
+                                        {{session('success_msg')}}
+                                    </div>
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Name</label>
