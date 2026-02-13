@@ -16,5 +16,6 @@ Route::view('/blank', 'blank');
 
 Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::view('/admin/dashboard', 'dashboard');
-    Route::view('/admin/profile', [ProfileController::class, 'index']);
+    Route::get('/admin/profile', [ProfileController::class, 'index']);
+    Route::post('/admin/profile-update', [ProfileController::class, 'update']);
 });
