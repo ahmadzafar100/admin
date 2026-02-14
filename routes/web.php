@@ -22,4 +22,5 @@ Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::get('/admin/change-password', [ProfileController::class, 'change_password']);
     Route::post('/admin/update-pass', [ProfileController::class, 'update_password']);
     Route::resource('/admin/category', CategoryController::class);
+    Route::post('/admin/category-import', [CategoryController::class, 'import']);
 });

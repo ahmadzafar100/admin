@@ -11,6 +11,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card mb-3">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Add Category Manually</h5>
+                            </div>
                             <div class="card-body">
                                 <form action="/admin/category" method="post">
                                     @csrf
@@ -48,6 +51,27 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Or Import Excel to Add Categories</h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="/admin/category-import" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-6 mb-3">
+                                            <input type="file" class="form-control" name="file">
+                                            @error('file')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary">Import</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <div class="card flex-fill">
                             <table class="table table-hover my-0">
                                 <thead>
@@ -64,7 +88,7 @@
                                     @if (count($data) > 0)
                                         @foreach ($data as $row)
                                             <tr>
-                                                <td>{{ count($data) }}</td>
+                                                <td>{{ $loop->iteration }}.</td>
                                                 <td>{{ $row->name }}</td>
                                                 <td>{{ $row->display_name }}</td>
                                                 <td><span class="badge bg-success">Active</span></td>
@@ -72,6 +96,14 @@
                                                 <td></td>
                                             </tr>
                                         @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="6">
+                                                <h3 class="mb-0 text-danger text-uppercase text-center"><strong>No Data
+                                                        Found...</strong>
+                                                </h3>
+                                            </td>
+                                        </tr>
                                     @endif
                                 </tbody>
                             </table>
