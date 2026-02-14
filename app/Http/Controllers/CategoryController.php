@@ -99,4 +99,26 @@ class CategoryController extends Controller
         Excel::import(new CategoryImport, $request->file('file'));
         return back()->with('success_msg', 'Category Imported Successfully');
     }
+
+    function deactivate($id)
+    {
+        $update = Category::find($id);
+        $update->status = 0;
+
+        if ($update->save()) {
+            Session::flash('action_msg', 'Category deactivated.');
+            return redirect('/admin/category');
+        }
+    }
+
+    function activate($id)
+    {
+        $update = Category::find($id);
+        $update->status = 1;
+
+        if ($update->save()) {
+            Session::flash('action_msg', 'Category activated.');
+            return redirect('/admin/category');
+        }
+    }
 }

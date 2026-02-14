@@ -23,4 +23,6 @@ Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::post('/admin/update-pass', [ProfileController::class, 'update_password']);
     Route::resource('/admin/category', CategoryController::class);
     Route::post('/admin/category-import', [CategoryController::class, 'import']);
+    Route::get('/admin/deactivate-category/{id}', [CategoryController::class, 'deactivate']);
+    Route::get('/admin/activate-category/{id}', [CategoryController::class, 'activate']);
 });

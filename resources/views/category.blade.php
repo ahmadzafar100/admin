@@ -73,6 +73,11 @@
                             </div>
                         </div>
                         <div class="card flex-fill">
+                            @if (session()->has('action_msg'))
+                                <div class="alert alert-info">
+                                    {{ session('action_msg') }}
+                                </div>
+                            @endif
                             <table class="table table-hover my-0">
                                 <thead>
                                     <tr>
@@ -91,13 +96,24 @@
                                                 <td>{{ $loop->iteration }}.</td>
                                                 <td>{{ $row->name }}</td>
                                                 <td>{{ $row->display_name }}</td>
-                                                <td><span class="badge bg-success">Active</span></td>
+                                                <td>
+                                                    @if ($row->status === 1)
+                                                        <span class="badge bg-success">Active</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Inactive</span>
+                                                    @endif
+                                                </td>
                                                 <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
                                                 <td>
-                                                    <a href="{{ url('/admin/deactivate-category/' . $row->id) }}"
-                                                        class="btn btn-primary btn-sm">Deactive</a>
+                                                    @if ($row->status === 1)
+                                                        <a href="{{ url('/admin/deactivate-category/' . $row->id) }}"
+                                                            class="btn btn-primary btn-sm">Deactivate</a>
+                                                    @else
+                                                        <a href="{{ url('/admin/activate-category/' . $row->id) }}"
+                                                            class="btn btn-warning btn-sm">Activate</a>
+                                                    @endif
                                                     <form action="{{ url('admin/category/' . $row->id) }}"
-                                                        method="POST">
+                                                        method="POST" class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm"

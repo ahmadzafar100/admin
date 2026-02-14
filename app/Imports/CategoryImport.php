@@ -14,6 +14,10 @@ class CategoryImport implements ToModel
      */
     public function model(array $row)
     {
+        if (Category::where('name', $row[0])->exists()) {
+            return null; // skip duplicate
+        }
+
         return new Category([
             'name' => $row[0],
             'display_name' => $row[1],
