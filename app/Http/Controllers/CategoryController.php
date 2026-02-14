@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -11,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = Category::orderBy('id', 'desc')->get();
+        return view('category', ['data' => $category]);
     }
 
     /**
@@ -27,7 +30,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'display_name' => 'required'
+        ]);
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->display_name = $request->display_name;
+        if (!$category->save()) {
+            Session::flash('err_msg', 'Category not saved.');
+            return redirect('/admin/category');
+        }
+        Session::flash('success_msg', 'Category saved.');
+        return redirect('/admin/category');
     }
 
     /**
