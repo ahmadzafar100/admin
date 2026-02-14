@@ -7,15 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
     <meta name="author" content="AdminKit">
-    <meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+    <meta name="keywords"
+        content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="{{asset('img/icons/icon-48x48.png')}}" />
+    <link rel="shortcut icon" href="{{ asset('img/icons/icon-48x48.png') }}" />
 
-    <title>{{$title}}</title>
+    <title>{{ $title }}</title>
 
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
-    <link href="{{asset('css/alert.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/alert.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -23,7 +24,7 @@
     <div class="wrapper">
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="{{url('/')}}">
+                <a class="sidebar-brand" href="{{ url('/') }}">
                     <span class="align-middle">Admin Panel</span>
                 </a>
                 <x-menu></x-menu>
@@ -45,14 +46,15 @@
                 </div>
             </nav>
 
-            {{$main}}
+            {{ $main }}
 
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row text-muted">
                         <div class="col-12 text-start">
                             <p class="mb-0">
-                                Copyright &copy; <a class="text-muted" href="{{url('/dashboard')}}" target="_blank"><strong>Admin Panel</strong></a>. All rights reserved.
+                                Copyright &copy; <a class="text-muted" href="{{ url('/dashboard') }}"
+                                    target="_blank"><strong>Admin Panel</strong></a>. All rights reserved.
                             </p>
                         </div>
                     </div>
@@ -61,7 +63,7 @@
         </div>
     </div>
 
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -73,7 +75,9 @@
             new Chart(document.getElementById("chartjs-dashboard-line"), {
                 type: "line",
                 data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
+                        "Dec"
+                    ],
                     datasets: [{
                         label: "Sales ($)",
                         fill: true,
@@ -167,7 +171,9 @@
             new Chart(document.getElementById("chartjs-dashboard-bar"), {
                 type: "bar",
                 data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
+                        "Dec"
+                    ],
                     datasets: [{
                         label: "This year",
                         backgroundColor: window.theme.primary,
@@ -285,6 +291,7 @@
         });
     </script>
 
+    @include('sweetalert::alert')
 </body>
 
 </html>

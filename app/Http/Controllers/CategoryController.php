@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
@@ -16,6 +17,9 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::orderBy('id', 'desc')->get();
+        $title = 'Delete Category!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('category', ['data' => $category]);
     }
 
@@ -77,7 +81,13 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $del = Category::destroy($id);
+        if (!$del) {
+            return back()->with('err_msg', 'Category not deleted.');
+        }
+        // return back()->with('success_msg', 'Category deleted.');
+        Alert::success('Success', 'Category Added Successfully');
+        return redirect()->back();
     }
 
     public function import(Request $request)
@@ -87,6 +97,6 @@ class CategoryController extends Controller
         ]);
 
         Excel::import(new CategoryImport, $request->file('file'));
-        return back()->with('success_msg', 'Data Imported Successfully');
+        return back()->with('success_msg', 'Category Imported Successfully');
     }
 }

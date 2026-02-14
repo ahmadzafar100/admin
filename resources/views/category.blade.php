@@ -93,7 +93,17 @@
                                                 <td>{{ $row->display_name }}</td>
                                                 <td><span class="badge bg-success">Active</span></td>
                                                 <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
-                                                <td></td>
+                                                <td>
+                                                    <a href="{{ url('/admin/deactivate-category/' . $row->id) }}"
+                                                        class="btn btn-primary btn-sm">Deactive</a>
+                                                    <form action="{{ url('admin/category/' . $row->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            data-confirm-delete="true">Delete</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @else
