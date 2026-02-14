@@ -57,23 +57,29 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Category::find($id);
+        return view('category', ['editdata' => $data]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function edit(string $id) {}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->display_name = $request->display_name;
+        if (!$category->save()) {
+            Session::flash('err_msg', 'Category not updated.');
+            return redirect('/admin/category');
+        }
+        Session::flash('success_msg', 'Category updated.');
+        return redirect('/admin/category');
     }
 
     /**
@@ -86,7 +92,6 @@ class CategoryController extends Controller
             return back()->with('err_msg', 'Category not deleted.');
         }
         // return back()->with('success_msg', 'Category deleted.');
-        Alert::success('Success', 'Category Added Successfully');
         return redirect()->back();
     }
 
@@ -106,7 +111,7 @@ class CategoryController extends Controller
         $update->status = 0;
 
         if ($update->save()) {
-            Session::flash('action_msg', 'Category deactivated.');
+            // Session::flash('action_msg', 'Category deactivated.');
             return redirect('/admin/category');
         }
     }
@@ -117,7 +122,7 @@ class CategoryController extends Controller
         $update->status = 1;
 
         if ($update->save()) {
-            Session::flash('action_msg', 'Category activated.');
+            // Session::flash('action_msg', 'Category activated.');
             return redirect('/admin/category');
         }
     }
