@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
 /* Route::get('/', function () {
@@ -25,4 +26,8 @@ Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::post('/admin/category-import', [CategoryController::class, 'import']);
     Route::get('/admin/deactivate-category/{id}', [CategoryController::class, 'deactivate']);
     Route::get('/admin/activate-category/{id}', [CategoryController::class, 'activate']);
+    Route::resource('/admin/subcategory', SubcategoryController::class);
+    Route::post('/admin/subcategory-import', [SubcategoryController::class, 'import']);
+    Route::get('/admin/deactivate-subcategory/{id}', [SubcategoryController::class, 'deactivate']);
+    Route::get('/admin/activate-subcategory/{id}', [SubcategoryController::class, 'activate']);
 });
