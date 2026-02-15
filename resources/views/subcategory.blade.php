@@ -5,7 +5,11 @@
             <div class="container-fluid p-0">
 
                 <div class="mb-3">
-                    <h1 class="h3 d-inline align-middle">Subcategory</h1>
+                    <h1 class="h3 d-inline align-middle">Subcategory
+                        @if (!isset($editdata))
+                            {{ '(' . count($data) . ')' }}
+                        @endif
+                    </h1>
                 </div>
 
                 <div class="row">
@@ -94,7 +98,9 @@
                                                 <select name="category" class="form-control">
                                                     <option value="">Select Category</option>
                                                     @foreach ($cat as $cats)
-                                                        <option value="{{ $cats->id }}">{{ $cats->display_name }}
+                                                        <option value="{{ $cats->id }}"
+                                                            {{ old('category') == $cats->id ? 'selected' : '' }}>
+                                                            {{ $cats->display_name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -182,15 +188,16 @@
                                                     </td>
                                                     <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
                                                     <td>
+                                                        <div class="btn-group btn-group-sm" role="group"
+                                                            aria-label="Small button group">
                                                         <a href="{{ url('/admin/subcategory/' . $row->id) }}"
                                                             class="btn btn-dark btn-sm">Edit</a>
-                                                        <form action="{{ url('admin/subcategory/' . $row->id) }}"
-                                                            method="POST" class="d-inline">
+                                                        <a href="{{ route('subcategory.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                                                        {{-- <form action="{{url('/admin/subcategory/'.$row->id)}}" method="POST" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                                data-confirm-delete="true">Delete</button>
-                                                        </form>
+                                                            <button type="submit" class="btn btn-danger btn-sm" data-confirm-delete="true">Delete</button>
+                                                        </form> --}}
                                                         @if ($row->status === 1)
                                                             <a href="{{ url('/admin/deactivate-subcategory/' . $row->id) }}"
                                                                 class="btn btn-primary btn-sm">Deactivate</a>
@@ -198,6 +205,7 @@
                                                             <a href="{{ url('/admin/activate-subcategory/' . $row->id) }}"
                                                                 class="btn btn-warning btn-sm">Activate</a>
                                                         @endif
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach

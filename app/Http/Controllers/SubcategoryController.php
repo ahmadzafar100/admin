@@ -14,12 +14,12 @@ class SubcategoryController extends Controller
 {
     public function index()
     {
-        $category = Category::orderBy('name')->get();
-        $subcategory = Subcategory::with('category')->orderBy('id', 'desc')->get();
+        $cat = Category::orderBy('name')->get();
+        $data = Subcategory::with('category')->latest()->get();
         $title = 'Delete subcategory!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view('subcategory', ['data' => $subcategory, 'cat' => $category]);
+        return view('subcategory', compact('cat', 'data'));
     }
 
     /**

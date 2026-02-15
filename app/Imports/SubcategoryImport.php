@@ -15,7 +15,7 @@ class SubcategoryImport implements ToModel
      */
     public function model(array $row)
     {
-        if (Subcategory::where('name', $row[0])->exists()) {
+        if (Subcategory::where('name', $row[1])->exists()) {
             return null; // skip duplicate
         }
 

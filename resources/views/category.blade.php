@@ -5,7 +5,11 @@
             <div class="container-fluid p-0">
 
                 <div class="mb-3">
-                    <h1 class="h3 d-inline align-middle">Category</h1>
+                    <h1 class="h3 d-inline align-middle">Category
+                        @if (!isset($editdata))
+                            {{ '(' . count($data) . ')' }}
+                        @endif
+                    </h1>
                 </div>
 
                 <div class="row">
@@ -150,22 +154,26 @@
                                                     </td>
                                                     <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
                                                     <td>
-                                                        <a href="{{ url('/admin/category/' . $row->id) }}"
-                                                            class="btn btn-dark btn-sm">Edit</a>
-                                                        <form action="{{ url('admin/category/' . $row->id) }}"
-                                                            method="POST" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                                data-confirm-delete="true">Delete</button>
-                                                        </form>
-                                                        @if ($row->status === 1)
-                                                            <a href="{{ url('/admin/deactivate-category/' . $row->id) }}"
-                                                                class="btn btn-primary btn-sm">Deactivate</a>
-                                                        @else
-                                                            <a href="{{ url('/admin/activate-category/' . $row->id) }}"
-                                                                class="btn btn-warning btn-sm">Activate</a>
-                                                        @endif
+                                                        <div class="btn-group btn-group-sm" role="group"
+                                                            aria-label="Small button group">
+                                                            <a href="{{ url('/admin/category/' . $row->id) }}"
+                                                                class="btn btn-dark btn-sm">Edit</a>
+                                                            <a href="{{ route('category.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                                                            {{-- <form action="{{ url('admin/category/' . $row->id) }}"
+                                                                method="POST" class="d-inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                                    data-confirm-delete="true">Delete</button>
+                                                            </form> --}}
+                                                            @if ($row->status === 1)
+                                                                <a href="{{ url('/admin/deactivate-category/' . $row->id) }}"
+                                                                    class="btn btn-primary btn-sm">Deactivate</a>
+                                                            @else
+                                                                <a href="{{ url('/admin/activate-category/' . $row->id) }}"
+                                                                    class="btn btn-warning btn-sm">Activate</a>
+                                                            @endif
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach

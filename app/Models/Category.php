@@ -3,13 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'name',
         'display_name'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($category) {
+            if ($category->isForceDeleting()) {
+                $category->subcategories()->forceDelete();
+            } else {
+                $category->subcategories()->delete();
+            }
+        });
+    }
 
     public function subcategories()
     {
