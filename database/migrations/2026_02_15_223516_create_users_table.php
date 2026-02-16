@@ -21,6 +21,10 @@ return new class extends Migration
             $table->tinyInteger('mobile_verified')->default(0);
             $table->string('username', 50);
             $table->string('password', 100);
+            $table->foreignId('role_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
             $table->timestamps();
         });
     }

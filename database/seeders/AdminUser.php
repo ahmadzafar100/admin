@@ -14,6 +14,6 @@ class AdminUser extends Seeder
      */
     public function run(): void
     {
-        User::create(['name' => 'Superadmin', 'email' => 'ahmadzafar100@gmail.com', 'email_verified' => 1, 'mobile' => '9616251187', 'mobile_verified' => 1, 'username' => 'superadmin', 'password' => Hash::make('admin')]);
+        User::create(['name' => 'Superadmin', 'email' => 'ahmadzafar100@gmail.com', 'email_verified' => 1, 'mobile' => '9616251187', 'mobile_verified' => 1, 'username' => 'superadmin', 'password' => Hash::make('admin'), 'role_id' => 1]);
     }
 }
