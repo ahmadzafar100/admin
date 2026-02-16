@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
 
+            $table->string('summary', 500)->nullable();
+
             $table->longText('content');
 
             $table->string('featured_image')->nullable();
@@ -42,6 +44,7 @@ return new class extends Migration
             $table->timestamp('published_at')->nullable();
 
             $table->boolean('is_featured')->default(false);
+            $table->boolean('is_breaking_news')->default(false);
 
             $table->integer('views')->default(0);
 

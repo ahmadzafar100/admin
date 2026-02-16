@@ -20,4 +20,10 @@
             <i class="align-middle" data-feather="chevron-right"></i> <span class="align-middle">Subcategory</span>
         </a>
     </li>
+
+    <li class="sidebar-item">
+        <a class="sidebar-link" href="{{ url('/admin/news') }}">
+            <i class="align-middle" data-feather="chevron-right"></i> <span class="align-middle">News</span>
+        </a>
+    </li>
 </ul>
