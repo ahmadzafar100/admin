@@ -19,6 +19,7 @@
     <link href="{{ asset('css/alert.css') }}" rel="stylesheet">
     <link href="{{ asset('css/switch.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -70,6 +71,7 @@
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <!-- <script src="{{ asset('tinymce/tinymce.min.js') }}"></script> -->
     <script src="https://cdn.tiny.cloud/1/ayet7xh26mtheph8psgildwxc5tlyi9wetq8gjm3f9qf63tm/tinymce/6/tinymce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
 
     <script>

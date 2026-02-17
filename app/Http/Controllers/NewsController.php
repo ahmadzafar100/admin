@@ -33,8 +33,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        print_r($request->is_featured);
-        print_r($request->is_breaking);
+        //
     }
 
     /**
