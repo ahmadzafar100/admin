@@ -170,8 +170,34 @@
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+                                        <div class="col-md-4 col-sm-6 mb-3">
+                                            <label>Is Featured News</label>
+                                            <div class="switch-wrapper">
+                                                <label class="rocker rocker-small" for="switch-yes-no">
+                                                    <input type="checkbox" id="switch-yes-no" name="is_featured" value="1">
+                                                    <span class="switch-left">Yes</span>
+                                                    <span class="switch-right">No</span>
+                                                </label>
+                                            </div>
+                                            @error('publish_date')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 mb-3">
+                                            <label>Is Breaking News</label>
+                                            <div class="switch-wrapper">
+                                                <label class="rocker rocker-small" for="switch-yes-no2">
+                                                    <input type="checkbox" id="switch-yes-no2" name="is_breaking" value="1">
+                                                    <span class="switch-left">Yes</span>
+                                                    <span class="switch-right">No</span>
+                                                </label>
+                                            </div>
+                                            @error('is_breaking')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Add news</button>
+                                            <button type="submit" class="btn btn-primary">Save as Draft</button>
                                         </div>
                                     </div>
                                 </form>
