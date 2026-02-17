@@ -150,7 +150,10 @@
                                                 <label>Featured Image</label>
                                                 <input type="file" id="imageInput" accept="image/*" class="form-control" name="file">
                                             </div>
-
+                                            <div class="mt-3">
+                                                Width: <span id="cropWidth">0</span> px |
+                                                Height: <span id="cropHeight">0</span> px
+                                            </div>
                                             <div>
                                                 <img id="preview" style="max-width:100%;">
                                             </div>
@@ -169,7 +172,7 @@
                                             <label>Cropped Image Preview:</label>
                                             <img id="croppedPreview" style="max-width:100%; display:none;">
                                         </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Status</label>
                                             <select name="status" class="form-control">
                                                 <option value="draft" {{ old('status', $post->status ?? '') == 'draft' ? 'selected' : '' }}>Draft</option>
@@ -180,14 +183,14 @@
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Publish Date</label>
                                             <input type="text" class="form-control" name="publish_date" id="publish_date" readonly>
                                             @error('publish_date')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Is Featured News</label>
                                             <div class="switch-wrapper">
                                                 <label class="rocker rocker-small" for="switch-yes-no">
@@ -196,11 +199,11 @@
                                                     <span class="switch-right">No</span>
                                                 </label>
                                             </div>
-                                            @error('publish_date')
+                                            @error('is_featured')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Is Breaking News</label>
                                             <div class="switch-wrapper">
                                                 <label class="rocker rocker-small" for="switch-yes-no2">
@@ -214,7 +217,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Save as Draft</button>
+                                            <button type="submit" class="btn btn-primary">Add News</button>
                                         </div>
                                     </div>
                                 </form>
@@ -430,10 +433,20 @@
                     cropper.destroy();
                 }
 
-                cropper = new Cropper(preview, {
+                /* cropper = new Cropper(preview, {
                     aspectRatio: 16 / 9,
                     viewMode: 1,
                     autoCropArea: 1,
+                }); */
+
+                cropper = new Cropper(preview, {
+                    aspectRatio: NaN,
+                    viewMode: 1,
+                    autoCropArea: 1,
+                    crop(event) {
+                        document.getElementById('cropWidth').innerText = Math.round(event.detail.width);
+                        document.getElementById('cropHeight').innerText = Math.round(event.detail.height);
+                    }
                 });
 
                 cropBtn.disabled = false; // Enable crop button
