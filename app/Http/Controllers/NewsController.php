@@ -17,6 +17,7 @@ class NewsController extends Controller
         $cat = Category::orderBy('name')->get();
         $subcat = Subcategory::orderBy('name')->get();
         $data = News::with(['category', 'subcategory'])->latest()->get();
+
         return view('news', compact('cat', 'subcat', 'data'));
     }
 
@@ -36,10 +37,10 @@ class NewsController extends Controller
         $request->validate([
             'category' => 'required',
             'subcategory' => 'required',
-            'title' => 'required',
-            'summary' => 'required',
+            'title' => 'required|max:255',
+            'summary' => 'required|max:255',
             'content' => 'required',
-            'featured_image' => 'required',
+            'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:1024',
             'status' => 'required',
             'published_at' => 'required',
             'is_featured' => 'required',
