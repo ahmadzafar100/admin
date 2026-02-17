@@ -80,7 +80,7 @@
                                 <h5 class="card-title mb-0">Add News Manually</h5>
                             </div>
                             <div class="card-body">
-                                <form action="{{ url('/admin/news') }}" method="post">
+                                <form action="{{ url('/admin/news') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @if (session()->has('err_msg'))
                                     <div class="alert alert-danger">
@@ -148,8 +148,11 @@
                                         <div class="col-md-6 mb-3">
                                             <div class="">
                                                 <label>Featured Image</label>
-                                                <input type="file" id="imageInput" accept="image/*" class="form-control" name="file">
+                                                <input type="file" id="imageInput" accept="image/*" class="form-control" name="featured_image">
                                             </div>
+                                            @error('featured_image')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                             <div class="mt-3">
                                                 Width: <span id="cropWidth">0</span> px |
                                                 Height: <span id="cropHeight">0</span> px
@@ -164,9 +167,6 @@
 
                                             <!-- Hidden input to send cropped image -->
                                             <input type="hidden" name="featured_image" id="croppedImage">
-                                            @error('file')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label>Cropped Image Preview:</label>
@@ -185,8 +185,8 @@
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Publish Date</label>
-                                            <input type="text" class="form-control" name="publish_date" id="publish_date" readonly>
-                                            @error('publish_date')
+                                            <input type="text" class="form-control" name="published_at" id="published_at" readonly>
+                                            @error('published_at')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -207,7 +207,7 @@
                                             <label>Is Breaking News</label>
                                             <div class="switch-wrapper">
                                                 <label class="rocker rocker-small" for="switch-yes-no2">
-                                                    <input type="checkbox" id="switch-yes-no2" name="is_breaking" value="1">
+                                                    <input type="checkbox" id="switch-yes-no2" name="is_breaking_news" value="1">
                                                     <span class="switch-left">Yes</span>
                                                     <span class="switch-right">No</span>
                                                 </label>
@@ -349,7 +349,7 @@
             }
         });
 
-        $("#publish_date").datepicker({
+        $("#published_at").datepicker({
 
             dateFormat: "dd-mm-yy", // Display format
             altFormat: "yy-mm-dd", // Database format

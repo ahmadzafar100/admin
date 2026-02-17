@@ -33,7 +33,18 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $request->validate([
+            'category' => 'required',
+            'subcategory' => 'required',
+            'title' => 'required',
+            'summary' => 'required',
+            'content' => 'required',
+            'featured_image' => 'required',
+            'status' => 'required',
+            'published_at' => 'required',
+            'is_featured' => 'required',
+            'is_breaking_news' => 'required',
+        ]);
     }
 
     /**
