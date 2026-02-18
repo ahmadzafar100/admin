@@ -37,36 +37,37 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category' => 'required',
-            'subcategory' => 'required',
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
             'title' => 'required|max:255',
             'summary' => 'required|max:255',
             'content' => 'required',
-            'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:1024',
+            // 'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:1024',
             'status' => 'required',
             'published_at' => 'required',
-            'is_featured' => 'required',
-            'is_breaking_news' => 'required',
+            'is_featured' => 'nullable|boolean',
+            'is_breaking_news' => 'nullable|boolean',
         ]);
 
-        $is_featured = $request->is_featured ?? 0;
-        $is_breaking_news = $request->is_breaking_news ?? 0;
+        $data = $request->all();
+        $data['is_featured'] = $request->has('is_featured');
+        $data['is_breaking_news'] = $request->has('is_breaking_news');
 
-        $news = new News;
-        $news->category_id = $request->category_id;
-        $news->subcategory_id = $request->subcategory_id;
-        $news->title = $request->title;
-        $news->slug = 'https://google.com';
-        $news->summary = $request->summary;
-        $news->content = $request->content;
+        $news = new News();
+        $news->category_id = $data['category_id'];
+        $news->subcategory_id = $data['subcategory_id'];
+        $news->title = $data['title'];
+        $news->slug = 'https://face.com';
+        $news->summary = $data['summary'];
+        $news->content = $data['content'];
         $news->featured_image = '';
-        $news->status = $request->status;
-        $news->published_at = $request->published_at;
-        $news->is_featured = $is_featured;
-        $news->is_breaking_news = $is_breaking_news;
+        $news->status = $data['status'];
+        $news->published_at = date('Y-m-d H:i:s', strtotime($data['published_at']));
+        $news->is_featured = $data['is_featured'];
+        $news->is_breaking_news = $data['is_breaking_news'];
         $news->user_id = session('user')->id;
 
-        dd($request->all());
+        // dd($request->all());
 
         if (!$news->save()) {
             // Session::flash('err_msg', 'News not saved.');
