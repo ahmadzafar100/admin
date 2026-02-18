@@ -95,7 +95,7 @@ class CategoryController extends Controller
     {
         $del = Category::destroy($id);
         if (!$del) {
-            return back()->with('err_msg', 'Category not deleted.');
+            return redirect()->back()->with('err_msg', 'Category not deleted.');
         }
         // return back()->with('success_msg', 'Category deleted.');
         return redirect()->back();

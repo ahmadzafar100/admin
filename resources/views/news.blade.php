@@ -92,6 +92,13 @@
                                         {{ session('success_msg') }}
                                     </div>
                                     @endif
+                                    @if($errors->any())
+                                        <ul class="alert alert-danger">
+                                            @foreach ($errors->all() as $err)
+                                            <li>{{$err}}</li>       
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Category</label>
@@ -104,9 +111,6 @@
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @error('category_id')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Subcategory</label>
@@ -119,40 +123,25 @@
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @error('subcategory_id')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Title</label>
                                             <input type="text" class="form-control" name="title"
                                                 value="{{ old('title') }}">
-                                            @error('title')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label>Summary</label>
-                                            <textarea class="form-control" name="summary">{{ old('summary') }}</textarea>
-                                            @error('summary')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            <textarea class="form-control" name="summary" rows="5">{{ old('summary') }}</textarea>
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label>Content</label>
                                             <textarea class="form-control" name="content" id="content">{{ old('content') }}</textarea>
-                                            @error('content')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <div class="">
                                                 <label>Featured Image</label>
                                                 <input type="file" id="imageInput" accept="image/*" class="form-control" name="featured_image">
                                             </div>
-                                            @error('featured_image')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                             <div class="mt-3">
                                                 Width: <span id="cropWidth">0</span> px |
                                                 Height: <span id="cropHeight">0</span> px
@@ -179,16 +168,10 @@
                                                 <option value="published" {{ old('status', $post->status ?? '') == 'published' ? 'selected' : '' }}>Published</option>
                                                 <option value="archived" {{ old('status', $post->status ?? '') == 'archived' ? 'selected' : '' }}>Archived</option>
                                             </select>
-                                            @error('status')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Publish Date</label>
+                                            <label>Publish At</label>
                                             <input type="text" class="form-control" name="published_at" id="published_at" value="{{ old('published_at') }}" readonly>
-                                            @error('published_at')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Is Featured News</label>
@@ -199,9 +182,6 @@
                                                     <span class="switch-right">No</span>
                                                 </label>
                                             </div>
-                                            @error('is_featured')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Is Breaking News</label>
@@ -212,9 +192,6 @@
                                                     <span class="switch-right">No</span>
                                                 </label>
                                             </div>
-                                            @error('is_breaking')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary">Add News</button>
@@ -255,9 +232,9 @@
                                 <thead>
                                     <tr>
                                         <th>S.No.</th>
-                                        <th>Category</th>
-                                        <th>Name</th>
-                                        <th>Display Name</th>
+                                        <th>Cateory-Subcategory</th>
+                                        <th>Title</th>
+                                        <th>Publish At</th>
                                         <th>Status</th>
                                         <th>Created At</th>
                                         <th>Action</th>
@@ -268,14 +245,16 @@
                                     @foreach ($data as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}.</td>
-                                        <td>{{ $row->category->name }}</td>
-                                        <td>{{ $row->name }}</td>
-                                        <td>{{ $row->display_name }}</td>
+                                        <td>{{ $row->category->name }}-{{ $row->subcategory->name }}</td>
+                                        <td>{{ $row->title }}</td>
+                                        <td>{{ date('d/m/Y', strtotime($row->published_at)) }}</td>
                                         <td>
-                                            @if ($row->status === 1)
-                                            <span class="badge bg-success">Active</span>
+                                            @if ($row->status === 'draft')
+                                            <span class="badge bg-primary">{{strtoupper($row->status)}}</span>
+                                            @elseif ($row->status === 'published')
+                                            <span class="badge bg-success">{{strtoupper($row->status)}}</span>
                                             @else
-                                            <span class="badge bg-danger">Inactive</span>
+                                            <span class="badge bg-danger">{{strtoupper($row->status)}}</span>
                                             @endif
                                         </td>
                                         <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>

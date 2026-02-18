@@ -19,7 +19,9 @@ class NewsController extends Controller
         $cat = Category::orderBy('name')->get();
         $subcat = Subcategory::orderBy('name')->get();
         $data = News::with(['category', 'subcategory'])->latest()->get();
-
+        $title = 'Delete Category!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('news', compact('cat', 'subcat', 'data'));
     }
 
@@ -108,7 +110,13 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $del = News::destroy($id);
+        if (!$del) {
+            Alert::toast('News not deleted.', 'error');
+            return redirect()->back();
+        }
+        Alert::toast('News deleted.', 'success');
+        return redirect()->back();
     }
 
     public function getSubcategories($categoryId)
