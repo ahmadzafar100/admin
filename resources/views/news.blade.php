@@ -95,31 +95,31 @@
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Category</label>
-                                            <select name="category" id="category" class="form-control">
+                                            <select name="category_id" id="category" class="form-control">
                                                 <option value="">Select Category</option>
                                                 @foreach ($cat as $cats)
                                                 <option value="{{ $cats->id }}"
-                                                    {{ old('category') == $cats->id ? 'selected' : '' }}>
+                                                    {{ old('category_id') == $cats->id ? 'selected' : '' }}>
                                                     {{ $cats->display_name }}
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @error('category')
+                                            @error('category_id')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Subcategory</label>
-                                            <select name="subcategory" id="subcategory" class="form-control">
+                                            <select name="subcategory_id" id="subcategory" class="form-control">
                                                 <option value="">Select Subcategory</option>
                                                 @foreach ($subcat as $subcats)
                                                 <option value="{{ $cats->id }}"
-                                                    {{ old('subcategory') == $subcats->id ? 'selected' : '' }}>
+                                                    {{ old('subcategory_id') == $subcats->id ? 'selected' : '' }}>
                                                     {{ $subcats->display_name }}
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @error('subcategory')
+                                            @error('subcategory_id')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -185,7 +185,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Publish Date</label>
-                                            <input type="text" class="form-control" name="published_at" id="published_at" readonly>
+                                            <input type="text" class="form-control" name="published_at" id="published_at" value="{{ old('published_at') }}" readonly>
                                             @error('published_at')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -194,7 +194,7 @@
                                             <label>Is Featured News</label>
                                             <div class="switch-wrapper">
                                                 <label class="rocker rocker-small" for="switch-yes-no">
-                                                    <input type="checkbox" id="switch-yes-no" name="is_featured" value="1">
+                                                    <input type="checkbox" id="switch-yes-no" name="is_featured" value="1" {{old('is_featured') == 1 ? 'checked' : ''}}>
                                                     <span class="switch-left">Yes</span>
                                                     <span class="switch-right">No</span>
                                                 </label>
@@ -207,7 +207,7 @@
                                             <label>Is Breaking News</label>
                                             <div class="switch-wrapper">
                                                 <label class="rocker rocker-small" for="switch-yes-no2">
-                                                    <input type="checkbox" id="switch-yes-no2" name="is_breaking_news" value="1">
+                                                    <input type="checkbox" id="switch-yes-no2" name="is_breaking_news" value="1" {{old('is_breaking_news') == 1 ? 'checked' : ''}}>
                                                     <span class="switch-left">Yes</span>
                                                     <span class="switch-right">No</span>
                                                 </label>

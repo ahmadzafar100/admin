@@ -48,6 +48,7 @@ class CategoryController extends Controller
             Session::flash('err_msg', 'Category not saved.');
             return redirect('/admin/category');
         }
+        Alert::toast('Category added successfully!', 'success');
         Session::flash('success_msg', 'Category saved.');
         return redirect('/admin/category');
     }

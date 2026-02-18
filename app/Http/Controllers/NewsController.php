@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NewsController extends Controller
 {
@@ -46,6 +48,34 @@ class NewsController extends Controller
             'is_featured' => 'required',
             'is_breaking_news' => 'required',
         ]);
+
+        $is_featured = $request->is_featured ?? 0;
+        $is_breaking_news = $request->is_breaking_news ?? 0;
+
+        $news = new News;
+        $news->category_id = $request->category_id;
+        $news->subcategory_id = $request->subcategory_id;
+        $news->title = $request->title;
+        $news->slug = 'https://google.com';
+        $news->summary = $request->summary;
+        $news->content = $request->content;
+        $news->featured_image = '';
+        $news->status = $request->status;
+        $news->published_at = $request->published_at;
+        $news->is_featured = $is_featured;
+        $news->is_breaking_news = $is_breaking_news;
+        $news->user_id = session('user')->id;
+
+        dd($request->all());
+
+        if (!$news->save()) {
+            // Session::flash('err_msg', 'News not saved.');
+            Alert::toast('News not saved.', 'error');
+            return redirect('/admin/news');
+        }
+        Alert::toast('News saved.', 'success');
+        // Session::flash('success_msg', 'News saved.');
+        return redirect('/admin/news');
     }
 
     /**
