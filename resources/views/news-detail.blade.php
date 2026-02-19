@@ -79,6 +79,16 @@
                                         <td>:</td>
                                         <td>{{($data->is_breaking_news === 1) ? 'Yes' : 'No'}}</td>
                                     </tr>
+                                    <tr>
+                                        <th>Created At</th>
+                                        <td>:</td>
+                                        <td>{{ date('d/m/Y h:i A', strtotime($data->created_at)) }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Updated At</th>
+                                        <td>:</td>
+                                        <td>{{ date('d/m/Y h:i A', strtotime($data->updated_at)) }}</td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>

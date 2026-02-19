@@ -20,7 +20,7 @@
                                 <h5 class="card-title mb-0">Edit News</h5>
                             </div>
                             <div class="card-body">
-                                <form action="{{ url('/admin/news/' . $editdata->id) }}" method="post">
+                                <form action="{{ url('/admin/news/' . $editdata->id) }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     @if (session()->has('err_msg'))
@@ -33,37 +33,106 @@
                                         {{ session('success_msg') }}
                                     </div>
                                     @endif
+                                    @if($errors->any())
+                                    <ul class="alert alert-danger">
+                                        @foreach ($errors->all() as $err)
+                                        <li>{{$err}}</li>
+                                        @endforeach
+                                    </ul>
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Category</label>
-                                            <select name="category" class="form-control">
+                                            <select name="category_id" id="category" class="form-control">
                                                 <option value="">Select Category</option>
                                                 @foreach ($cat as $cats)
                                                 <option value="{{ $cats->id }}"
-                                                    {{ old('category', $editdata->category_id) == $cats->id ? 'selected' : '' }}>
+                                                    {{ old('category_id', $editdata->category_id) == $cats->id ? 'selected' : '' }}>
                                                     {{ $cats->display_name }}
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @error('category')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Name</label>
-                                            <input type="text" class="form-control" name="name"
-                                                value="{{ $editdata->name }}">
-                                            @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            <label>Subcategory</label>
+                                            <select name="subcategory_id" id="subcategory" class="form-control">
+                                                <option value="">Select Subcategory</option>
+                                                @foreach ($subcat as $subcats)
+                                                <option value="{{ $cats->id }}"
+                                                    {{ old('subcategory_id', $editdata->subcategory_id) == $subcats->id ? 'selected' : '' }}>
+                                                    {{ $subcats->display_name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Display Name</label>
-                                            <input type="text" class="form-control" name="display_name"
-                                                value="{{ $editdata->display_name }}">
-                                            @error('display_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            <label>Title</label>
+                                            <input type="text" class="form-control" name="title"
+                                                value="{{ $editdata->title }}">
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label>Summary</label>
+                                            <textarea class="form-control" name="summary" rows="5">{{ $editdata->summary }}</textarea>
+                                        </div>
+                                        <div class="col-md-12 mb-3">
+                                            <label>Content</label>
+                                            <textarea class="form-control" name="content" id="content">{{ $editdata->content }}</textarea>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="">
+                                                <label>Featured Image</label>
+                                                <input type="file" id="imageInput" accept="image/*" class="form-control" name="featured_image">
+                                            </div>
+                                            <div class="mt-3">
+                                                Width: <span id="cropWidth">0</span> px |
+                                                Height: <span id="cropHeight">0</span> px
+                                            </div>
+                                            <div>
+                                                <img id="preview" style="max-width:100%;">
+                                            </div>
+
+                                            <button type="button" id="cropBtn" class="btn btn-success">
+                                                Crop & Save
+                                            </button>
+
+                                            <!-- Hidden input to send cropped image -->
+                                            <input type="hidden" name="croppedImage" id="croppedImage">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Cropped Image Preview:</label>
+                                            <img id="croppedPreview" style="max-width:100%; display:none;">
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 mb-3">
+                                            <label>Status</label>
+                                            <select name="status" class="form-control">
+                                                <option value="draft" {{ old('status', $editdata->status ?? '') == 'draft' ? 'selected' : '' }}>Draft</option>
+                                                <option value="published" {{ old('status', $editdata->status ?? '') == 'published' ? 'selected' : '' }}>Published</option>
+                                                <option value="archived" {{ old('status', $editdata->status ?? '') == 'archived' ? 'selected' : '' }}>Archived</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 mb-3">
+                                            <label>Publish At</label>
+                                            <input type="text" class="form-control" name="published_at" id="published_at" value="{{ date('d-m-Y', strtotime($editdata->published_at)) }}" readonly>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 mb-3">
+                                            <label>Is Featured News</label>
+                                            <div class="switch-wrapper">
+                                                <label class="rocker rocker-small" for="switch-yes-no">
+                                                    <input type="checkbox" id="switch-yes-no" name="is_featured" value="1" {{$editdata->is_featured == 1 ? 'checked' : ''}}>
+                                                    <span class="switch-left">Yes</span>
+                                                    <span class="switch-right">No</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 mb-3">
+                                            <label>Is Breaking News</label>
+                                            <div class="switch-wrapper">
+                                                <label class="rocker rocker-small" for="switch-yes-no2">
+                                                    <input type="checkbox" id="switch-yes-no2" name="is_breaking_news" value="1" {{$editdata->is_breaking_news == 1 ? 'checked' : ''}}>
+                                                    <span class="switch-left">Yes</span>
+                                                    <span class="switch-right">No</span>
+                                                </label>
+                                            </div>
                                         </div>
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary">Update
