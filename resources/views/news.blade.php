@@ -116,12 +116,6 @@
                                             <label>Subcategory</label>
                                             <select name="subcategory_id" id="subcategory" class="form-control">
                                                 <option value="">Select Subcategory</option>
-                                                @foreach ($subcat as $subcats)
-                                                <option value="{{ $cats->id }}"
-                                                    {{ old('subcategory_id') == $subcats->id ? 'selected' : '' }}>
-                                                    {{ $subcats->display_name }}
-                                                </option>
-                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
@@ -302,30 +296,40 @@
 
 <script>
     $(document).ready(function() {
+        let oldCategory = "{{ old('category_id') }}";
+        let oldSubcategory = "{{ old('subcategory_id') }}";
+
+        if (oldCategory) {
+            loadSubcategories(oldCategory, oldSubcategory);
+        }
+
         $('#category').change(function() {
             let categoryId = $(this).val();
-
-            if (categoryId) {
-                $.ajax({
-                    url: '/get-subcategories/' + categoryId,
-                    type: 'GET',
-                    success: function(data) {
-
-                        $('#subcategory').empty();
-                        $('#subcategory').append('<option value="">Select Subcategory</option>');
-
-                        $.each(data, function(key, value) {
-                            $('#subcategory').append(
-                                '<option value="' + value.id + '">' + value.name + '</option>'
-                            );
-                        });
-                    }
-                });
-            } else {
-                $('#subcategory').empty();
-                $('#subcategory').append('<option value="">Select Subcategory</option>');
-            }
+            loadSubcategories(categoryId, null);
         });
+
+        function loadSubcategories(categoryId, selectedSubcategory = null) {
+
+            $.ajax({
+                url: "/get-subcategories/" + categoryId,
+                type: "GET",
+                success: function(data) {
+
+                    $('#subcategory').html('<option value="">Select Subcategory</option>');
+
+                    $.each(data, function(key, value) {
+
+                        let selected = selectedSubcategory == value.id ? 'selected' : '';
+
+                        $('#subcategory').append(
+                            '<option value="' + value.id + '" ' + selected + '>' +
+                            value.name +
+                            '</option>'
+                        );
+                    });
+                }
+            });
+        }
 
         $("#published_at").datepicker({
 

@@ -18,12 +18,11 @@ class NewsController extends Controller
     public function index()
     {
         $cat = Category::orderBy('name')->get();
-        $subcat = Subcategory::orderBy('name')->get();
         $data = News::with(['category', 'subcategory'])->latest()->get();
         $title = 'Delete Category!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view('news', compact('cat', 'subcat', 'data'));
+        return view('news', compact('cat', 'data'));
     }
 
     /**
@@ -39,19 +38,25 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'category_id' => 'required',
-            'subcategory_id' => 'required',
-            'title' => 'required|max:255',
-            'summary' => 'required|max:255',
-            'content' => 'required',
-            'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
-            'croppedImage' => 'required',
-            'status' => 'required',
-            'published_at' => 'required',
-            'is_featured' => 'nullable|boolean',
-            'is_breaking_news' => 'nullable|boolean',
-        ]);
+        $request->validate(
+            [
+                'category_id' => 'required',
+                'subcategory_id' => 'required',
+                'title' => 'required|max:255',
+                'summary' => 'required|max:255',
+                'content' => 'required',
+                'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+                'croppedImage' => 'required',
+                'status' => 'required',
+                'published_at' => 'required',
+                'is_featured' => 'nullable|boolean',
+                'is_breaking_news' => 'nullable|boolean',
+            ],
+            [
+                'category_id.required' => 'Category is required.',
+                'subcategory_id.required' => 'Subcategory is required.',
+            ]
+        );
 
         $data = $request->all();
         $data['is_featured'] = $request->has('is_featured');
