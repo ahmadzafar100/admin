@@ -62,18 +62,6 @@ class NewsController extends Controller
         $data['is_featured'] = $request->has('is_featured');
         $data['is_breaking_news'] = $request->has('is_breaking_news');
 
-        $image = $request->croppedImage;
-
-        // dd($request);
-
-        // Remove base64 header
-        $image = str_replace('data:image/jpeg;base64,', '', $image);
-        $image = str_replace(' ', '+', $image);
-
-        $imageName = time() . '.jpg';
-
-        File::put(public_path('uploads/' . $imageName), base64_decode($image));
-
         $news = new News();
         $news->category_id = $data['category_id'];
         $news->subcategory_id = $data['subcategory_id'];
@@ -81,7 +69,7 @@ class NewsController extends Controller
         $news->slug = 'https://face.com';
         $news->summary = $data['summary'];
         $news->content = $data['content'];
-        $news->featured_image = $imageName;
+        // $news->featured_image = $imageName;
         $news->status = $data['status'];
         $news->published_at = date('Y-m-d H:i:s', strtotime($data['published_at']));
         $news->is_featured = $data['is_featured'];
@@ -95,6 +83,23 @@ class NewsController extends Controller
             Alert::toast('News not saved.', 'error');
             return redirect('/admin/news');
         }
+
+        $image = $request->croppedImage;
+
+        // Remove base64 header
+        $image = str_replace('data:image/jpeg;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+
+        $lastId = str_pad($news->id, 5, '0', STR_PAD_LEFT);
+        $extension = $data['featured_image']->getClientOriginalExtension();
+        $imageName = date('dmY_His') . '_' . $lastId . '.' . $extension;
+
+        File::put(public_path('uploads/' . $imageName), base64_decode($image));
+
+        $news->update([
+            'featured_image' => $imageName
+        ]);
+
         Alert::toast('News saved.', 'success');
         // Session::flash('success_msg', 'News saved.');
         return redirect('/admin/news');

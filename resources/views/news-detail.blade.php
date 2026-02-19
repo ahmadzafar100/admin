@@ -46,7 +46,9 @@
                                         <th style="vertical-align: middle;">Featured Image</th>
                                         <td>:</td>
                                         <td>
-                                            <img src="{{ asset('uploads/'.$data->featured_image) }}" width="300">
+                                            <a href="{{ asset('uploads/'.$data->featured_image) }}" target="_blank">
+                                                <img src="{{ asset('uploads/'.$data->featured_image) }}" width="300">
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr>

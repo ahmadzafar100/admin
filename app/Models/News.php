@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class News extends Model
 {
     use SoftDeletes;
+
+    protected $fillable = [
+        'featured_image',
+    ];
     public function category()
     {
         return $this->belongsTo(Category::class);
