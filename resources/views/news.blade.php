@@ -93,11 +93,11 @@
                                     </div>
                                     @endif
                                     @if($errors->any())
-                                        <ul class="alert alert-danger">
-                                            @foreach ($errors->all() as $err)
-                                            <li>{{$err}}</li>       
-                                            @endforeach
-                                        </ul>
+                                    <ul class="alert alert-danger">
+                                        @foreach ($errors->all() as $err)
+                                        <li>{{$err}}</li>
+                                        @endforeach
+                                    </ul>
                                     @endif
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
@@ -155,7 +155,7 @@
                                             </button>
 
                                             <!-- Hidden input to send cropped image -->
-                                            <input type="hidden" name="featured_image" id="croppedImage">
+                                            <input type="hidden" name="croppedImage" id="croppedImage">
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label>Cropped Image Preview:</label>
@@ -228,70 +228,72 @@
                                 {{ session('action_msg') }}
                             </div>
                             @endif
-                            <table class="table table-hover my-0">
-                                <thead>
-                                    <tr>
-                                        <th>S.No.</th>
-                                        <th>Cateory-Subcategory</th>
-                                        <th>Title</th>
-                                        <th>Publish At</th>
-                                        <th>Status</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (count($data) > 0)
-                                    @foreach ($data as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}.</td>
-                                        <td>{{ $row->category->name }}-{{ $row->subcategory->name }}</td>
-                                        <td>{{ $row->title }}</td>
-                                        <td>{{ date('d/m/Y', strtotime($row->published_at)) }}</td>
-                                        <td>
-                                            @if ($row->status === 'draft')
-                                            <span class="badge bg-primary">{{strtoupper($row->status)}}</span>
-                                            @elseif ($row->status === 'published')
-                                            <span class="badge bg-success">{{strtoupper($row->status)}}</span>
-                                            @else
-                                            <span class="badge bg-danger">{{strtoupper($row->status)}}</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
-                                        <td>
-                                            <div class="btn-group btn-group-sm" role="group"
-                                                aria-label="Small button group">
-                                                <a href="{{ url('/admin/news/' . $row->id) }}"
-                                                    class="btn btn-dark btn-sm">Edit</a>
-                                                <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
-                                                {{-- <form action="{{url('/admin/news/'.$row->id)}}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" data-confirm-delete="true">Delete</button>
-                                                </form> --}}
-                                                @if ($row->status === 1)
-                                                <a href="{{ url('/admin/deactivate-news/' . $row->id) }}"
-                                                    class="btn btn-primary btn-sm">Deactivate</a>
+                            <div class="table-responsive">
+                                <table class="table table-hover my-0">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th>Cateory-Subcategory</th>
+                                            <th>Title</th>
+                                            <th>Publish At</th>
+                                            <th>Status</th>
+                                            <th>Created At</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (count($data) > 0)
+                                        @foreach ($data as $row)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}.</td>
+                                            <td>{{ $row->category->name }}-{{ $row->subcategory->name }}</td>
+                                            <td>{{ $row->title }}</td>
+                                            <td>{{ date('d/m/Y', strtotime($row->published_at)) }}</td>
+                                            <td>
+                                                @if ($row->status === 'draft')
+                                                <span class="badge bg-primary">{{strtoupper($row->status)}}</span>
+                                                @elseif ($row->status === 'published')
+                                                <span class="badge bg-success">{{strtoupper($row->status)}}</span>
                                                 @else
-                                                <a href="{{ url('/admin/activate-news/' . $row->id) }}"
-                                                    class="btn btn-warning btn-sm">Activate</a>
+                                                <span class="badge bg-danger">{{strtoupper($row->status)}}</span>
                                                 @endif
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <tr>
-                                        <td colspan="7">
-                                            <h3 class="mb-0 text-danger text-uppercase text-center"><strong>No
-                                                    Data
-                                                    Found...</strong>
-                                            </h3>
-                                        </td>
-                                    </tr>
-                                    @endif
-                                </tbody>
-                            </table>
+                                            </td>
+                                            <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" role="group"
+                                                    aria-label="Small button group">
+                                                    <a href="{{ url('/admin/news/' . $row->id) }}"
+                                                        class="btn btn-dark btn-sm">Edit</a>
+                                                    <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                                                    {{-- <form action="{{url('/admin/news/'.$row->id)}}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" data-confirm-delete="true">Delete</button>
+                                                    </form> --}}
+                                                    @if ($row->status === 1)
+                                                    <a href="{{ url('/admin/deactivate-news/' . $row->id) }}"
+                                                        class="btn btn-primary btn-sm">Deactivate</a>
+                                                    @else
+                                                    <a href="{{ url('/admin/activate-news/' . $row->id) }}"
+                                                        class="btn btn-warning btn-sm">Activate</a>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        @else
+                                        <tr>
+                                            <td colspan="7">
+                                                <h3 class="mb-0 text-danger text-uppercase text-center"><strong>No
+                                                        Data
+                                                        Found...</strong>
+                                                </h3>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         @endif
                     </div>

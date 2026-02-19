@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -44,7 +45,8 @@ class NewsController extends Controller
             'title' => 'required|max:255',
             'summary' => 'required|max:255',
             'content' => 'required',
-            // 'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:1024',
+            'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+            'croppedImage' => 'required',
             'status' => 'required',
             'published_at' => 'required',
             'is_featured' => 'nullable|boolean',
@@ -55,6 +57,18 @@ class NewsController extends Controller
         $data['is_featured'] = $request->has('is_featured');
         $data['is_breaking_news'] = $request->has('is_breaking_news');
 
+        $image = $request->croppedImage;
+
+        // dd($request);
+
+        // Remove base64 header
+        $image = str_replace('data:image/jpeg;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+
+        $imageName = time() . '.jpg';
+
+        File::put(public_path('uploads/' . $imageName), base64_decode($image));
+
         $news = new News();
         $news->category_id = $data['category_id'];
         $news->subcategory_id = $data['subcategory_id'];
@@ -62,7 +76,7 @@ class NewsController extends Controller
         $news->slug = 'https://face.com';
         $news->summary = $data['summary'];
         $news->content = $data['content'];
-        $news->featured_image = '';
+        $news->featured_image = $imageName;
         $news->status = $data['status'];
         $news->published_at = date('Y-m-d H:i:s', strtotime($data['published_at']));
         $news->is_featured = $data['is_featured'];
