@@ -139,4 +139,10 @@ class NewsController extends Controller
 
         return response()->json($subcategories);
     }
+
+    public function newsDetail($id)
+    {
+        $data = News::findOrFail($id);
+        return view('news-detail', compact('data'));
+    }
 }

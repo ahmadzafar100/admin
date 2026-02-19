@@ -235,7 +235,7 @@
                                             <th>S.No.</th>
                                             <th>Cateory-Subcategory</th>
                                             <th>Title</th>
-                                            <th>Publish At</th>
+                                            <th>Published At</th>
                                             <th>Status</th>
                                             <th>Created At</th>
                                             <th>Action</th>
@@ -262,21 +262,18 @@
                                             <td>
                                                 <div class="btn-group btn-group-sm" role="group"
                                                     aria-label="Small button group">
+                                                    <a href="{{ url('/admin/news-detail/' . $row->id) }}"
+                                                        class="btn btn-info btn-sm" target="_blank">View Detail</a>
                                                     <a href="{{ url('/admin/news/' . $row->id) }}"
                                                         class="btn btn-dark btn-sm">Edit</a>
                                                     <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
-                                                    {{-- <form action="{{url('/admin/news/'.$row->id)}}" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" data-confirm-delete="true">Delete</button>
-                                                    </form> --}}
-                                                    @if ($row->status === 1)
+                                                    <!-- @if ($row->status === 1)
                                                     <a href="{{ url('/admin/deactivate-news/' . $row->id) }}"
                                                         class="btn btn-primary btn-sm">Deactivate</a>
                                                     @else
                                                     <a href="{{ url('/admin/activate-news/' . $row->id) }}"
                                                         class="btn btn-warning btn-sm">Activate</a>
-                                                    @endif
+                                                    @endif -->
                                                 </div>
                                             </td>
                                         </tr>
