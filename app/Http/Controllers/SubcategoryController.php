@@ -58,15 +58,18 @@ class SubcategoryController extends Controller
      */
     public function show(string $id)
     {
-        $data = Subcategory::find($id);
-        $category = Category::orderBy('name')->get();
-        return view('subcategory', ['editdata' => $data, 'cat' => $category]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {}
+    public function edit(string $id)
+    {
+        $data = Subcategory::find($id);
+        $category = Category::orderBy('name')->get();
+        return view('subcategory', ['editdata' => $data, 'cat' => $category]);
+    }
 
     /**
      * Update the specified resource in storage.

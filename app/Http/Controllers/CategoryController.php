@@ -58,14 +58,17 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $data = Category::find($id);
-        return view('category', ['editdata' => $data]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {}
+    public function edit(string $id)
+    {
+        $data = Category::find($id);
+        return view('category', ['editdata' => $data]);
+    }
 
     /**
      * Update the specified resource in storage.

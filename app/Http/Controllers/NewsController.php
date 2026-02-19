@@ -110,10 +110,8 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        $cat = Category::orderBy('name')->get();
-        $editdata = News::findOrFail($id);
-        $subcat = Subcategory::where('category_id', $editdata->category_id)->orderBy('name')->get();
-        return view('news', compact('editdata', 'cat', 'subcat'));
+        $data = News::findOrFail($id);
+        return view('news-detail', compact('data'));
     }
 
     /**
@@ -121,7 +119,10 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $cat = Category::orderBy('name')->get();
+        $editdata = News::findOrFail($id);
+        $subcat = Subcategory::where('category_id', $editdata->category_id)->orderBy('name')->get();
+        return view('news', compact('editdata', 'cat', 'subcat'));
     }
 
     /**
@@ -129,6 +130,7 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        dd($request->all(), $request->file('featured_image'));
         $request->validate(
             [
                 'category_id' => 'required',
@@ -154,7 +156,9 @@ class NewsController extends Controller
 
         $news = News::findOrFail($id);
 
-        if ($request->has('featured_image')) {
+        $filename = explode('.', $news->featured_image);
+
+        if ($request->hasFile('featured_image')) {
 
             $image = $request->croppedImage;
 
@@ -164,7 +168,7 @@ class NewsController extends Controller
 
             $lastId = str_pad($id, 7, '0', STR_PAD_LEFT);
             $extension = $data['featured_image']->getClientOriginalExtension();
-            $imageName = date('dmY_His') . '_' . $lastId . '.' . $extension;
+            $imageName = $filename[0] . '.' . $extension;
 
             File::put(public_path('uploads/' . $imageName), base64_decode($image));
         } else {
@@ -216,11 +220,5 @@ class NewsController extends Controller
         $subcategories = Subcategory::where('category_id', $categoryId)->get();
 
         return response()->json($subcategories);
-    }
-
-    public function newsDetail($id)
-    {
-        $data = News::findOrFail($id);
-        return view('news-detail', compact('data'));
     }
 }

@@ -190,7 +190,7 @@
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group"
                                                 aria-label="Small button group">
-                                                <a href="{{ url('/admin/subcategory/' . $row->id) }}"
+                                                <a href="{{ url('/admin/subcategory/' . $row->id.'/edit') }}"
                                                     class="btn btn-dark btn-sm">Edit</a>
                                                 <a href="{{ route('subcategory.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                                                 {{-- <form action="{{url('/admin/subcategory/'.$row->id)}}" method="POST" class="d-inline">

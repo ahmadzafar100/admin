@@ -156,7 +156,7 @@
                                                     <td>
                                                         <div class="btn-group btn-group-sm" role="group"
                                                             aria-label="Small button group">
-                                                            <a href="{{ url('/admin/category/' . $row->id) }}"
+                                                            <a href="{{ url('/admin/category/' . $row->id.'/edit') }}"
                                                                 class="btn btn-dark btn-sm">Edit</a>
                                                             <a href="{{ route('category.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                                                             {{-- <form action="{{ url('admin/category/' . $row->id) }}"

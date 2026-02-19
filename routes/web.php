@@ -32,6 +32,5 @@ Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::get('/admin/deactivate-subcategory/{id}', [SubcategoryController::class, 'deactivate']);
     Route::get('/admin/activate-subcategory/{id}', [SubcategoryController::class, 'activate']);
     Route::resource('/admin/news', NewsController::class);
-    Route::get('/admin/news-detail/{id}', [NewsController::class, 'newsDetail']);
     Route::get('/get-subcategories/{category}', [NewsController::class, 'getSubcategories']);
 });

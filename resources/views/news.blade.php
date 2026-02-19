@@ -58,7 +58,7 @@
                                             <select name="subcategory_id" id="subcategory" class="form-control">
                                                 <option value="">Select Subcategory</option>
                                                 @foreach ($subcat as $subcats)
-                                                <option value="{{ $cats->id }}"
+                                                <option value="{{ $subcats->id }}"
                                                     {{ old('subcategory_id', $editdata->subcategory_id) == $subcats->id ? 'selected' : '' }}>
                                                     {{ $subcats->display_name }}
                                                 </option>
@@ -325,9 +325,9 @@
                                             <td>
                                                 <div class="btn-group btn-group-sm" role="group"
                                                     aria-label="Small button group">
-                                                    <a href="{{ url('/admin/news-detail/' . $row->id) }}"
-                                                        class="btn btn-info btn-sm" target="_blank">View Detail</a>
                                                     <a href="{{ url('/admin/news/' . $row->id) }}"
+                                                        class="btn btn-info btn-sm" target="_blank">View Detail</a>
+                                                    <a href="{{ url('/admin/news/' . $row->id.'/edit') }}"
                                                         class="btn btn-dark btn-sm">Edit</a>
                                                     <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                                                     <!-- @if ($row->status === 1)
