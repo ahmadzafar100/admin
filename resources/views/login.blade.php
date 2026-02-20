@@ -61,7 +61,7 @@
 											@enderror
 										</div>
 										<div>
-											<div class="mb-3 text-center">
+											<div class="mb-3 text-center" id="captcha-container">
 												<img src="{{ url('/captcha-image') }}" alt="Captcha">
 											</div>
 											<input type="text" name="captcha" class="form-control form-control-lg" placeholder="Enter Captcha">

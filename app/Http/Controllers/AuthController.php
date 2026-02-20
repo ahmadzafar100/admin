@@ -45,7 +45,7 @@ class AuthController extends Controller
     public function generateCaptcha()
     {
         // $text = Str::random(6);
-        $text = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 6);
+        $text = substr(str_shuffle('abcdefghijklmnopqrstuvwxyz0123456789'), 0, 6);
         session(['captcha_text' => $text]);
 
         $image = imagecreate(120, 40);

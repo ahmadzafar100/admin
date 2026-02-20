@@ -442,7 +442,7 @@
 
         tinymce.init({
             selector: '#content',
-            height: 400,
+            height: 300,
             menubar: true,
             plugins: [
                 'advlist', 'autolink', 'lists', 'link', 'image',

@@ -17,7 +17,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $cat = Category::orderBy('name')->get();
+        $cat = Category::where('status', 1)->orderBy('name')->get();
         $data = News::with(['category', 'subcategory'])->latest()->get();
         $title = 'Delete Category!';
         $text = "Are you sure you want to delete?";
@@ -219,7 +219,7 @@ class NewsController extends Controller
 
     public function getSubcategories($categoryId)
     {
-        $subcategories = Subcategory::where('category_id', $categoryId)->get();
+        $subcategories = Subcategory::where(['category_id' => $categoryId, 'status' => 1])->get();
 
         return response()->json($subcategories);
     }
