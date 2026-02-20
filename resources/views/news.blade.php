@@ -336,7 +336,9 @@
                                                 <div class="btn-group btn-group-sm" role="group"
                                                     aria-label="Small button group">
                                                     <a href="{{ url('/admin/news/' . $row->id) }}"
-                                                        class="btn btn-info btn-sm" target="_blank">View Detail</a>
+                                                        class="btn btn-primary btn-sm" target="_blank">View Detail</a>
+                                                    <a href="{{ url('/admin/news-images/' . $row->id) }}"
+                                                        class="btn btn-info btn-sm" target="_blank">Add Images</a>
                                                     <a href="{{ url('/admin/news/' . $row->id.'/edit') }}"
                                                         class="btn btn-dark btn-sm">Edit</a>
                                                     <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>

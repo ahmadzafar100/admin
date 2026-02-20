@@ -14,10 +14,10 @@
                     <div class="col-12">
                         <div class="card mb-3">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Add Images</h5>
+                                <h5 class="card-title mb-0">Add Image</h5>
                             </div>
                             <div class="card-body">
-                                <form action="{{ url('/admin/add-image') }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ url('/admin/add-image/'.$id) }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @if (session()->has('err_msg'))
                                     <div class="alert alert-danger">
@@ -34,7 +34,7 @@
                                             <input type="file" id="imageInput" accept="image/*" class="form-control" name="image">
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Add Category</button>
+                                            <button type="submit" class="btn btn-primary">Add Image</button>
                                         </div>
                                     </div>
                                 </form>

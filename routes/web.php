@@ -35,5 +35,6 @@ Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::get('/admin/activate-subcategory/{id}', [SubcategoryController::class, 'activate']);
     Route::resource('/admin/news', NewsController::class);
     Route::get('/get-subcategories/{category}', [NewsController::class, 'getSubcategories']);
-    Route::get('/admin/news-images', [NewsImageController::class, 'index']);
+    Route::get('/admin/news-images/{id}', [NewsImageController::class, 'index']);
+    Route::post('/admin/add-image/{id}', [NewsImageController::class, 'addImage']);
 });
