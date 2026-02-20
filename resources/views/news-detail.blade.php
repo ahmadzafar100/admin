@@ -33,6 +33,11 @@
                                         <td>{{$data->title}}</td>
                                     </tr>
                                     <tr>
+                                        <th>Slug</th>
+                                        <td>:</td>
+                                        <td>{{$data->slug}}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Summary</th>
                                         <td>:</td>
                                         <td>{{$data->summary}}</td>

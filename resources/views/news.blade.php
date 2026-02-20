@@ -41,7 +41,7 @@
                                     </ul>
                                     @endif
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Category</label>
                                             <select name="category_id" id="category" class="form-control">
                                                 <option value="">Select Category</option>
@@ -53,7 +53,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Subcategory</label>
                                             <select name="subcategory_id" id="subcategory" class="form-control">
                                                 <option value="">Select Subcategory</option>
@@ -65,10 +65,15 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Title</label>
                                             <input type="text" class="form-control" name="title"
                                                 value="{{ $editdata->title }}">
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 mb-3">
+                                            <label>Slug</label>
+                                            <input type="text" class="form-control" name="slug"
+                                                value="{{ $editdata->slug }}">
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label>Summary</label>
@@ -169,7 +174,7 @@
                                     </ul>
                                     @endif
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Category</label>
                                             <select name="category_id" id="category" class="form-control">
                                                 <option value="">Select Category</option>
@@ -181,16 +186,21 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Subcategory</label>
                                             <select name="subcategory_id" id="subcategory" class="form-control">
                                                 <option value="">Select Subcategory</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
+                                        <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Title</label>
                                             <input type="text" class="form-control" name="title"
                                                 value="{{ old('title') }}">
+                                        </div>
+                                        <div class="col-md-3 col-sm-6 mb-3">
+                                            <label>Slug</label>
+                                            <input type="text" class="form-control" name="slug"
+                                                value="{{ old('slug') }}">
                                         </div>
                                         <div class="col-md-12 mb-3">
                                             <label>Summary</label>

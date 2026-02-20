@@ -41,12 +41,13 @@ return new class extends Migration
             $table->enum('status', ['draft', 'published', 'archived'])
                 ->default('draft');
 
-            $table->timestamp('published_at')->nullable();
+            $table->date('published_at')->nullable();
 
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_breaking_news')->default(false);
 
             $table->integer('views')->default(0);
+            $table->bigInteger('likes')->default(0);
 
             $table->softDeletes();
 

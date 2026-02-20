@@ -61,10 +61,14 @@
 											@enderror
 										</div>
 										<div>
-											<div class="form-check align-items-center">
-												<input id="customControlInline" type="checkbox" class="form-check-input" value="remember-me" name="remember-me" checked>
-												<label class="form-check-label text-small" for="customControlInline">Remember me</label>
+											<div class="mb-3 text-center">
+												<img src="{{ url('/captcha-image') }}" alt="Captcha">
 											</div>
+											<input type="text" name="captcha" class="form-control form-control-lg" placeholder="Enter Captcha">
+
+											@error('captcha')
+											<span class="text-danger">{{ $message }}</span>
+											@enderror
 										</div>
 										<div class="d-grid gap-2 mt-3">
 											<button type="submit" class="btn btn-lg btn-primary">Login</button>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -18,8 +19,13 @@ class AuthController extends Controller
     {
         $r->validate([
             'username' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'captcha' => 'required'
         ]);
+
+        if ($r->captcha != session('captcha_text')) {
+            return back()->withErrors(['captcha' => 'Invalid Captcha']);
+        }
 
         $row = DB::table('users')->where('username', $r->username)->first();
         if (!$row || !Hash::check($r->password, $row->password)) {
@@ -34,5 +40,25 @@ class AuthController extends Controller
     {
         Session::flush();
         return redirect('/admin/login');
+    }
+
+    public function generateCaptcha()
+    {
+        // $text = Str::random(6);
+        $text = substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 6);
+        session(['captcha_text' => $text]);
+
+        $image = imagecreate(120, 40);
+        $bg = imagecolorallocate($image, 255, 255, 255);
+        $textColor = imagecolorallocate($image, 0, 0, 0);
+
+        imagestring($image, 5, 30, 10, $text, $textColor);
+
+        ob_start();
+        imagepng($image);
+        $imageData = ob_get_clean();
+        imagedestroy($image);
+
+        return response($imageData)->header('Content-Type', 'image/png');
     }
 }
