@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\NewsImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,5 @@ Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::get('/admin/activate-subcategory/{id}', [SubcategoryController::class, 'activate']);
     Route::resource('/admin/news', NewsController::class);
     Route::get('/get-subcategories/{category}', [NewsController::class, 'getSubcategories']);
+    Route::get('/admin/news-images', [NewsImageController::class, 'index']);
 });
