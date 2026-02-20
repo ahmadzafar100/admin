@@ -32,6 +32,9 @@
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <input type="file" id="imageInput" accept="image/*" class="form-control" name="image">
+                                             @error('image')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary">Add Image</button>
