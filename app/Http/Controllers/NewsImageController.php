@@ -12,6 +12,9 @@ class NewsImageController extends Controller
     function index(string $id)
     {
         $data = NewsImage::where('news_id', $id)->orderBy('id', 'desc')->get();
+        $title = 'Delete Image!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('news-images', compact('data', 'id'));
     }
 
@@ -32,13 +35,17 @@ class NewsImageController extends Controller
                 return redirect('/admin/news-images/' . $id);
             }
 
-            $image = $r->file('image');
+            $image = $r->croppedImage;
+
+            // Remove base64 header
+            $image = str_replace('data:image/jpeg;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
 
             $lastId = str_pad($newsImage->id, 7, '0', STR_PAD_LEFT);
             $extension = $r->image->getClientOriginalExtension();
             $imageName = date('dmY_His') . '_' . $id . '_' . $lastId . '.' . $extension;
 
-            $image->move(public_path('uploads'), $imageName);
+            File::put(public_path('uploads/' . $imageName), base64_decode($image));
 
             $newsImage->update([
                 'image' => $imageName
