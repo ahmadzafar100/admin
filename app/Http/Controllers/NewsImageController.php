@@ -23,9 +23,9 @@ class NewsImageController extends Controller
 
         $newsImage = new NewsImage();
 
-        if ($r->hasFile('featured_image')) {
-
+        if ($r->hasFile('image')) {
             $newsImage->news_id = $id;
+            $newsImage->image = '';
 
             if (!$newsImage->save()) {
                 Alert::toast('News image not saved.', 'error');
@@ -48,8 +48,7 @@ class NewsImageController extends Controller
             return redirect('/admin/news-images/' . $id);
         }
 
-
-
-        return redirect()->back()->with('success', 'Image uploaded successfully');
+        Alert::toast('No image uploaded.', 'error');
+        return back();
     }
 }

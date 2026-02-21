@@ -8,6 +8,7 @@ use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class NewsController extends Controller
@@ -46,7 +47,7 @@ class NewsController extends Controller
                 'slug' => 'required|max:255',
                 'summary' => 'required|max:255',
                 'content' => 'required',
-                'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
+                // 'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
                 'croppedImage' => 'required',
                 'status' => 'required',
                 'published_at' => 'required',
@@ -96,6 +97,7 @@ class NewsController extends Controller
         $imageName = date('dmY_His') . '_' . $lastId . '.' . $extension;
 
         File::put(public_path('uploads/' . $imageName), base64_decode($image));
+        // Storage::disk('public')->putFileAs('uploads', $request->file('featured_image'), $imageName);
 
         $news->update([
             'featured_image' => $imageName
