@@ -61,29 +61,24 @@
                                 </form>
                             </div>
                         </div>
+                        @if (count($data) > 0)
                         <div class="card flex-fill">
-                            @if (session()->has('action_msg'))
-                            <div class="alert alert-info">
-                                {{ session('action_msg') }}
-                            </div>
-                            @endif
                             <div class="card-body">
                                 <div class="row">
-                                    @if (count($data) > 0)
-                                        @foreach ($data as $row)
-                                        <div class="col-md-3 col-sm-6 mb-3">
-                                            <a href="{{ asset('uploads/'.$row->image) }}" target="_blank">
-                                                <img src="{{ asset('uploads/'.$row->image) }}" class="img-thumbnail" width="300">
-                                            </a>
-                                            <div class="d-grid">
-                                            <a href="{{ url('/admin/delete-news-image/' . $row->id) }}" class="btn btn-danger btn-block" data-confirm-delete="true">Delete</a>
-                                            </div>
+                                    @foreach ($data as $row)
+                                    <div class="col-md-3 col-sm-6 mb-3">
+                                        <a href="{{ asset('uploads/'.$row->image) }}" target="_blank">
+                                            <img src="{{ asset('uploads/'.$row->image) }}" class="img-thumbnail" width="300">
+                                        </a>
+                                        <div class="d-grid">
+                                        <a href="{{ url('/admin/delete-news-image/' . $row->id) }}" class="btn btn-danger btn-block" data-confirm-delete="true">Delete</a>
                                         </div>
-                                        @endforeach
-                                    @endif
+                                    </div>
+                                    @endforeach                                    
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

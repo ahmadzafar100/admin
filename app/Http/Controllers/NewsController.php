@@ -18,12 +18,11 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $cat = Category::where('status', 1)->orderBy('name')->get();
         $data = News::with(['category', 'subcategory'])->latest()->get();
         $title = 'Delete Category!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view('news', compact('cat', 'data'));
+        return view('news', compact('data'));
     }
 
     /**
@@ -31,7 +30,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        $cat = Category::where('status', 1)->orderBy('name')->get();
+        return view('post-news', compact('cat'));
     }
 
     /**
@@ -125,7 +125,7 @@ class NewsController extends Controller
         $cat = Category::orderBy('name')->get();
         $editdata = News::findOrFail($id);
         $subcat = Subcategory::where('category_id', $editdata->category_id)->orderBy('name')->get();
-        return view('news', compact('editdata', 'cat', 'subcat'));
+        return view('post-news', compact('editdata', 'cat', 'subcat'));
     }
 
     /**

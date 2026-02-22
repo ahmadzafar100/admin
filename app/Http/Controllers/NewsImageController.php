@@ -58,4 +58,15 @@ class NewsImageController extends Controller
         Alert::toast('No image uploaded.', 'error');
         return back();
     }
+
+    function deleteImage($id)
+    {
+        $del = NewsImage::destroy($id);
+        if (!$del) {
+            Alert::toast('Image not deleted.', 'error');
+            return redirect()->back();
+        }
+        Alert::toast('Image deleted.', 'success');
+        return redirect()->back();
+    }
 }
