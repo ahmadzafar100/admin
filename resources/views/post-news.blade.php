@@ -269,7 +269,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="card mb-3">
+                        {{-- <div class="card mb-3">
                             <div class="card-header">
                                 <h5 class="card-title mb-0">Or Import Excel to Add News</h5>
                             </div>
@@ -290,7 +290,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
                         @endif
                     </div>
                 </div>

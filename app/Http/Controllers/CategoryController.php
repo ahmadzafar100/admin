@@ -45,11 +45,12 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->display_name = $request->display_name;
         if (!$category->save()) {
-            Session::flash('err_msg', 'Category not saved.');
+            Alert::toast('Category not saved.', 'error');
+            // Session::flash('err_msg', 'Category not saved.');
             return redirect('/admin/category');
         }
         Alert::toast('Category added successfully!', 'success');
-        Session::flash('success_msg', 'Category saved.');
+        // Session::flash('success_msg', 'Category saved.');
         return redirect('/admin/category');
     }
 
@@ -76,7 +77,7 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|unique:categories',
+            'name' => 'required',
             'display_name' => 'required'
         ]);
 
@@ -84,10 +85,12 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->display_name = $request->display_name;
         if (!$category->save()) {
-            Session::flash('err_msg', 'Category not updated.');
+            // Session::flash('err_msg', 'Category not updated.');
+            Alert::toast('Category not updated.', 'error');
             return redirect('/admin/category');
         }
-        Session::flash('success_msg', 'Category updated.');
+        Alert::toast('Category updated.', 'success');
+        // Session::flash('success_msg', 'Category updated.');
         return redirect('/admin/category');
     }
 
@@ -98,9 +101,11 @@ class CategoryController extends Controller
     {
         $del = Category::destroy($id);
         if (!$del) {
-            return redirect()->back()->with('err_msg', 'Category not deleted.');
+            Alert::toast('Category not deleted.', 'error');
+            return redirect()->back();
         }
         // return back()->with('success_msg', 'Category deleted.');
+        Alert::toast('Category deleted.', 'success');
         return redirect()->back();
     }
 
@@ -111,7 +116,8 @@ class CategoryController extends Controller
         ]);
 
         Excel::import(new CategoryImport, $request->file('file'));
-        return back()->with('success_msg', 'Category Imported Successfully');
+        Alert::toast('Category Imported Successfully', 'success');
+        return redirect()->back();
     }
 
     function deactivate($id)
@@ -121,6 +127,7 @@ class CategoryController extends Controller
 
         if ($update->save()) {
             // Session::flash('action_msg', 'Category deactivated.');
+            Alert::toast('Category deactivated.', 'success');
             return redirect('/admin/category');
         }
     }
@@ -132,6 +139,7 @@ class CategoryController extends Controller
 
         if ($update->save()) {
             // Session::flash('action_msg', 'Category activated.');
+            Alert::toast('Category activated.', 'success');
             return redirect('/admin/category');
         }
     }

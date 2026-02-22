@@ -37,7 +37,7 @@ class SubcategoryController extends Controller
     {
         $request->validate([
             'category' => 'required',
-            'name' => 'required|unique:categories',
+            'name' => 'required|unique:subcategories',
             'display_name' => 'required'
         ]);
 
@@ -46,10 +46,12 @@ class SubcategoryController extends Controller
         $subcategory->name = $request->name;
         $subcategory->display_name = $request->display_name;
         if (!$subcategory->save()) {
-            Session::flash('err_msg', 'Subcategory not saved.');
+            // Session::flash('err_msg', 'Subcategory not saved.');
+            Alert::toast('Subcategory not saved.', 'error');
             return redirect('/admin/subcategory');
         }
-        Session::flash('success_msg', 'Subcategory saved.');
+        // Session::flash('success_msg', 'Subcategory saved.');
+        Alert::toast('Subcategory saved.', 'success');
         return redirect('/admin/subcategory');
     }
 
@@ -78,7 +80,7 @@ class SubcategoryController extends Controller
     {
         $request->validate([
             'category' => 'required',
-            'name' => 'required|unique:categories',
+            'name' => 'required',
             'display_name' => 'required'
         ]);
 
@@ -87,10 +89,12 @@ class SubcategoryController extends Controller
         $subcategory->name = $request->name;
         $subcategory->display_name = $request->display_name;
         if (!$subcategory->save()) {
-            Session::flash('err_msg', 'Subcategory not updated.');
+            // Session::flash('err_msg', 'Subcategory not updated.');
+            Alert::toast('Subcategory not updated.', 'error');
             return redirect('/admin/subcategory');
         }
-        Session::flash('success_msg', 'Subcategory updated.');
+        // Session::flash('success_msg', 'Subcategory updated.');
+        Alert::toast('Subcategory updated.', 'success');
         return redirect('/admin/subcategory');
     }
 
@@ -101,9 +105,11 @@ class SubcategoryController extends Controller
     {
         $del = Subcategory::destroy($id);
         if (!$del) {
-            return back()->with('err_msg', 'Subcategory not deleted.');
+            Alert::toast('Subcategory not deleted.', 'error');
+            return redirect()->back();
         }
         // return back()->with('success_msg', 'subcategory deleted.');
+        Alert::toast('Subcategory deleted.', 'success');
         return redirect()->back();
     }
 
@@ -114,7 +120,8 @@ class SubcategoryController extends Controller
         ]);
 
         Excel::import(new SubcategoryImport, $request->file('file'));
-        return back()->with('success_msg', 'Subcategory Imported Successfully');
+        Alert::toast('Subcategory Imported Successfully.', 'success');
+        return redirect()->back();
     }
 
     function deactivate($id)
@@ -124,6 +131,7 @@ class SubcategoryController extends Controller
 
         if ($update->save()) {
             // Session::flash('action_msg', 'Subcategory deactivated.');
+            Alert::toast('Subcategory deactivated.', 'success');
             return redirect('/admin/subcategory');
         }
     }
@@ -135,6 +143,7 @@ class SubcategoryController extends Controller
 
         if ($update->save()) {
             // Session::flash('action_msg', 'Subcategory activated.');
+            Alert::toast('Subcategory activated.', 'success');
             return redirect('/admin/subcategory');
         }
     }
