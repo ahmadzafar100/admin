@@ -35,7 +35,7 @@
                                         @endif
                                         <div class="row">
                                             <div class="col-md-4 col-sm-6 mb-3">
-                                                <label>Name</label>
+                                                <label>Name<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="name"
                                                     value="{{ $editdata->name }}">
                                                 @error('name')
@@ -43,7 +43,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 col-sm-6 mb-3">
-                                                <label>Display Name</label>
+                                                <label>Display Name<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="display_name"
                                                     value="{{ $editdata->display_name }}">
                                                 @error('display_name')
@@ -78,7 +78,7 @@
                                         @endif
                                         <div class="row">
                                             <div class="col-md-4 col-sm-6 mb-3">
-                                                <label>Name</label>
+                                                <label>Name<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="name"
                                                     value="{{ old('name') }}">
                                                 @error('name')
@@ -86,7 +86,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-4 col-sm-6 mb-3">
-                                                <label>Display Name</label>
+                                                <label>Display Name<span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="display_name"
                                                     value="{{ old('display_name') }}">
                                                 @error('display_name')

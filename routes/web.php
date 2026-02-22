@@ -38,4 +38,6 @@ Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::get('/admin/news-images/{id}', [NewsImageController::class, 'index']);
     Route::post('/admin/add-image/{id}', [NewsImageController::class, 'addImage']);
     Route::delete('/admin/delete-news-image/{id}', [NewsImageController::class, 'deleteImage']);
+    Route::post('/news/update-status', [NewsController::class, 'updateStatus'])
+        ->name('news.updateStatus');
 });

@@ -26,24 +26,24 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Name</label>
+                                            <label>Name<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="name" value="{{$data->name}}">
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Email</label>
+                                            <label>Email<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="email" value="{{$data->email}}">
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Mobile</label>
+                                            <label>Mobile<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="mobile" value="{{$data->mobile}}">
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Username</label>
+                                            <label>Username<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" value="{{$data->username}}" disabled>
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Role</label>
-                                            <input type="text" class="form-control" value="{{$data->role}}" disabled>
+                                            <label>Role<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" value="{{$data->role_id}}" disabled>
                                         </div>
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary">Update Profile</button>

@@ -21,7 +21,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Current Password</label>
+                                            <label>Current Password<span class="text-danger">*</span></label>
                                             <input type="password" class="form-control" name="current_pass"
                                                 value="{{ old('current_pass') }}">
                                             @error('current_pass')
@@ -29,7 +29,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>New Password</label>
+                                            <label>New Password<span class="text-danger">*</span></label>
                                             <input type="password" class="form-control" name="new_pass"
                                                 value="{{ old('new_pass') }}">
                                             @error('new_pass')
@@ -37,7 +37,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Confirm Password</label>
+                                            <label>Confirm Password<span class="text-danger">*</span></label>
                                             <input type="password" class="form-control" name="confirm_pass"
                                                 value="{{ old('confirm_pass') }}">
                                             @error('confirm_pass')

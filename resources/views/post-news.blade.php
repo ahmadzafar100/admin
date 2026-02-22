@@ -38,7 +38,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Category</label>
+                                            <label>Category<span class="text-danger">*</span></label>
                                             <select name="category_id" id="category" class="form-control">
                                                 <option value="">Select Category</option>
                                                 @foreach ($cat as $cats)
@@ -50,7 +50,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Subcategory</label>
+                                            <label>Subcategory<span class="text-danger">*</span></label>
                                             <select name="subcategory_id" id="subcategory" class="form-control">
                                                 <option value="">Select Subcategory</option>
                                                 @foreach ($subcat as $subcats)
@@ -62,26 +62,26 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Title</label>
+                                            <label>Title<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="title"
                                                 value="{{ $editdata->title }}">
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Slug</label>
+                                            <label>Slug<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="slug"
                                                 value="{{ $editdata->slug }}">
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label>Summary</label>
+                                            <label>Summary<span class="text-danger">*</span></label>
                                             <textarea class="form-control" name="summary" rows="5">{{ $editdata->summary }}</textarea>
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label>Content</label>
+                                            <label>Content<span class="text-danger">*</span></label>
                                             <textarea class="form-control" name="content" id="content">{{ $editdata->content }}</textarea>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <div class="">
-                                                <label>Featured Image</label>
+                                                <label>Featured Image<span class="text-danger">*</span></label>
                                                 <input type="file" id="imageInput" accept="image/*" class="form-control" name="featured_image">
                                             </div>
                                             <div class="mt-3">
@@ -112,7 +112,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Publish At</label>
+                                            <label>Publish At<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="published_at" id="published_at" value="{{ date('d-m-Y', strtotime($editdata->published_at)) }}" readonly>
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
@@ -171,7 +171,7 @@
                                     @endif
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Category</label>
+                                            <label>Category<span class="text-danger">*</span></label>
                                             <select name="category_id" id="category" class="form-control">
                                                 <option value="">Select Category</option>
                                                 @foreach ($cat as $cats)
@@ -183,32 +183,32 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Subcategory</label>
+                                            <label>Subcategory<span class="text-danger">*</span></label>
                                             <select name="subcategory_id" id="subcategory" class="form-control">
                                                 <option value="">Select Subcategory</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Title</label>
+                                            <label>Title<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="title"
                                                 value="{{ old('title') }}">
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Slug</label>
+                                            <label>Slug<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="slug"
                                                 value="{{ old('slug') }}">
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label>Summary</label>
+                                            <label>Summary<span class="text-danger">*</span></label>
                                             <textarea class="form-control" name="summary" rows="5">{{ old('summary') }}</textarea>
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label>Content</label>
+                                            <label>Content<span class="text-danger">*</span></label>
                                             <textarea class="form-control" name="content" id="content">{{ old('content') }}</textarea>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <div class="">
-                                                <label>Featured Image</label>
+                                                <label>Featured Image<span class="text-danger">*</span></label>
                                                 <input type="file" id="imageInput" accept="image/*" class="form-control" name="featured_image">
                                             </div>
                                             <div class="mt-3">
@@ -239,7 +239,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Publish At</label>
+                                            <label>Publish At<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="published_at" id="published_at" value="{{ old('published_at') }}" readonly>
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">

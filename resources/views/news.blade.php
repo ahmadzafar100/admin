@@ -43,13 +43,11 @@
                                             <td>{{ $row->title }}</td>
                                             <td>{{ date('d/m/Y', strtotime($row->published_at)) }}</td>
                                             <td>
-                                                @if ($row->status === 'draft')
-                                                <span class="badge bg-primary">{{strtoupper($row->status)}}</span>
-                                                @elseif ($row->status === 'published')
-                                                <span class="badge bg-success">{{strtoupper($row->status)}}</span>
-                                                @else
-                                                <span class="badge bg-danger">{{strtoupper($row->status)}}</span>
-                                                @endif
+                                                <select data-id="{{$row->id}}" class="form-control form-control-sm status-dropdown">
+                                                    <option value="draft" {{$row->status === 'draft' ? 'selected':''}}>Draft</option>
+                                                    <option value="published" {{$row->status === 'published' ? 'selected':''}}>Published</option>
+                                                    <option value="archived" {{$row->status === 'archived' ? 'selected':''}}>Archived</option>
+                                                </select>
                                             </td>
                                             <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
                                             <td>
@@ -93,3 +91,40 @@
         </main>
     </x-slot>
 </x-layout>
+
+<script>
+$(document).on('change', '.status-dropdown', function() {
+
+    var status = $(this).val();
+    var news_id = $(this).data('id');
+
+     $.ajax({
+        url: "{{ route('news.updateStatus') }}",
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            news_id: news_id,
+            status: status
+        },
+        success: function(response) {
+
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: response.message,
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+        },
+        error: function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            });
+        }
+    });
+});
+</script>

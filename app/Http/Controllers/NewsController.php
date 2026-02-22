@@ -225,4 +225,16 @@ class NewsController extends Controller
 
         return response()->json($subcategories);
     }
+
+    public function updateStatus(Request $request)
+    {
+        $news = News::findOrFail($request->news_id);
+        $news->status = $request->status;
+        $news->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Status updated successfully'
+        ]);
+    }
 }
