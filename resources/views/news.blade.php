@@ -15,6 +15,7 @@
                 <div class="row">
                     <div class="col-12">
                         <a href="{{url('/admin/news/create')}}" class="btn btn-secondary mb-3">Post News</a>
+                        <a href="{{url('/admin/news-export')}}" class="btn btn-dark mb-3">Export Excel</a>
                         <div class="card flex-fill">
                             @if (session()->has('action_msg'))
                             <div class="alert alert-info">

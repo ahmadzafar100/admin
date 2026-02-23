@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\NewsExport;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class NewsController extends Controller
@@ -261,5 +263,11 @@ class NewsController extends Controller
         }
 
         return $slug;
+    }
+
+    public function export()
+    {
+        return 'Export in progress';
+        // return Excel::download(new NewsExport, 'news.xlsx');
     }
 }

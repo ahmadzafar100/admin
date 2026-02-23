@@ -41,4 +41,5 @@ Route::middleware(['isvalid', 'nocache'])->group(function () {
     Route::delete('/admin/delete-news-image/{id}', [NewsImageController::class, 'deleteImage']);
     Route::post('/news/update-status', [NewsController::class, 'updateStatus'])
         ->name('news.updateStatus');
+    Route::get('/admin/news-export', [NewsController::class, 'export']);
 });
