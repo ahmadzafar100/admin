@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NewsImageController;
 use App\Http\Controllers\ProfileController;
@@ -20,7 +21,7 @@ Route::get('/captcha-image', [AuthController::class, 'generateCaptcha']);
 Route::view('/blank', 'blank');
 
 Route::middleware(['isvalid', 'nocache'])->group(function () {
-    Route::view('/admin/dashboard', 'dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index']);
     Route::get('/admin/profile', [ProfileController::class, 'index']);
     Route::post('/admin/profile-update', [ProfileController::class, 'update']);
     Route::get('/admin/change-password', [ProfileController::class, 'change_password']);
