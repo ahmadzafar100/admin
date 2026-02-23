@@ -17,9 +17,19 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $r)
     {
         $data = News::with(['category', 'subcategory'])->latest()->get();
+        $data = News::with(['category', 'subcategory'])
+            ->when($r->status !== null, function ($query) use ($r) {
+                $query->where('status', $r->status);
+            })
+            ->when($r->is_breaking !== null, function ($query) use ($r) {
+                $query->where('is_breaking_news', $r->is_breaking);
+            })
+            ->when($r->is_featured !== null, function ($query) use ($r) {
+                $query->where('is_featured', $r->is_featured);
+            })->latest()->get();
         $title = 'Delete Category!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
