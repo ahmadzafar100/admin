@@ -1,7 +1,7 @@
 <ul class="sidebar-nav">
-    <li class="sidebar-header">
+    <!-- <li class="sidebar-header">
         Pages
-    </li>
+    </li> -->
 
     <li class="sidebar-item {{ request()->is('admin/dashboard') ? 'active' : '' }}">
         <a class="sidebar-link" href="{{ url('/admin/dashboard') }}">

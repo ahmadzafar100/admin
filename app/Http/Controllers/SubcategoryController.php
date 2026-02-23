@@ -80,7 +80,7 @@ class SubcategoryController extends Controller
     {
         $request->validate([
             'category' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:subcategories,name,' . $id,
             'display_name' => 'required'
         ]);
 
