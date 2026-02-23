@@ -5,6 +5,12 @@
             <div class="container-fluid p-0">
                 <div class="mb-3">
                     <h1 class="h3 d-inline align-middle">News Detail</h1>
+                    <span class="badge bg-primary text-white ms-2" title="Total Likes">
+                        <i class="align-middle" data-feather="thumbs-up"></i> {{$data->likes}}
+                    </span>
+                    <span class="badge bg-success text-white ms-0" title="Total Views">
+                        <i class="align-middle" data-feather="eye"></i> {{$data->views}}
+                    </span>
                 </div>
 
                 <div class="row">
@@ -16,7 +22,7 @@
                             </div>
                             @endif
                             <div class="table-responsive">
-                                <table class="table table-hover my-0">
+                                <table class="table my-0">
                                     <tr>
                                         <th style="width: 20%;">Category</th>
                                         <td>:</td>
