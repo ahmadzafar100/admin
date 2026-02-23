@@ -43,7 +43,7 @@
                                             <td>{{ $row->title }}</td>
                                             <td>{{ date('d/m/Y', strtotime($row->published_at)) }}</td>
                                             <td>
-                                                <select data-id="{{$row->id}}" class="form-control form-control-sm status-dropdown">
+                                                <select data-id="{{$row->id}}" class="form-select form-select-sm status-dropdown">
                                                     <option value="draft" {{$row->status === 'draft' ? 'selected':''}}>Draft</option>
                                                     <option value="published" {{$row->status === 'published' ? 'selected':''}}>Published</option>
                                                     <option value="archived" {{$row->status === 'archived' ? 'selected':''}}>Archived</option>

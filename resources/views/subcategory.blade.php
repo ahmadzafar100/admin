@@ -36,7 +36,7 @@
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Category<span class="text-danger">*</span></label>
-                                            <select name="category" class="form-control">
+                                            <select name="category" class="form-select">
                                                 <option value="">Select Category</option>
                                                 @foreach ($cat as $cats)
                                                 <option value="{{ $cats->id }}"
@@ -95,7 +95,7 @@
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Category<span class="text-danger">*</span></label>
-                                            <select name="category" class="form-control">
+                                            <select name="category" class="form-select">
                                                 <option value="">Select Category</option>
                                                 @foreach ($cat as $cats)
                                                 <option value="{{ $cats->id }}"

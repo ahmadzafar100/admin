@@ -39,7 +39,7 @@
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Category<span class="text-danger">*</span></label>
-                                            <select name="category_id" id="category" class="form-control">
+                                            <select name="category_id" id="category" class="form-select">
                                                 <option value="">Select Category</option>
                                                 @foreach ($cat as $cats)
                                                 <option value="{{ $cats->id }}"
@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Subcategory<span class="text-danger">*</span></label>
-                                            <select name="subcategory_id" id="subcategory" class="form-control">
+                                            <select name="subcategory_id" id="subcategory" class="form-select">
                                                 <option value="">Select Subcategory</option>
                                                 @foreach ($subcat as $subcats)
                                                 <option value="{{ $subcats->id }}"
@@ -105,7 +105,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Status</label>
-                                            <select name="status" class="form-control">
+                                            <select name="status" class="form-select">
                                                 <option value="draft" {{ old('status', $editdata->status ?? '') == 'draft' ? 'selected' : '' }}>Draft</option>
                                                 <option value="published" {{ old('status', $editdata->status ?? '') == 'published' ? 'selected' : '' }}>Published</option>
                                                 <option value="archived" {{ old('status', $editdata->status ?? '') == 'archived' ? 'selected' : '' }}>Archived</option>
@@ -172,7 +172,7 @@
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Category<span class="text-danger">*</span></label>
-                                            <select name="category_id" id="category" class="form-control">
+                                            <select name="category_id" id="category" class="form-select">
                                                 <option value="">Select Category</option>
                                                 @foreach ($cat as $cats)
                                                 <option value="{{ $cats->id }}"
@@ -184,7 +184,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Subcategory<span class="text-danger">*</span></label>
-                                            <select name="subcategory_id" id="subcategory" class="form-control">
+                                            <select name="subcategory_id" id="subcategory" class="form-select">
                                                 <option value="">Select Subcategory</option>
                                             </select>
                                         </div>
@@ -232,7 +232,7 @@
                                         </div>
                                         <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Status</label>
-                                            <select name="status" class="form-control">
+                                            <select name="status" class="form-select">
                                                 <option value="draft" {{ old('status', $post->status ?? '') == 'draft' ? 'selected' : '' }}>Draft</option>
                                                 <option value="published" {{ old('status', $post->status ?? '') == 'published' ? 'selected' : '' }}>Published</option>
                                                 <option value="archived" {{ old('status', $post->status ?? '') == 'archived' ? 'selected' : '' }}>Archived</option>
@@ -282,18 +282,18 @@
                                             <input type="file" class="form-control" name="file">
                                             @error('file')
                                             <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Import</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div> --}}
-                        @endif
+                        @enderror
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Import</button>
                     </div>
                 </div>
+                </form>
+            </div>
+            </div> --}}
+            @endif
+            </div>
+            </div>
             </div>
         </main>
     </x-slot>
