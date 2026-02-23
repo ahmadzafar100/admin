@@ -54,19 +54,12 @@
                                                 <div class="btn-group btn-group-sm" role="group"
                                                     aria-label="Small button group">
                                                     <a href="{{ url('/admin/news/' . $row->id) }}"
-                                                        class="btn btn-primary btn-sm" target="_blank">View Detail</a>
+                                                        class="btn btn-primary btn-sm" target="_blank" title="View Detail"><i class="align-middle" data-feather="eye"></i></a>
                                                     <a href="{{ url('/admin/news-images/' . $row->id) }}"
-                                                        class="btn btn-info btn-sm" target="_blank">Add Images</a>
+                                                        class="btn btn-info btn-sm" target="_blank" title="Add Image"><i class="align-middle" data-feather="image"></i></a>
                                                     <a href="{{ url('/admin/news/' . $row->id.'/edit') }}"
-                                                        class="btn btn-dark btn-sm">Edit</a>
-                                                    <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
-                                                    <!-- @if ($row->status === 1)
-                                                    <a href="{{ url('/admin/deactivate-news/' . $row->id) }}"
-                                                        class="btn btn-primary btn-sm">Deactivate</a>
-                                                    @else
-                                                    <a href="{{ url('/admin/activate-news/' . $row->id) }}"
-                                                        class="btn btn-warning btn-sm">Activate</a>
-                                                    @endif -->
+                                                        class="btn btn-dark btn-sm" title="Edit"><i class="align-middle" data-feather="edit"></i></a>
+                                                    <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger" title="Delete" data-confirm-delete="true"><i class="align-middle" data-feather="trash-2"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -93,38 +86,38 @@
 </x-layout>
 
 <script>
-$(document).on('change', '.status-dropdown', function() {
+    $(document).on('change', '.status-dropdown', function() {
 
-    var status = $(this).val();
-    var news_id = $(this).data('id');
+        var status = $(this).val();
+        var news_id = $(this).data('id');
 
-     $.ajax({
-        url: "{{ route('news.updateStatus') }}",
-        type: "POST",
-        data: {
-            _token: "{{ csrf_token() }}",
-            news_id: news_id,
-            status: status
-        },
-        success: function(response) {
+        $.ajax({
+            url: "{{ route('news.updateStatus') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                news_id: news_id,
+                status: status
+            },
+            success: function(response) {
 
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'success',
-                title: response.message,
-                showConfirmButton: false,
-                timer: 3000
-            });
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: response.message,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
 
-        },
-        error: function() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-            });
-        }
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                });
+            }
+        });
     });
-});
 </script>

@@ -191,8 +191,8 @@
                                             <div class="btn-group btn-group-sm" role="group"
                                                 aria-label="Small button group">
                                                 <a href="{{ url('/admin/subcategory/' . $row->id.'/edit') }}"
-                                                    class="btn btn-dark btn-sm">Edit</a>
-                                                <a href="{{ route('subcategory.destroy', $row->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                                                    class="btn btn-dark btn-sm" title="Edit"><i class="align-middle" data-feather="edit"></i></a>
+                                                <a href="{{ route('subcategory.destroy', $row->id) }}" class="btn btn-danger" title="Delete" data-confirm-delete="true"><i class="align-middle" data-feather="trash-2"></i></a>
                                                 {{-- <form action="{{url('/admin/subcategory/'.$row->id)}}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -200,10 +200,10 @@
                                                 </form> --}}
                                                 @if ($row->status === 1)
                                                 <a href="{{ url('/admin/deactivate-subcategory/' . $row->id) }}"
-                                                    class="btn btn-primary btn-sm">Deactivate</a>
+                                                    class="btn btn-primary btn-sm" title="Click to Deactivate"><i class="align-middle" data-feather="x-circle"></i></a>
                                                 @else
                                                 <a href="{{ url('/admin/activate-subcategory/' . $row->id) }}"
-                                                    class="btn btn-warning btn-sm">Activate</a>
+                                                    class="btn btn-warning btn-sm" title="Click to Activate"><i class="align-middle" data-feather="check-circle"></i></a>
                                                 @endif
                                             </div>
                                         </td>
