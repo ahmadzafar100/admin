@@ -150,7 +150,7 @@ class NewsController extends Controller
                 'category_id' => 'required',
                 'subcategory_id' => 'required',
                 'title' => 'required|max:255',
-                'slug' => 'required|max:255',
+                // 'slug' => 'required|max:255',
                 'summary' => 'required|max:255',
                 'content' => 'required',
                 'featured_image' => 'mimes:jpeg,png,jpg|max:5120',
@@ -193,7 +193,7 @@ class NewsController extends Controller
         $news->category_id = $data['category_id'];
         $news->subcategory_id = $data['subcategory_id'];
         $news->title = $data['title'];
-        $news->slug = $data['slug'];
+        $news->slug = $this->generateUniqueSlug($request->title);
         $news->summary = $data['summary'];
         $news->content = $data['content'];
         $news->featured_image = $imageName;
