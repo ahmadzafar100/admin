@@ -170,7 +170,7 @@
                                     </ul>
                                     @endif
                                     <div class="row">
-                                        <div class="col-md-3 col-sm-6 mb-3">
+                                        <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Category<span class="text-danger">*</span></label>
                                             <select name="category_id" id="category" class="form-select">
                                                 <option value="">Select Category</option>
@@ -182,22 +182,22 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
+                                        <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Subcategory<span class="text-danger">*</span></label>
                                             <select name="subcategory_id" id="subcategory" class="form-select">
                                                 <option value="">Select Subcategory</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
+                                        <div class="col-md-4 col-sm-6 mb-3">
                                             <label>Title<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="title"
                                                 value="{{ old('title') }}">
                                         </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
+                                        <!-- <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Slug<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="slug"
                                                 value="{{ old('slug') }}">
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-12 mb-3">
                                             <label>Summary<span class="text-danger">*</span></label>
                                             <textarea class="form-control" name="summary" rows="5">{{ old('summary') }}</textarea>

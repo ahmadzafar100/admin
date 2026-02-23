@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class NewsController extends Controller
@@ -44,7 +45,7 @@ class NewsController extends Controller
                 'category_id' => 'required',
                 'subcategory_id' => 'required',
                 'title' => 'required|max:255',
-                'slug' => 'required|max:255',
+                // 'slug' => 'required|max:255',
                 'summary' => 'required|max:255',
                 'content' => 'required',
                 // 'featured_image' => 'required|image|mimes:jpeg,png,jpg|max:5120',
@@ -68,7 +69,7 @@ class NewsController extends Controller
         $news->category_id = $data['category_id'];
         $news->subcategory_id = $data['subcategory_id'];
         $news->title = $data['title'];
-        $news->slug = $data['slug'];
+        $news->slug = $this->generateUniqueSlug($request->title);
         $news->summary = $data['summary'];
         $news->content = $data['content'];
         // $news->featured_image = $imageName;
@@ -236,5 +237,19 @@ class NewsController extends Controller
             'success' => true,
             'message' => 'Status updated successfully'
         ]);
+    }
+
+    public function generateUniqueSlug($title)
+    {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (News::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
     }
 }
