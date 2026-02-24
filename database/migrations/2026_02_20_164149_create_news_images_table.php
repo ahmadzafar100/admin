@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('news_images', function (Blueprint $table) {
+            $table->engine('innoDB');
             $table->id();
             $table->string('image', 255);
             $table->bigInteger('news_id');

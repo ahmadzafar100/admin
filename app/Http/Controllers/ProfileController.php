@@ -3,32 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
     function index()
     {
-        $user = DB::table('users')->where('id', session('user')->id)->first();
+        $user = Auth::user();
         return view('profile', ['data' => $user]);
     }
 
     function update(Request $r)
     {
-        $update = DB::table('users')->where('id', session('user')->id)->update([
-            'name' => $r->name,
-            'email' => $r->email,
-            'mobile' => $r->mobile
-        ]);
+        $user = Auth::user();
+
+        $user->name = $r->name;
+        $user->email = $r->email;
+        $update = $user->save();
 
         if (!$update) {
-            Session::flash('err_msg', 'Profile not updated.');
+            Alert::toast('Profile not saved.', 'error');
             return redirect('/admin/profile');
         }
 
-        Session::flash('success_msg', 'Profile updated.');
+        Alert::toast('Profile saved.', 'success');
         return redirect('/admin/profile');
     }
 
@@ -61,17 +63,18 @@ class ProfileController extends Controller
         }
         $newPassword = Hash::make($r->new_pass);
 
-        $update = DB::table('users')->where('id', session('user')->id)->update([
-            'password' => $newPassword,
-        ]);
+        $user = Auth::user();
+
+        $user->password = $r->newPassword;
+        $update = $user->save();
 
         if (!$update) {
-            Session::flash('err_msg', 'Password not changed.');
+            Alert::toast('Password not changed.', 'error');
             return redirect('/admin/login');
         }
 
         Session::flush();
-        Session::flash('success_msg', 'Password changed successfully. Please login again.');
+        Alert::toast('Password changed successfully. Please login again.', 'success');
         return redirect('/admin/login');
     }
 }
