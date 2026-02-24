@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Route;
     return view('login');
 }); */
 
-Route::get('/admin/login', [AuthController::class, 'login']);
-Route::post('/admin/login', [AuthController::class, 'validate']);
+Route::get('/admin/login', [AuthController::class, 'index'])->name('login');
+Route::post('/admin/login', [AuthController::class, 'login']);
 Route::get('/admin/logout', [AuthController::class, 'logout']);
 Route::get('/captcha-image', [AuthController::class, 'generateCaptcha']);
 
 Route::view('/blank', 'blank');
 
-Route::middleware(['isvalid', 'nocache'])->group(function () {
+Route::middleware(['auth', 'nocache'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index']);
     Route::get('/admin/profile', [ProfileController::class, 'index']);
     Route::post('/admin/profile-update', [ProfileController::class, 'update']);

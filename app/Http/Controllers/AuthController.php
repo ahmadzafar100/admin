@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
-    function login()
+    function index()
     {
         return view('login');
     }
 
-    function validate(Request $r)
+    /* function validate(Request $r)
     {
         $r->validate([
             'username' => 'required',
@@ -27,18 +29,43 @@ class AuthController extends Controller
             return back()->withErrors(['captcha' => 'Invalid Captcha']);
         }
 
-        $row = DB::table('users')->where('username', $r->username)->first();
+        $row = DB::table('users')->where('email', $r->username)->first();
         if (!$row || !Hash::check($r->password, $row->password)) {
             Session::flash('err_msg', 'Wrong credentials...');
             return redirect('/admin/login');
         }
         Session::put('user', $row);
         return redirect('/admin/dashboard');
+    } */
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect('/admin/dashboard');
+        }
+
+        Alert::toast('Invalid Credentials!', 'error');
+        return redirect()->back();
     }
 
-    function logout()
+    /* function logout()
     {
         Session::flush();
+        return redirect('/admin/login');
+    } */
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect('/admin/login');
     }
 

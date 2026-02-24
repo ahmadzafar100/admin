@@ -47,9 +47,9 @@
 										</div>
 										@endif
 										<div class="mb-3">
-											<label class="form-label">Username</label>
-											<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" />
-											@error('username')
+											<label class="form-label">Email</label>
+											<input class="form-control form-control-lg" type="text" name="email" placeholder="Enter your email" />
+											@error('email')
 											<span class="text-danger">{{ $message }}</span>
 											@enderror
 										</div>
@@ -84,7 +84,7 @@
 	</main>
 
 	<script src="{{asset('js/app.js')}}"></script>
-
+	@include('sweetalert::alert')
 </body>
 
 </html>

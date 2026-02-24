@@ -31,10 +31,12 @@
                                                     </div>
                                                 </div>
                                                 <h1 class="mt-1 mb-3">{{$category}}</h1>
+                                                @if($category > 0)
                                                 <div class="mb-0">
                                                     <span class="text-muted d-block">Last Created On</span>
                                                     <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> <strong>{{date('d-m-Y h:i A', strtotime($categoryLastCreated->created_at))}}</strong></span>
                                                 </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </a>
@@ -55,10 +57,12 @@
                                                     </div>
                                                 </div>
                                                 <h1 class="mt-1 mb-3">{{$subcategory}}</h1>
+                                                @if($subcategory > 0)
                                                 <div class="mb-0">
                                                     <span class="text-muted d-block">Last Created On</span>
                                                     <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> <strong>{{date('d-m-Y h:i A', strtotime($subcategoryLastCreated->created_at))}}</strong></span>
                                                 </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </a>
@@ -79,10 +83,12 @@
                                                     </div>
                                                 </div>
                                                 <h1 class="mt-1 mb-3">{{$newsTotal}}</h1>
+                                                @if($newsTotal > 0)
                                                 <div class="mb-0">
                                                     <span class="text-muted d-block">Last Created On</span>
                                                     <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> <strong>{{date('d-m-Y h:i A', strtotime($lastNewsCreated->created_at))}}</strong></span>
                                                 </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </a>
