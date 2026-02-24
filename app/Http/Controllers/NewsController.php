@@ -267,7 +267,6 @@ class NewsController extends Controller
 
     public function export()
     {
-        return 'Export in progress';
-        // return Excel::download(new NewsExport, 'news.xlsx');
+        return Excel::download(new NewsExport, 'news_' . date('dmY_His') . '.xlsx');
     }
 }

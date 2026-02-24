@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class NoCache
@@ -16,6 +17,11 @@ class NoCache
     public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
+
+        // Skip file download responses
+        if ($response instanceof BinaryFileResponse) {
+            return $response;
+        }
 
         return $response->header('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate')
             ->header('Pragma', 'no-cache')
