@@ -45,6 +45,11 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        if ($request->captcha != session('captcha_text')) {
+            Alert::toast('Invalid Captcha!', 'error');
+            return redirect()->back();
+        }
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect('/admin/dashboard');
@@ -66,6 +71,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        Alert::toast('Logout Successfully.', 'success');
         return redirect('/admin/login');
     }
 
