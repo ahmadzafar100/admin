@@ -26,4 +26,12 @@
             <i class="align-middle" data-feather="chevron-right"></i> <span class="align-middle">News</span>
         </a>
     </li>
+
+    @role('admin')
+    <li class="sidebar-item {{ request()->is('admin/permissions') ? 'active' : '' }}">
+        <a class="sidebar-link" href="{{ url('/admin/permissions') }}">
+            <i class="align-middle" data-feather="chevron-right"></i> <span class="align-middle">Permissions</span>
+        </a>
+    </li>
+    @endrole
 </ul>
