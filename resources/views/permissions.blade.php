@@ -27,7 +27,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}.</td>
                                             <td>{{$user->name}}</td>
-                                            <td>{{$user->getRoleNames()->implode(', ')}}</td>
+                                            <td>{{ucwords($user->getRoleNames()->implode(', '))}}</td>
                                             <td>
                                                 @foreach(($user->getAllPermissions()->pluck('name')) as $permits)
                                                 <span class="badge bg-primary mb-1">{{ucwords($permits)}}</span>
