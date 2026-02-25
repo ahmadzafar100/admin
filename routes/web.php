@@ -20,7 +20,7 @@ Route::get('/captcha-image', [AuthController::class, 'generateCaptcha']);
 
 Route::view('/blank', 'blank');
 
-Route::middleware(['auth', 'nocache', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'nocache'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index']);
     Route::get('/admin/profile', [ProfileController::class, 'index']);
     Route::post('/admin/profile-update', [ProfileController::class, 'update']);
