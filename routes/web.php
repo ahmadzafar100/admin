@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NewsImageController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoryController;
 use Illuminate\Support\Facades\Route;
@@ -42,4 +43,5 @@ Route::middleware(['auth', 'nocache'])->group(function () {
     Route::post('/news/update-status', [NewsController::class, 'updateStatus'])
         ->name('news.updateStatus');
     Route::get('/admin/news-export', [NewsController::class, 'export']);
+    Route::get('/admin/permissions', [PermissionController::class, 'index']);
 });
