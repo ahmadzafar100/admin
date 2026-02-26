@@ -16,37 +16,50 @@
                         <form action="{{ url('/admin/give-permit') }}" method="post">
                             @csrf
                             <div class="row">
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="mb-3">
-                                        <label>Role<span class="text-danger">*</span></label>
-                                        <select name="role" id="role" class="form-control">
-                                            <option value="">Select Role</option>
-                                            @foreach ($roles as $role)
-                                            <option value="{{ $role->name }}"
-                                                {{ old('role') == $role->name ? 'selected' : '' }}>
-                                                {{ ucwords($role->name) }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                        @error('role')
-                                        <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Permissions<span class="text-danger">*</span></label>
-                                        <select name="permission[]" id="permission" class="form-control" style="height: 200px;" multiple>
-                                            <option value="">Select Permissions</option>
+                                <div class="col-md-4 col-sm-6 mb-3">
+                                    <label>Role<span class="text-danger">*</span></label>
+                                    <select name="role" id="role" class="form-control">
+                                        <option value="">Select Role</option>
+                                        @foreach ($roles as $role)
+                                        <option value="{{ $role->name }}"
+                                            {{ old('role') == $role->name ? 'selected' : '' }}>
+                                            {{ ucwords($role->name) }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('role')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <!-- <label class="mb-3">Permissions<span class="text-danger">*</span></label><br> -->
+                                    <!-- <select name="permission[]" id="permission" class="form-control" style="height: 200px;" multiple>
                                             @foreach ($permissions as $permission)
                                             <option value="{{ $permission->name }}"
                                                 {{ old('permission') == $permission->name ? 'selected' : '' }}>
                                                 {{ ucwords($permission->name) }}
                                             </option>
                                             @endforeach
-                                        </select>
-                                        @error('permission')
-                                        <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        </select> -->
+                                    <div class="row">
+                                        @foreach ($permissions as $permission)
+                                        <div class="col-md-3 col-sm-6 mb-3">
+                                            <div class="checkbox-wrapper">
+                                                <input type="checkbox" name="permission[]" id="checkbox-transformation-{{$permission->id}}" value="{{$permission->name}}" class="input permission-checkbox">
+                                                <label for="checkbox-transformation-{{$permission->id}}" class="checkbox">
+                                                    <svg viewBox="0 0 18 18">
+                                                        <path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+                                                        <polyline points="1 9 7 14 15 4"></polyline>
+                                                    </svg>
+                                                </label>
+                                                <label for="checkbox-transformation-{{$permission->id}}" class="label">{{ucwords($permission->name)}}</label>
+                                            </div>
+                                        </div>
+                                        @endforeach
                                     </div>
+                                    @error('permission')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary">Give Permit</button>
@@ -105,7 +118,7 @@
 </x-layout>
 
 <script>
-    $('#role').on('change', function() {
+    /* $('#role').on('change', function() {
 
         let roleId = $(this).val();
 
@@ -123,6 +136,31 @@
                 $('#permission')
                     .val(permissions)
                     .trigger('change'); // important if using Select2
+
+            }
+        });
+
+    }); */
+
+    $('#role').on('change', function() {
+
+        let role = $(this).val();
+
+        if (!role) return;
+
+        $.ajax({
+            url: '/get-role-permissions/' + role,
+            type: 'GET',
+            success: function(permissions) {
+
+                // Uncheck all first
+                $('.permission-checkbox').prop('checked', false);
+
+                // Check assigned permissions
+                permissions.forEach(function(permission) {
+                    $('.permission-checkbox[value="' + permission + '"]')
+                        .prop('checked', true);
+                });
 
             }
         });

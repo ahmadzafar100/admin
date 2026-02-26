@@ -22,7 +22,7 @@ class PermissionController extends Controller
     {
         $request->validate([
             'role' => 'required|exists:roles,name',
-            'permission' => 'required|array',
+            'permission' => 'array',
             'permission.*' => 'exists:permissions,name',
         ]);
 
