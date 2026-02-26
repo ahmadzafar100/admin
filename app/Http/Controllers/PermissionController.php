@@ -45,4 +45,14 @@ class PermissionController extends Controller
             $role->permissions->pluck('name')
         );
     }
+
+    public function addPermission(Request $request)
+    {
+        $request->validate([
+            'permission_name' => 'required|string|max:255|unique:permissions,name'
+        ]);
+        Permission::firstOrCreate(['name' => $request->permission_name]);
+        Alert::toast('Permissions added.', 'success');
+        return redirect()->back();
+    }
 }

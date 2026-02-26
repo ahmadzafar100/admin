@@ -46,4 +46,5 @@ Route::middleware(['auth', 'nocache'])->group(function () {
     Route::get('/admin/permissions', [PermissionController::class, 'index']);
     Route::post('/admin/give-permit', [PermissionController::class, 'givePermit']);
     Route::get('/get-role-permissions/{role}', [PermissionController::class, 'getPermissions']);
+    Route::post('/admin/add-permission', [PermissionController::class, 'addPermission']);
 });

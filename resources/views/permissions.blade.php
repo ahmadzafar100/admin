@@ -10,6 +10,30 @@
 
                 <div class="card mb-3">
                     <div class="card-header">
+                        <h5 class="card-title mb-0">Add Permission</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ url('/admin/add-permission') }}" method="post">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6 mb-3">
+                                    <label>Permission Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="permission_name"
+                                        value="{{ old('permission_name') }}">
+                                    @error('permission_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">Add Permisison</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
                         <h5 class="card-title mb-0">Give Permissions</h5>
                     </div>
                     <div class="card-body">
@@ -18,7 +42,7 @@
                             <div class="row">
                                 <div class="col-md-4 col-sm-6 mb-3">
                                     <label>Role<span class="text-danger">*</span></label>
-                                    <select name="role" id="role" class="form-control">
+                                    <select name="role" id="role" class="form-select">
                                         <option value="">Select Role</option>
                                         @foreach ($roles as $role)
                                         <option value="{{ $role->name }}"
