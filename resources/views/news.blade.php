@@ -14,9 +14,9 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <!-- @can('create news') -->
+                        @can('create news')
                         <a href="{{url('/admin/news/create')}}" class="btn btn-secondary mb-3">Post News</a>
-                        <!-- @endcan -->
+                        @endcan
                         <a href="{{url('/admin/news-export')}}" class="btn btn-dark mb-3">Export Excel</a>
                         <div class="card flex-fill">
                             @if (session()->has('action_msg'))
@@ -46,11 +46,15 @@
                                             <td>{{ $row->title }}</td>
                                             <td>{{ date('d/m/Y', strtotime($row->published_at)) }}</td>
                                             <td>
+                                                @can('news status')
                                                 <select data-id="{{$row->id}}" class="form-select form-select-sm status-dropdown">
                                                     <option value="draft" {{$row->status === 'draft' ? 'selected':''}}>Draft</option>
                                                     <option value="published" {{$row->status === 'published' ? 'selected':''}}>Published</option>
                                                     <option value="archived" {{$row->status === 'archived' ? 'selected':''}}>Archived</option>
                                                 </select>
+                                                @else
+                                                {{ucfirst($row->status)}}
+                                                @endcan
                                             </td>
                                             <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
                                             <td>
@@ -58,11 +62,17 @@
                                                     aria-label="Small button group">
                                                     <a href="{{ url('/admin/news/' . $row->id) }}"
                                                         class="btn btn-primary btn-sm" target="_blank" title="View Detail"><i class="align-middle" data-feather="eye"></i></a>
+                                                    @can('add image')
                                                     <a href="{{ url('/admin/news-images/' . $row->id) }}"
                                                         class="btn btn-info btn-sm" target="_blank" title="Add Image"><i class="align-middle" data-feather="image"></i></a>
+                                                    @endcan
+                                                    @can('edit news')
                                                     <a href="{{ url('/admin/news/' . $row->id.'/edit') }}"
                                                         class="btn btn-dark btn-sm" title="Edit"><i class="align-middle" data-feather="edit"></i></a>
+                                                    @endcan
+                                                    @can('delete news')
                                                     <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger" title="Delete" data-confirm-delete="true"><i class="align-middle" data-feather="trash-2"></i></a>
+                                                    @endcan
                                                 </div>
                                             </td>
                                         </tr>

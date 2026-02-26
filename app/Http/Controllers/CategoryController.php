@@ -11,6 +11,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+        $this->middleware('permission:create categories')->only(['create', 'store']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +33,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('create-category');
     }
 
     /**
@@ -68,7 +73,7 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $data = Category::find($id);
-        return view('category', ['editdata' => $data]);
+        return view('create-category', ['editdata' => $data]);
     }
 
     /**

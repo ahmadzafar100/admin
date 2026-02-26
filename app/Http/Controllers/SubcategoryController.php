@@ -12,14 +12,19 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class SubcategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+        $this->middleware('permission:create subcategories')->only(['create', 'store']);
+    }
+
     public function index()
     {
-        $cat = Category::orderBy('name')->get();
         $data = Subcategory::with('category')->latest()->get();
         $title = 'Delete subcategory!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view('subcategory', compact('cat', 'data'));
+        return view('subcategory', compact('data'));
     }
 
     /**
@@ -27,7 +32,8 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        //
+        $cat = Category::orderBy('name')->get();
+        return view('create-subcategory', compact('cat'));
     }
 
     /**
@@ -70,7 +76,7 @@ class SubcategoryController extends Controller
     {
         $data = Subcategory::find($id);
         $category = Category::orderBy('name')->get();
-        return view('subcategory', ['editdata' => $data, 'cat' => $category]);
+        return view('create-subcategory', ['editdata' => $data, 'cat' => $category]);
     }
 
     /**

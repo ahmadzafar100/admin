@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -86,6 +87,8 @@ class NewsController extends Controller
         $data['is_featured'] = $request->has('is_featured');
         $data['is_breaking_news'] = $request->has('is_breaking_news');
 
+        $user = Auth::user();
+
         $news = new News();
         $news->category_id = $data['category_id'];
         $news->subcategory_id = $data['subcategory_id'];
@@ -98,7 +101,7 @@ class NewsController extends Controller
         $news->published_at = date('Y-m-d H:i:s', strtotime($data['published_at']));
         $news->is_featured = $data['is_featured'];
         $news->is_breaking_news = $data['is_breaking_news'];
-        $news->user_id = session('user')->id;
+        $news->user_id = $user->id;
 
         // dd($request->all());
 
@@ -180,6 +183,8 @@ class NewsController extends Controller
         $data['is_featured'] = $request->has('is_featured');
         $data['is_breaking_news'] = $request->has('is_breaking_news');
 
+        $user = Auth::user();
+
         $news = News::findOrFail($id);
 
         $filename = explode('.', $news->featured_image);
@@ -212,7 +217,7 @@ class NewsController extends Controller
         $news->published_at = date('Y-m-d H:i:s', strtotime($data['published_at']));
         $news->is_featured = $data['is_featured'];
         $news->is_breaking_news = $data['is_breaking_news'];
-        $news->user_id = session('user')->id;
+        $news->user_id = $user->id;
 
         // dd($request->all());
 
