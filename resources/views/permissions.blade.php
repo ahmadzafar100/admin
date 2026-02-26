@@ -8,6 +8,54 @@
                     <h1 class="h3 d-inline align-middle">Permissions</h1>
                 </div>
 
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Give Permissions</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ url('/admin/give-permit') }}" method="post">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="mb-3">
+                                        <label>Role<span class="text-danger">*</span></label>
+                                        <select name="role" id="role" class="form-control">
+                                            <option value="">Select Role</option>
+                                            @foreach ($roles as $role)
+                                            <option value="{{ $role->name }}"
+                                                {{ old('role') == $role->name ? 'selected' : '' }}>
+                                                {{ ucwords($role->name) }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('role')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Permissions<span class="text-danger">*</span></label>
+                                        <select name="permission[]" id="permission" class="form-control" style="height: 200px;" multiple>
+                                            <option value="">Select Permissions</option>
+                                            @foreach ($permissions as $permission)
+                                            <option value="{{ $permission->name }}"
+                                                {{ old('permission') == $permission->name ? 'selected' : '' }}>
+                                                {{ ucwords($permission->name) }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('permission')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">Give Permit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card flex-fill">
@@ -55,3 +103,29 @@
         </main>
     </x-slot>
 </x-layout>
+
+<script>
+    $('#role').on('change', function() {
+
+        let roleId = $(this).val();
+
+        if (!roleId) {
+            $('#permission').val([]).trigger('change');
+            return;
+        }
+
+        $.ajax({
+            url: '/get-role-permissions/' + roleId,
+            type: 'GET',
+            success: function(permissions) {
+
+                // Set selected values
+                $('#permission')
+                    .val(permissions)
+                    .trigger('change'); // important if using Select2
+
+            }
+        });
+
+    });
+</script>

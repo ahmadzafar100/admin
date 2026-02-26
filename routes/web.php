@@ -44,4 +44,6 @@ Route::middleware(['auth', 'nocache'])->group(function () {
         ->name('news.updateStatus');
     Route::get('/admin/news-export', [NewsController::class, 'export']);
     Route::get('/admin/permissions', [PermissionController::class, 'index']);
+    Route::post('/admin/give-permit', [PermissionController::class, 'givePermit']);
+    Route::get('/get-role-permissions/{role}', [PermissionController::class, 'getPermissions']);
 });
