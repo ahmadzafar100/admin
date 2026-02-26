@@ -58,22 +58,19 @@
                                             </td>
                                             <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
                                             <td>
-                                                <div class="btn-group btn-group-sm" role="group"
-                                                    aria-label="Small button group">
-                                                    <a href="{{ url('/admin/news/' . $row->id) }}"
-                                                        class="btn btn-primary btn-sm" target="_blank" title="View Detail"><i class="align-middle" data-feather="eye"></i></a>
-                                                    @can('add image')
-                                                    <a href="{{ url('/admin/news-images/' . $row->id) }}"
-                                                        class="btn btn-info btn-sm" target="_blank" title="Add Image"><i class="align-middle" data-feather="image"></i></a>
-                                                    @endcan
-                                                    @can('edit news')
-                                                    <a href="{{ url('/admin/news/' . $row->id.'/edit') }}"
-                                                        class="btn btn-dark btn-sm" title="Edit"><i class="align-middle" data-feather="edit"></i></a>
-                                                    @endcan
-                                                    @can('delete news')
-                                                    <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger" title="Delete" data-confirm-delete="true"><i class="align-middle" data-feather="trash-2"></i></a>
-                                                    @endcan
-                                                </div>
+                                                <a href="{{ url('/admin/news/' . $row->id) }}"
+                                                    class="btn btn-primary btn-sm" target="_blank" title="View Detail"><i class="align-middle" data-feather="eye"></i></a>
+                                                @can('add image')
+                                                <a href="{{ url('/admin/news-images/' . $row->id) }}"
+                                                    class="btn btn-info btn-sm" target="_blank" title="Add Image"><i class="align-middle" data-feather="image"></i></a>
+                                                @endcan
+                                                @can('edit news')
+                                                <a href="{{ url('/admin/news/' . $row->id.'/edit') }}"
+                                                    class="btn btn-dark btn-sm" title="Edit"><i class="align-middle" data-feather="edit"></i></a>
+                                                @endcan
+                                                @can('delete news')
+                                                <a href="{{ route('news.destroy', $row->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true"><i class="align-middle" data-feather="trash-2"></i></a>
+                                                @endcan
                                             </td>
                                         </tr>
                                         @endforeach

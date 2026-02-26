@@ -55,7 +55,7 @@
                                                 class="btn btn-dark btn-sm" title="Edit"><i class="align-middle" data-feather="edit"></i></a>
                                             @endcan
                                             @can('delete categories')
-                                            <a href="{{ route('category.destroy', $row->id) }}" class="btn btn-danger" title="Delete" data-confirm-delete="true"><i class="align-middle" data-feather="trash-2"></i></a>
+                                            <a href="{{ route('category.destroy', $row->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true"><i class="align-middle" data-feather="trash-2"></i></a>
                                             @endcan
                                             @can('category status')
                                             @if ($row->status === 1)
