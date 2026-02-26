@@ -86,7 +86,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">Give Permit</button>
+                                    <button type="submit" class="btn btn-primary">Update Permission</button>
                                 </div>
                             </div>
                         </form>
