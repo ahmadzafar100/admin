@@ -10,7 +10,18 @@ class News extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'title',
+        'slug',
+        'summary',
+        'content',
         'featured_image',
+        'category_id',
+        'subcategory_id',
+        'status',
+        'published_at',
+        'is_featured',
+        'is_breaking_news',
+        'user_id'
     ];
     public function category()
     {

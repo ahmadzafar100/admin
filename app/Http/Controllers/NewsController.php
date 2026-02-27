@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\NewsExport;
+use App\Imports\NewsImport;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
@@ -20,14 +21,14 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    /* public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
 
         $this->middleware('permission:create news', [
             'only' => ['create', 'store']
         ]);
-    } */
+    }
 
     public function index(Request $r)
     {
@@ -42,7 +43,7 @@ class NewsController extends Controller
             ->when($r->is_featured !== null, function ($query) use ($r) {
                 $query->where('is_featured', $r->is_featured);
             })->latest()->get();
-        $title = 'Delete Category!';
+        $title = 'Delete News!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
         return view('news', compact('data'));
@@ -279,6 +280,16 @@ class NewsController extends Controller
         return $slug;
     }
 
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx,csv|max:2048',
+        ]);
+
+        Excel::import(new NewsImport, $request->file('file'));
+        Alert::toast('News Imported Successfully.', 'success');
+        return redirect('/admin/news');
+    }
     public function export()
     {
         return Excel::download(new NewsExport, 'news_' . date('dmY_His') . '.xlsx');

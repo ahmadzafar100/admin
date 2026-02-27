@@ -264,7 +264,7 @@
                                 </form>
                             </div>
                         </div>
-                        {{-- <div class="card mb-3">
+                        <div class="card mb-3">
                             <div class="card-header">
                                 <h5 class="card-title mb-0">Or Import Excel to Add News</h5>
                             </div>
@@ -277,18 +277,18 @@
                                             <input type="file" class="form-control" name="file">
                                             @error('file')
                                             <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">Import</button>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary">Import</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
-                </form>
-            </div>
-            </div> --}}
-            @endif
-            </div>
-            </div>
             </div>
         </main>
     </x-slot>
