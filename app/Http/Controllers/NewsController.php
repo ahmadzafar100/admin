@@ -26,7 +26,7 @@ class NewsController extends Controller
         $this->middleware('auth');
 
         $this->middleware('permission:create news', [
-            'only' => ['create', 'store']
+            'only' => ['create', 'store', 'import']
         ]);
     }
 

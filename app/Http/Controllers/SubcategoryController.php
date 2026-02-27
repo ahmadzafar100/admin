@@ -15,7 +15,7 @@ class SubcategoryController extends Controller
     public function __construct()
     {
         $this->middleware(['auth']);
-        $this->middleware('permission:create subcategories')->only(['create', 'store']);
+        $this->middleware('permission:create subcategories')->only(['create', 'store', 'import']);
     }
 
     public function index()

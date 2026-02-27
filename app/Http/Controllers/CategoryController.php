@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware(['auth']);
-        $this->middleware('permission:create categories')->only(['create', 'store']);
+        $this->middleware('permission:create categories')->only(['create', 'store', 'import']);
     }
     /**
      * Display a listing of the resource.

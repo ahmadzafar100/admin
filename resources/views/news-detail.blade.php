@@ -11,6 +11,10 @@
                     <span class="badge bg-success text-white ms-0" title="Total Views">
                         <i class="align-middle" data-feather="eye"></i> {{$data->views}}
                     </span>
+                    @can('edit news')
+                        <a href="{{ url('/admin/news/' . $data->id.'/edit') }}"
+                        class="btn btn-dark btn-sm" title="Edit"><i class="align-middle" data-feather="edit"></i></a>
+                    @endcan
                 </div>
 
                 <div class="row">
@@ -57,9 +61,12 @@
                                         <th style="vertical-align: middle;">Featured Image</th>
                                         <td>:</td>
                                         <td>
+                                            @if(!empty($data->featured_image))
                                             <a href="{{ asset('uploads/'.$data->featured_image) }}" target="_blank">
                                                 <img src="{{ asset('uploads/'.$data->featured_image) }}" width="300">
                                             </a>
+                                            @endif
+                                            <span class="badge bg-danger">Not Uploaded</span>
                                         </td>
                                     </tr>
                                     <tr>
