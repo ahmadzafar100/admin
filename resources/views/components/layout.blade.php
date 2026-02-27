@@ -30,7 +30,12 @@
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
                 <a class="sidebar-brand" href="{{ url('/') }}">
-                    <span class="align-middle">Admin Panel</span>
+                    <span class="align-middle">
+                        @role('admin'){{'Admin'}}@endrole
+                        @role('user'){{'User'}}@endrole
+                        @role('editor'){{'Editor'}}@endrole
+                        Panel
+                    </span>
                 </a>
                 <x-menu></x-menu>
             </div>

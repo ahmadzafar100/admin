@@ -127,7 +127,7 @@ class SubcategoryController extends Controller
 
         Excel::import(new SubcategoryImport, $request->file('file'));
         Alert::toast('Subcategory Imported Successfully.', 'success');
-        return redirect()->back();
+        return redirect('/admin/subcategory');
     }
 
     function deactivate($id)

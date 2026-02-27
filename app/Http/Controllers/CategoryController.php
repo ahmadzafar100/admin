@@ -122,7 +122,7 @@ class CategoryController extends Controller
 
         Excel::import(new CategoryImport, $request->file('file'));
         Alert::toast('Category Imported Successfully', 'success');
-        return redirect()->back();
+        return redirect('/admin/category');
     }
 
     function deactivate($id)
