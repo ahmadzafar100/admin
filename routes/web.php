@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\NewsImageController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\NewsImageController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
 /* Route::get('/', function () {

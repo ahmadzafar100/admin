@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\NewsImage;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class NewsImageController extends Controller
         $title = 'Delete Image!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view('news-images', compact('data', 'id'));
+        return view('admin.news-images', compact('data', 'id'));
     }
 
     function addImage(Request $r, string $id)

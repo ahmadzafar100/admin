@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     function index()
     {
-        return view('login');
+        return view('admin.login');
     }
 
     /* function validate(Request $r)

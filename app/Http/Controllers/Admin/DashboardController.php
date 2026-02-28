@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\News;
@@ -23,6 +23,6 @@ class DashboardController extends Controller
         $newsArchived = News::where('status', 'archived')->count();
         $lastNewsCreated = News::latest()->first();
         $lastNewsUpdated = News::latest('updated_at')->first();
-        return view('dashboard', compact('category', 'categoryLastCreated', 'subcategory', 'subcategoryLastCreated', 'newsTotal', 'newsBreaking', 'newsFeatured', 'newsDraft', 'newsPublished', 'newsArchived', 'lastNewsCreated', 'lastNewsUpdated'));
+        return view('admin.dashboard', compact('category', 'categoryLastCreated', 'subcategory', 'subcategoryLastCreated', 'newsTotal', 'newsBreaking', 'newsFeatured', 'newsDraft', 'newsPublished', 'newsArchived', 'lastNewsCreated', 'lastNewsUpdated'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Imports\CategoryImport;
 use App\Models\Category;
@@ -25,7 +25,7 @@ class CategoryController extends Controller
         $title = 'Delete Category!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view('category', ['data' => $category]);
+        return view('admin.category', ['data' => $category]);
     }
 
     /**
@@ -33,7 +33,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('create-category');
+        return view('admin.create-category');
     }
 
     /**
@@ -73,7 +73,7 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $data = Category::find($id);
-        return view('create-category', ['editdata' => $data]);
+        return view('admin.create-category', ['editdata' => $data]);
     }
 
     /**

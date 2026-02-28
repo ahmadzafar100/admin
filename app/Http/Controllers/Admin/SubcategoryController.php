@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Imports\SubcategoryImport;
 use App\Models\Category;
@@ -24,7 +24,7 @@ class SubcategoryController extends Controller
         $title = 'Delete subcategory!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view('subcategory', compact('data'));
+        return view('admin.subcategory', compact('data'));
     }
 
     /**
@@ -33,7 +33,7 @@ class SubcategoryController extends Controller
     public function create()
     {
         $cat = Category::orderBy('name')->get();
-        return view('create-subcategory', compact('cat'));
+        return view('admin.create-subcategory', compact('cat'));
     }
 
     /**
@@ -76,7 +76,7 @@ class SubcategoryController extends Controller
     {
         $data = Subcategory::find($id);
         $category = Category::orderBy('name')->get();
-        return view('create-subcategory', ['editdata' => $data, 'cat' => $category]);
+        return view('admin.create-subcategory', ['editdata' => $data, 'cat' => $category]);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class PermissionController extends Controller
         $users = User::with('roles', 'permissions')->get();
         $roles = Role::all();
         $permissions = Permission::all();
-        return view('permissions', compact('users', 'roles', 'permissions'));
+        return view('admin.permissions', compact('users', 'roles', 'permissions'));
     }
 
     function givePermit(Request $request)

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Exports\NewsExport;
 use App\Imports\NewsImport;
@@ -46,7 +46,7 @@ class NewsController extends Controller
         $title = 'Delete News!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        return view('news', compact('data'));
+        return view('admin.news', compact('data'));
     }
 
     /**
@@ -55,7 +55,7 @@ class NewsController extends Controller
     public function create()
     {
         $cat = Category::where('status', 1)->orderBy('name')->get();
-        return view('post-news', compact('cat'));
+        return view('admin.post-news', compact('cat'));
     }
 
     /**
@@ -140,7 +140,7 @@ class NewsController extends Controller
     public function show(string $id)
     {
         $data = News::findOrFail($id);
-        return view('news-detail', compact('data'));
+        return view('admin.news-detail', compact('data'));
     }
 
     /**
@@ -151,7 +151,7 @@ class NewsController extends Controller
         $cat = Category::orderBy('name')->get();
         $editdata = News::findOrFail($id);
         $subcat = Subcategory::where('category_id', $editdata->category_id)->orderBy('name')->get();
-        return view('post-news', compact('editdata', 'cat', 'subcat'));
+        return view('admin.post-news', compact('editdata', 'cat', 'subcat'));
     }
 
     /**

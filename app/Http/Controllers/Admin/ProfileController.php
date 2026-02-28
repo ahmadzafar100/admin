@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +14,7 @@ class ProfileController extends Controller
     function index()
     {
         $user = Auth::user();
-        return view('profile', ['data' => $user]);
+        return view('admin.profile', ['data' => $user]);
     }
 
     function update(Request $r)
@@ -36,7 +36,7 @@ class ProfileController extends Controller
 
     function change_password()
     {
-        return view('change-password');
+        return view('admin.change-password');
     }
 
     function update_password(Request $r)
