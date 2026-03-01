@@ -44,11 +44,14 @@
                                         <td>{{ $row->name }}</td>
                                         <td>{{ $row->display_name }}</td>
                                         <td>
-                                            @if ($row->status === 1)
-                                            <span class="badge bg-success">Active</span>
+                                            @can('subcategory status')
+                                            <div class="switch-wrapper">
+                                                <input type="checkbox" id="switch-material-{{ $row->id }}" class="input status-toggle" data-id="{{ $row->id }}" {{($row->status === 1) ? 'checked' : ''}} />
+                                                <label for="switch-material-{{ $row->id }}" class="toggle"><span></span></label>
+                                            </div>
                                             @else
-                                            <span class="badge bg-danger">Inactive</span>
-                                            @endif
+                                            <span class="badge bg-{{($row->status === 1) ? 'success' : 'danger'}}">{{$row->status}}</span>
+                                            @endcan
                                         </td>
                                         <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>
                                         <td>
@@ -58,15 +61,6 @@
                                             @endcan
                                             @can('delete subcategories')
                                             <a href="{{ route('subcategory.destroy', $row->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true"><i class="align-middle" data-feather="trash-2"></i></a>
-                                            @endcan
-                                            @can('subcategory status')
-                                            @if ($row->status === 1)
-                                            <a href="{{ url('/admin/deactivate-subcategory/' . $row->id) }}"
-                                                class="btn btn-primary btn-sm" title="Click to Deactivate"><i class="align-middle" data-feather="x-circle"></i></a>
-                                            @else
-                                            <a href="{{ url('/admin/activate-subcategory/' . $row->id) }}"
-                                                class="btn btn-warning btn-sm" title="Click to Activate"><i class="align-middle" data-feather="check-circle"></i></a>
-                                            @endif
                                             @endcan
                                         </td>
                                     </tr>
@@ -90,3 +84,31 @@
         </main>
     </x-slot>
 </x-layout>
+
+<script>
+$(document).on('change', '.status-toggle', function() {
+
+    let id = $(this).data('id');
+    let status = $(this).is(':checked') ? 1 : 0;
+
+    $.ajax({
+        url: '/admin/subcategory/status/' + id,
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            status: status
+        },
+        success: function(response) {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: response.message,
+                showConfirmButton: false,
+                timer: 3000
+            });
+        }
+    });
+
+});
+</script>

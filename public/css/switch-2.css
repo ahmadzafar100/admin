@@ -1,0 +1,71 @@
+.switch-wrapper .input {
+   visibility: hidden;
+   display: none;
+}
+
+.switch-wrapper .toggle {
+   position: relative;
+   display: block;
+   width: 51.2px;
+   height: 25.6px;
+   cursor: pointer;
+   -webkit-tap-highlight-color: transparent;
+   transform: translate3d(0, 0, 0);
+}
+
+.switch-wrapper .toggle:before {
+   content: "";
+   position: relative;
+   top: 3.8px;
+   left: 3.8px;
+   width: 43.5px;
+   height: 17.9px;
+   display: block;
+   background: #9A9999;
+   border-radius: 10.2px;
+   transition: background 0.2s ease;
+}
+
+.switch-wrapper .toggle span {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 25.6px;
+   height: 25.6px;
+   display: block;
+   background: white;
+   border-radius: 12.8px;
+   box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
+   transition: all 0.2s ease;
+}
+
+.switch-wrapper .toggle span:before {
+   content: "";
+   position: absolute;
+   display: block;
+   margin: -23px;
+   width: 71.7px;
+   height: 71.7px;
+   background: rgba(71,75,255,0.5);
+   border-radius: 50%;
+   transform: scale(0);
+   opacity: 1;
+   pointer-events: none;
+}
+
+.switch-wrapper .input:checked + .toggle:before {
+   background: #9396ff;
+}
+
+.switch-wrapper .input:checked + .toggle span {
+   background: #474bff;
+   transform: translateX(25.6px);
+   transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
+   box-shadow: 0 3px 8px rgba(71,75,255,0.2);
+}
+
+.switch-wrapper .input:checked + .toggle span:before {
+   transform: scale(1);
+   opacity: 0;
+   transition: all 0.4s ease;
+}

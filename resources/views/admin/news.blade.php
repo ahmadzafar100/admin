@@ -53,7 +53,14 @@
                                                     <option value="archived" {{$row->status === 'archived' ? 'selected':''}}>Archived</option>
                                                 </select>
                                                 @else
-                                                {{ucfirst($row->status)}}
+                                                <span class="badge bg-{{
+                                                match($row->status) {
+                                                    'published' => 'success',
+                                                    'draft' => 'warning',
+                                                    'archived' => 'danger',
+                                                    default => 'secondary'
+                                                };
+                                                }}">{{ucwords($row->status)}}</span>
                                                 @endcan
                                             </td>
                                             <td>{{ date('d/m/Y h:i A', strtotime($row->created_at)) }}</td>

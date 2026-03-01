@@ -148,4 +148,15 @@ class CategoryController extends Controller
             return redirect('/admin/category');
         }
     }
+
+    public function changeStatus(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+        $category->status = $request->status;
+        $category->save();
+
+        return response()->json([
+            'message' => 'Status updated successfully'
+        ]);
+    }
 }

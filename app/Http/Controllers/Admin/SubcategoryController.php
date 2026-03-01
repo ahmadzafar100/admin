@@ -153,4 +153,15 @@ class SubcategoryController extends Controller
             return redirect('/admin/subcategory');
         }
     }
+
+    public function changeStatus(Request $request, $id)
+    {
+        $subcategory = Subcategory::findOrFail($id);
+        $subcategory->status = $request->status;
+        $subcategory->save();
+
+        return response()->json([
+            'message' => 'Status updated successfully'
+        ]);
+    }
 }
