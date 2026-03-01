@@ -32,7 +32,7 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        $cat = Category::orderBy('name')->get();
+        $cat = Category::where('status', 1)->orderBy('name')->get();
         return view('admin.create-subcategory', compact('cat'));
     }
 

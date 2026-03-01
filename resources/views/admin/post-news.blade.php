@@ -11,281 +11,308 @@
                 <div class="row">
                     <div class="col-12">
                         @if (isset($editdata))
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Edit News</h5>
-                            </div>
-                            <div class="card-body">
-                                <form action="{{ url('/admin/news/' . $editdata->id) }}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    @if (session()->has('err_msg'))
-                                    <div class="alert alert-danger">
-                                        {{ session('err_msg') }}
-                                    </div>
-                                    @endif
-                                    @if (session()->has('success_msg'))
-                                    <div class="alert alert-success">
-                                        {{ session('success_msg') }}
-                                    </div>
-                                    @endif
-                                    @if($errors->any())
-                                    <ul class="alert alert-danger">
-                                        @foreach ($errors->all() as $err)
-                                        <li>{{$err}}</li>
-                                        @endforeach
-                                    </ul>
-                                    @endif
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Category<span class="text-danger">*</span></label>
-                                            <select name="category_id" id="category" class="form-select">
-                                                <option value="">Select Category</option>
-                                                @foreach ($cat as $cats)
-                                                <option value="{{ $cats->id }}"
-                                                    {{ old('category_id', $editdata->category_id) == $cats->id ? 'selected' : '' }}>
-                                                    {{ $cats->display_name }}
-                                                </option>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Edit News</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form action="{{ url('/admin/news/' . $editdata->id) }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        @if (session()->has('err_msg'))
+                                            <div class="alert alert-danger">
+                                                {{ session('err_msg') }}
+                                            </div>
+                                        @endif
+                                        @if (session()->has('success_msg'))
+                                            <div class="alert alert-success">
+                                                {{ session('success_msg') }}
+                                            </div>
+                                        @endif
+                                        @if ($errors->any())
+                                            <ul class="alert alert-danger">
+                                                @foreach ($errors->all() as $err)
+                                                    <li>{{ $err }}</li>
                                                 @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Subcategory<span class="text-danger">*</span></label>
-                                            <select name="subcategory_id" id="subcategory" class="form-select">
-                                                <option value="">Select Subcategory</option>
-                                                @foreach ($subcat as $subcats)
-                                                <option value="{{ $subcats->id }}"
-                                                    {{ old('subcategory_id', $editdata->subcategory_id) == $subcats->id ? 'selected' : '' }}>
-                                                    {{ $subcats->display_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Title<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="title"
-                                                value="{{ $editdata->title }}">
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <label>Summary<span class="text-danger">*</span></label>
-                                            <textarea class="form-control" name="summary" rows="5">{{ $editdata->summary }}</textarea>
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <label>Content<span class="text-danger">*</span></label>
-                                            <textarea class="form-control" name="content" id="content">{{ $editdata->content }}</textarea>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="">
-                                                <label>Featured Image<span class="text-danger">*</span></label>
-                                                <input type="file" id="imageInput" accept="image/*" class="form-control" name="featured_image">
+                                            </ul>
+                                        @endif
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-6 mb-3">
+                                                <label>Category<span class="text-danger">*</span></label>
+                                                <select name="category_id" id="category" class="form-select">
+                                                    <option value="">Select Category</option>
+                                                    @foreach ($cat as $cats)
+                                                        <option value="{{ $cats->id }}"
+                                                            {{ old('category_id', $editdata->category_id) == $cats->id ? 'selected' : '' }}>
+                                                            {{ $cats->display_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            <div class="mt-3">
-                                                Width: <span id="cropWidth">0</span> px |
-                                                Height: <span id="cropHeight">0</span> px
+                                            <div class="col-md-4 col-sm-6 mb-3">
+                                                <label>Subcategory<span class="text-danger">*</span></label>
+                                                <select name="subcategory_id" id="subcategory" class="form-select">
+                                                    <option value="">Select Subcategory</option>
+                                                    @foreach ($subcat as $subcats)
+                                                        <option value="{{ $subcats->id }}"
+                                                            {{ old('subcategory_id', $editdata->subcategory_id) == $subcats->id ? 'selected' : '' }}>
+                                                            {{ $subcats->display_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
-                                            <div>
-                                                <img id="preview" style="max-width:100%;">
+                                            <div class="col-md-4 col-sm-6 mb-3">
+                                                <label>Title<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="title"
+                                                    value="{{ $editdata->title }}">
                                             </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label>Summary<span class="text-danger">*</span></label>
+                                                <textarea class="form-control" name="summary" rows="5">{{ $editdata->summary }}</textarea>
+                                            </div>
+                                            <div class="col-md-12 mb-3">
+                                                <label>Content<span class="text-danger">*</span></label>
+                                                <textarea class="form-control" name="content" id="content">{{ $editdata->content }}</textarea>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="">
+                                                    <label>Featured Image<span class="text-danger">*</span></label>
+                                                    <input type="file" id="imageInput" accept="image/*"
+                                                        class="form-control" name="featured_image">
+                                                </div>
+                                                <div class="mt-3">
+                                                    Width: <span id="cropWidth">0</span> px |
+                                                    Height: <span id="cropHeight">0</span> px
+                                                </div>
+                                                <div>
+                                                    <img id="preview" style="max-width:100%;">
+                                                </div>
 
-                                            <button type="button" id="cropBtn" class="btn btn-success">
-                                                Crop & Save
-                                            </button>
+                                                <button type="button" id="cropBtn" class="btn btn-success">
+                                                    Crop & Save
+                                                </button>
 
-                                            <!-- Hidden input to send cropped image -->
-                                            <input type="hidden" name="croppedImage" id="croppedImage">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Cropped Image Preview:</label>
-                                            <img id="croppedPreview" style="max-width:100%; display:none;">
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Status</label>
-                                            <select name="status" class="form-select">
-                                                <option value="draft" {{ old('status', $editdata->status ?? '') == 'draft' ? 'selected' : '' }}>Draft</option>
-                                                <option value="published" {{ old('status', $editdata->status ?? '') == 'published' ? 'selected' : '' }}>Published</option>
-                                                <option value="archived" {{ old('status', $editdata->status ?? '') == 'archived' ? 'selected' : '' }}>Archived</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Publish At<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="published_at" id="published_at" value="{{ date('d-m-Y', strtotime($editdata->published_at)) }}" readonly>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Is Featured News</label>
-                                            <div class="switch-wrapper">
-                                                <label class="rocker rocker-small" for="switch-yes-no">
-                                                    <input type="checkbox" id="switch-yes-no" name="is_featured" value="1" {{$editdata->is_featured == 1 ? 'checked' : ''}}>
-                                                    <span class="switch-left">Yes</span>
-                                                    <span class="switch-right">No</span>
-                                                </label>
+                                                <!-- Hidden input to send cropped image -->
+                                                <input type="hidden" name="croppedImage" id="croppedImage">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Cropped Image Preview:</label>
+                                                <img id="croppedPreview" style="max-width:100%; display:none;">
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 mb-3">
+                                                <label>Status</label>
+                                                <select name="status" class="form-select">
+                                                    <option value="draft"
+                                                        {{ old('status', $editdata->status ?? '') == 'draft' ? 'selected' : '' }}>
+                                                        Draft</option>
+                                                    <option value="published"
+                                                        {{ old('status', $editdata->status ?? '') == 'published' ? 'selected' : '' }}>
+                                                        Published</option>
+                                                    <option value="archived"
+                                                        {{ old('status', $editdata->status ?? '') == 'archived' ? 'selected' : '' }}>
+                                                        Archived</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 mb-3">
+                                                <label>Publish At<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="published_at"
+                                                    id="published_at"
+                                                    value="{{ date('d-m-Y', strtotime($editdata->published_at)) }}"
+                                                    readonly>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 mb-3">
+                                                <label>Is Featured News</label>
+                                                <div class="switch-wrapper">
+                                                    <label class="rocker rocker-small" for="switch-yes-no">
+                                                        <input type="checkbox" id="switch-yes-no" name="is_featured"
+                                                            value="1"
+                                                            {{ $editdata->is_featured == 1 ? 'checked' : '' }}>
+                                                        <span class="switch-left">Yes</span>
+                                                        <span class="switch-right">No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 mb-3">
+                                                <label>Is Breaking News</label>
+                                                <div class="switch-wrapper">
+                                                    <label class="rocker rocker-small" for="switch-yes-no2">
+                                                        <input type="checkbox" id="switch-yes-no2"
+                                                            name="is_breaking_news" value="1"
+                                                            {{ $editdata->is_breaking_news == 1 ? 'checked' : '' }}>
+                                                        <span class="switch-left">Yes</span>
+                                                        <span class="switch-right">No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary">Update
+                                                    News</button>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Is Breaking News</label>
-                                            <div class="switch-wrapper">
-                                                <label class="rocker rocker-small" for="switch-yes-no2">
-                                                    <input type="checkbox" id="switch-yes-no2" name="is_breaking_news" value="1" {{$editdata->is_breaking_news == 1 ? 'checked' : ''}}>
-                                                    <span class="switch-left">Yes</span>
-                                                    <span class="switch-right">No</span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Update
-                                                News</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
                         @endif
                         @if (!isset($editdata))
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Add News Manually</h5>
-                            </div>
-                            <div class="card-body">
-                                <form action="{{ url('/admin/news') }}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    @if (session()->has('err_msg'))
-                                    <div class="alert alert-danger">
-                                        {{ session('err_msg') }}
-                                    </div>
-                                    @endif
-                                    @if (session()->has('success_msg'))
-                                    <div class="alert alert-success">
-                                        {{ session('success_msg') }}
-                                    </div>
-                                    @endif
-                                    @if($errors->any())
-                                    <ul class="alert alert-danger">
-                                        @foreach ($errors->all() as $err)
-                                        <li>{{$err}}</li>
-                                        @endforeach
-                                    </ul>
-                                    @endif
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Category<span class="text-danger">*</span></label>
-                                            <select name="category_id" id="category" class="form-select">
-                                                <option value="">Select Category</option>
-                                                @foreach ($cat as $cats)
-                                                <option value="{{ $cats->id }}"
-                                                    {{ old('category_id') == $cats->id ? 'selected' : '' }}>
-                                                    {{ $cats->display_name }}
-                                                </option>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Add News Manually</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form action="{{ url('/admin/news') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @if (session()->has('err_msg'))
+                                            <div class="alert alert-danger">
+                                                {{ session('err_msg') }}
+                                            </div>
+                                        @endif
+                                        @if (session()->has('success_msg'))
+                                            <div class="alert alert-success">
+                                                {{ session('success_msg') }}
+                                            </div>
+                                        @endif
+                                        @if ($errors->any())
+                                            <ul class="alert alert-danger">
+                                                @foreach ($errors->all() as $err)
+                                                    <li>{{ $err }}</li>
                                                 @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Subcategory<span class="text-danger">*</span></label>
-                                            <select name="subcategory_id" id="subcategory" class="form-select">
-                                                <option value="">Select Subcategory</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Title<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="title"
-                                                value="{{ old('title') }}">
-                                        </div>
-                                        <!-- <div class="col-md-3 col-sm-6 mb-3">
+                                            </ul>
+                                        @endif
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-6 mb-3">
+                                                <label>Category<span class="text-danger">*</span></label>
+                                                <select name="category_id" id="category" class="form-select">
+                                                    <option value="">Select Category</option>
+                                                    @foreach ($cat as $cats)
+                                                        <option value="{{ $cats->id }}"
+                                                            {{ old('category_id') == $cats->id ? 'selected' : '' }}>
+                                                            {{ $cats->display_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 mb-3">
+                                                <label>Subcategory<span class="text-danger">*</span></label>
+                                                <select name="subcategory_id" id="subcategory" class="form-select">
+                                                    <option value="">Select Subcategory</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 mb-3">
+                                                <label>Title<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="title"
+                                                    value="{{ old('title') }}">
+                                            </div>
+                                            <!-- <div class="col-md-3 col-sm-6 mb-3">
                                             <label>Slug<span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="slug"
                                                 value="{{ old('slug') }}">
                                         </div> -->
-                                        <div class="col-md-12 mb-3">
-                                            <label>Summary<span class="text-danger">*</span></label>
-                                            <textarea class="form-control" name="summary" rows="5">{{ old('summary') }}</textarea>
-                                        </div>
-                                        <div class="col-md-12 mb-3">
-                                            <label>Content<span class="text-danger">*</span></label>
-                                            <textarea class="form-control" name="content" id="content">{{ old('content') }}</textarea>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <div class="">
-                                                <label>Featured Image<span class="text-danger">*</span></label>
-                                                <input type="file" id="imageInput" accept="image/*" class="form-control" name="featured_image">
+                                            <div class="col-md-12 mb-3">
+                                                <label>Summary<span class="text-danger">*</span></label>
+                                                <textarea class="form-control" name="summary" rows="5">{{ old('summary') }}</textarea>
                                             </div>
-                                            <div class="mt-3">
-                                                Width: <span id="cropWidth">0</span> px |
-                                                Height: <span id="cropHeight">0</span> px
+                                            <div class="col-md-12 mb-3">
+                                                <label>Content<span class="text-danger">*</span></label>
+                                                <textarea class="form-control" name="content" id="content">{{ old('content') }}</textarea>
                                             </div>
-                                            <div>
-                                                <img id="preview" style="max-width:100%;">
-                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="">
+                                                    <label>Featured Image<span class="text-danger">*</span></label>
+                                                    <input type="file" id="imageInput" accept="image/*"
+                                                        class="form-control" name="featured_image">
+                                                </div>
+                                                <div class="mt-3">
+                                                    Width: <span id="cropWidth">0</span> px |
+                                                    Height: <span id="cropHeight">0</span> px
+                                                </div>
+                                                <div>
+                                                    <img id="preview" style="max-width:100%;">
+                                                </div>
 
-                                            <button type="button" id="cropBtn" class="btn btn-success">
-                                                Crop & Save
-                                            </button>
+                                                <button type="button" id="cropBtn" class="btn btn-success">
+                                                    Crop & Save
+                                                </button>
 
-                                            <!-- Hidden input to send cropped image -->
-                                            <input type="hidden" name="croppedImage" id="croppedImage">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Cropped Image Preview:</label>
-                                            <img id="croppedPreview" style="max-width:100%; display:none;">
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Status</label>
-                                            <select name="status" class="form-select">
-                                                <option value="draft" {{ old('status', $post->status ?? '') == 'draft' ? 'selected' : '' }}>Draft</option>
-                                                <option value="published" {{ old('status', $post->status ?? '') == 'published' ? 'selected' : '' }}>Published</option>
-                                                <option value="archived" {{ old('status', $post->status ?? '') == 'archived' ? 'selected' : '' }}>Archived</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Publish At<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="published_at" id="published_at" value="{{ old('published_at') }}" readonly>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Is Featured News</label>
-                                            <div class="switch-wrapper">
-                                                <label class="rocker rocker-small" for="switch-yes-no">
-                                                    <input type="checkbox" id="switch-yes-no" name="is_featured" value="1" {{old('is_featured') == 1 ? 'checked' : ''}}>
-                                                    <span class="switch-left">Yes</span>
-                                                    <span class="switch-right">No</span>
-                                                </label>
+                                                <!-- Hidden input to send cropped image -->
+                                                <input type="hidden" name="croppedImage" id="croppedImage">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label>Cropped Image Preview:</label>
+                                                <img id="croppedPreview" style="max-width:100%; display:none;">
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 mb-3">
+                                                <label>Status</label>
+                                                <select name="status" class="form-select">
+                                                    <option value="draft"
+                                                        {{ old('status', $post->status ?? '') == 'draft' ? 'selected' : '' }}>
+                                                        Draft</option>
+                                                    <option value="published"
+                                                        {{ old('status', $post->status ?? '') == 'published' ? 'selected' : '' }}>
+                                                        Published</option>
+                                                    <option value="archived"
+                                                        {{ old('status', $post->status ?? '') == 'archived' ? 'selected' : '' }}>
+                                                        Archived</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 mb-3">
+                                                <label>Publish At<span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="published_at"
+                                                    id="published_at" value="{{ old('published_at') }}" readonly>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 mb-3">
+                                                <label>Is Featured News</label>
+                                                <div class="switch-wrapper">
+                                                    <label class="rocker rocker-small" for="switch-yes-no">
+                                                        <input type="checkbox" id="switch-yes-no" name="is_featured"
+                                                            value="1"
+                                                            {{ old('is_featured') == 1 ? 'checked' : '' }}>
+                                                        <span class="switch-left">Yes</span>
+                                                        <span class="switch-right">No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-6 mb-3">
+                                                <label>Is Breaking News</label>
+                                                <div class="switch-wrapper">
+                                                    <label class="rocker rocker-small" for="switch-yes-no2">
+                                                        <input type="checkbox" id="switch-yes-no2"
+                                                            name="is_breaking_news" value="1"
+                                                            {{ old('is_breaking_news') == 1 ? 'checked' : '' }}>
+                                                        <span class="switch-left">Yes</span>
+                                                        <span class="switch-right">No</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary">Add News</button>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-sm-6 mb-3">
-                                            <label>Is Breaking News</label>
-                                            <div class="switch-wrapper">
-                                                <label class="rocker rocker-small" for="switch-yes-no2">
-                                                    <input type="checkbox" id="switch-yes-no2" name="is_breaking_news" value="1" {{old('is_breaking_news') == 1 ? 'checked' : ''}}>
-                                                    <span class="switch-left">Yes</span>
-                                                    <span class="switch-right">No</span>
-                                                </label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Or Import Excel to Add News</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form action="/admin/news-import" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-6 mb-3">
+                                                <input type="file" class="form-control" name="file">
+                                                @error('file')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary">Import</button>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Add News</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Or Import Excel to Add News</h5>
-                            </div>
-                            <div class="card-body">
-                                <form action="/admin/news-import" method="post"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <input type="file" class="form-control" name="file">
-                                            @error('file')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary">Import</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
                         @endif
                     </div>
                 </div>
@@ -426,8 +453,10 @@
                     viewMode: 1,
                     autoCropArea: 1,
                     crop(event) {
-                        document.getElementById('cropWidth').innerText = Math.round(event.detail.width);
-                        document.getElementById('cropHeight').innerText = Math.round(event.detail.height);
+                        document.getElementById('cropWidth').innerText = Math.round(event
+                            .detail.width);
+                        document.getElementById('cropHeight').innerText = Math.round(event
+                            .detail.height);
                     }
                 });
 
