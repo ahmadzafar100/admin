@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'homepage');
+Route::view('/contact-us', 'contact');
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/admin/login', 'index')->name('login');

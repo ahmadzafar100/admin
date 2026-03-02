@@ -30,11 +30,17 @@
     <div class="wrapper">
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="{{ url('/') }}">
+                <a class="sidebar-brand" href="{{ url('/admin/dashboard') }}">
                     <span class="align-middle">
-                        @role('admin'){{'Admin'}}@endrole
-                        @role('user'){{'User'}}@endrole
-                        @role('editor'){{'Editor'}}@endrole
+                        @role('admin')
+                            {{ 'Admin' }}
+                        @endrole
+                        @role('user')
+                            {{ 'User' }}
+                        @endrole
+                        @role('editor')
+                            {{ 'Editor' }}
+                        @endrole
                         Panel
                     </span>
                 </a>
@@ -78,7 +84,8 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
     <!-- <script src="{{ asset('tinymce/tinymce.min.js') }}"></script> -->
-    <script src="https://cdn.tiny.cloud/1/ayet7xh26mtheph8psgildwxc5tlyi9wetq8gjm3f9qf63tm/tinymce/6/tinymce.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/ayet7xh26mtheph8psgildwxc5tlyi9wetq8gjm3f9qf63tm/tinymce/6/tinymce.min.js">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
 
