@@ -94,6 +94,26 @@
                                     </a>
                                 </div>
                                 <div class="col-md-4 col-sm-6">
+                                    <a href="{{ url('/admin/news') }}">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col mt-0">
+                                                        <h5 class="card-title">Today News</h5>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <div class="stat text-primary">
+                                                            <i class="align-middle fas fa-calendar-day"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h1 class="mt-1 mb-3">{{$newsToday}}</h1>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
                                     <a href="{{ route('news.index', ['is_breaking' => 1]) }}">
                                         <div class="card">
                                             <div class="card-body">
@@ -109,10 +129,10 @@
                                                     </div>
                                                 </div>
                                                 <h1 class="mt-1 mb-3">{{$newsBreaking}}</h1>
-                                                <div class="mb-0">
+                                                <!-- <div class="mb-0">
                                                     <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
                                                     <span class="text-muted">Since last week</span>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </a>
@@ -133,10 +153,10 @@
                                                     </div>
                                                 </div>
                                                 <h1 class="mt-1 mb-3">{{$newsFeatured}}</h1>
-                                                <div class="mb-0">
+                                                <!-- <div class="mb-0">
                                                     <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
                                                     <span class="text-muted">Since last week</span>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </a>
@@ -157,10 +177,10 @@
                                                     </div>
                                                 </div>
                                                 <h1 class="mt-1 mb-3">{{$newsDraft}}</h1>
-                                                <div class="mb-0">
+                                                <!-- <div class="mb-0">
                                                     <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
                                                     <span class="text-muted">Since last week</span>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </a>
@@ -181,10 +201,10 @@
                                                     </div>
                                                 </div>
                                                 <h1 class="mt-1 mb-3">{{$newsPublished}}</h1>
-                                                <div class="mb-0">
+                                                <!-- <div class="mb-0">
                                                     <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
                                                     <span class="text-muted">Since last week</span>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </a>
@@ -205,10 +225,10 @@
                                                     </div>
                                                 </div>
                                                 <h1 class="mt-1 mb-3">{{$newsArchived}}</h1>
-                                                <div class="mb-0">
+                                                <!-- <div class="mb-0">
                                                     <span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
                                                     <span class="text-muted">Since last week</span>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </a>
@@ -216,7 +236,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-xxl-6 d-flex">
+                    <!-- <div class="col-xl-6 col-xxl-6 d-flex">
                         <div class="card flex-fill">
                             <div class="card-header">
 
@@ -230,7 +250,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </main>

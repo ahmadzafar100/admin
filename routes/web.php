@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use Illuminate\Support\Facades\Route;
 
+Route::view('/', 'homepage');
+
 Route::controller(AuthController::class)->group(function () {
     Route::get('/admin/login', 'index')->name('login');
     Route::post('/admin/login', 'login');
