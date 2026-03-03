@@ -201,7 +201,12 @@ class NewsController extends Controller
 
             $lastId = str_pad($id, 7, '0', STR_PAD_LEFT);
             $extension = $data['featured_image']->getClientOriginalExtension();
-            $imageName = $filename[0] . '.' . $extension;
+
+            if (!empty($filename[0])) {
+                $imageName = $filename[0] . '.' . $extension;
+            } else {
+                $imageName = date('dmY_His') . '_' . $lastId . '.' . $extension;
+            }
 
             File::put(public_path('uploads/' . $imageName), base64_decode($image));
         } else {

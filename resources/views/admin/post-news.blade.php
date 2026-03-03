@@ -45,7 +45,7 @@
                                                     @foreach ($cat as $cats)
                                                         <option value="{{ $cats->id }}"
                                                             {{ old('category_id', $editdata->category_id) == $cats->id ? 'selected' : '' }}>
-                                                            {{ $cats->display_name }}
+                                                            {{ $cats->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -57,7 +57,7 @@
                                                     @foreach ($subcat as $subcats)
                                                         <option value="{{ $subcats->id }}"
                                                             {{ old('subcategory_id', $editdata->subcategory_id) == $subcats->id ? 'selected' : '' }}>
-                                                            {{ $subcats->display_name }}
+                                                            {{ $subcats->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -188,7 +188,7 @@
                                                     @foreach ($cat as $cats)
                                                         <option value="{{ $cats->id }}"
                                                             {{ old('category_id') == $cats->id ? 'selected' : '' }}>
-                                                            {{ $cats->display_name }}
+                                                            {{ $cats->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>

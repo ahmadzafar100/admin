@@ -33,10 +33,10 @@
                 <nav class="navbar navbar-expand-sm bg-dark p-0">
                     <ul class="navbar-nav ml-n2">
                         <li class="nav-item border-right border-secondary">
-                            <a class="nav-link text-body small" href="#">{{ now()->format('l, F d, Y') }}</a>
+                            <span class="nav-link text-body small">{{ now()->format('l, F d, Y') }}</span>
                         </li>
                         <li class="nav-item border-right border-secondary">
-                            <a class="nav-link text-body small" href="#">Advertise</a>
+                            <span class="nav-link text-body small text-uppercase" id="clock"></span>
                         </li>
                         <li class="nav-item border-right border-secondary">
                             <a class="nav-link text-body small" href="{{ url('/contact-us') }}">Contact</a>
@@ -91,7 +91,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
-            <a href="{{url('/')}}" class="navbar-brand d-block d-lg-none">
+            <a href="{{ url('/') }}" class="navbar-brand d-block d-lg-none">
                 <h1 class="m-0 display-4 text-uppercase text-primary">Bharat<span
                         class="text-white font-weight-normal">Brief</span></h1>
             </a>
@@ -100,24 +100,27 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="{{url('/')}}" class="nav-item nav-link active">Home</a>
+                    <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
                     @php
-                    $visibleCategories = $categories->take(11);
-                    $moreCategories = $categories->slice(1);
+                        /* $visibleCategories = $categories->take(11);
+                        $moreCategories = $categories->slice(1); */
                     @endphp
-                    @if($visibleCategories->count())
-                    @foreach($visibleCategories as $category)
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{$category->name}}</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            @if($category->subcategories->count())
-                            @foreach($category->subcategories as $subcategory)
-                            <a href="#" class="dropdown-item">{{$subcategory->name}}</a>
-                            @endforeach
-                            @endif
-                        </div>
-                    </div>
-                    @endforeach
+                    @if ($categories->count())
+                        @foreach ($categories as $category)
+                            <div class="nav-item dropdown">
+                                <a href="{{ url('/category/' . $category->slug) }}" class="nav-link"
+                                    data-toggle="dropdown"
+                                    onclick="window.location=this.href">{{ $category->name }}</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    @if ($category->subcategories->count())
+                                        @foreach ($category->subcategories as $subcategory)
+                                            <a href="{{ url('/subcategory/' . $subcategory->slug) }}"
+                                                class="dropdown-item">{{ $subcategory->name }}</a>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
                     @endif
                 </div>
                 <!-- <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
@@ -260,6 +263,16 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('front/js/main.js') }}"></script>
+    <script>
+        function updateClock() {
+            let now = new Date();
+            let time = now.toLocaleTimeString();
+            document.getElementById('clock').innerHTML = time;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 </body>
 
 </html>
