@@ -273,6 +273,7 @@ class NewsController extends Controller
         $count = 1;
 
         while (News::where('slug', $slug)->exists()) {
+            if ($count === 1) continue;
             $slug = $originalSlug . '-' . $count;
             $count++;
         }

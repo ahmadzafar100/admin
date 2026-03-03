@@ -11,7 +11,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'display_name'
+        'slug'
     ];
 
     protected static function boot()

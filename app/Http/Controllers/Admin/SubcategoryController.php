@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -44,13 +45,12 @@ class SubcategoryController extends Controller
         $request->validate([
             'category' => 'required',
             'name' => 'required|unique:subcategories',
-            'display_name' => 'required'
         ]);
 
         $subcategory = new Subcategory();
         $subcategory->category_id = $request->category;
         $subcategory->name = $request->name;
-        $subcategory->display_name = $request->display_name;
+        $subcategory->slug = $this->generateUniqueSlug($request->name);
         if (!$subcategory->save()) {
             // Session::flash('err_msg', 'Subcategory not saved.');
             Alert::toast('Subcategory not saved.', 'error');
@@ -87,13 +87,12 @@ class SubcategoryController extends Controller
         $request->validate([
             'category' => 'required',
             'name' => 'required|unique:subcategories,name,' . $id,
-            'display_name' => 'required'
         ]);
 
         $subcategory = Subcategory::find($id);
         $subcategory->category_id = $request->category;
         $subcategory->name = $request->name;
-        $subcategory->display_name = $request->display_name;
+        $subcategory->slug = $this->generateUniqueSlug($request->name);
         if (!$subcategory->save()) {
             // Session::flash('err_msg', 'Subcategory not updated.');
             Alert::toast('Subcategory not updated.', 'error');
@@ -163,5 +162,20 @@ class SubcategoryController extends Controller
         return response()->json([
             'message' => 'Status updated successfully'
         ]);
+    }
+
+    public function generateUniqueSlug($title)
+    {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (Subcategory::where('slug', $slug)->exists()) {
+            if ($count === 1) continue;
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
     }
 }

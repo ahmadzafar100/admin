@@ -6,6 +6,7 @@ use App\Imports\CategoryImport;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -43,12 +44,11 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories',
-            'display_name' => 'required'
         ]);
 
         $category = new Category();
         $category->name = $request->name;
-        $category->display_name = $request->display_name;
+        $category->slug = $this->generateUniqueSlug($request->name);
         if (!$category->save()) {
             Alert::toast('Category not saved.', 'error');
             // Session::flash('err_msg', 'Category not saved.');
@@ -83,12 +83,11 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:categories,name,' . $id,
-            'display_name' => 'required'
         ]);
 
         $category = Category::find($id);
         $category->name = $request->name;
-        $category->display_name = $request->display_name;
+        $category->slug = $this->generateUniqueSlug($request->name);
         if (!$category->save()) {
             // Session::flash('err_msg', 'Category not updated.');
             Alert::toast('Category not updated.', 'error');
@@ -158,5 +157,20 @@ class CategoryController extends Controller
         return response()->json([
             'message' => 'Status updated successfully'
         ]);
+    }
+
+    public function generateUniqueSlug($title)
+    {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (Category::where('slug', $slug)->exists()) {
+            if ($count === 1) continue;
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
     }
 }

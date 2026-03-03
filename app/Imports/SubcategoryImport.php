@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Category;
 use App\Models\Subcategory;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class SubcategoryImport implements ToModel
@@ -27,12 +28,12 @@ class SubcategoryImport implements ToModel
 
         $category = Category::firstOrCreate(
             ['name' => $row[0]],
-            ['name' => $row[0], 'display_name' => $row[0]]
+            ['name' => $row[0], 'slug' => Str::slug($row[0])]
         );
 
         return new Subcategory([
             'name' => $row[1],
-            'display_name' => $row[2],
+            'slug' => Str::slug($row[0]),
             'category_id' => $category->id,
         ]);
     }

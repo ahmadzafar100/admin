@@ -22,7 +22,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('*', function ($view) {
-            $view->with('categories', Category::where('status', 1)->orderBy('name')->get());
+            $view->with(
+                'categories',
+                Category::with(['subcategories' => function ($query) {
+                    $query->where('status', 1);
+                }])
+                    ->where('status', 1)
+                    ->orderBy('name')
+                    ->get()
+            );
         });
     }
 }

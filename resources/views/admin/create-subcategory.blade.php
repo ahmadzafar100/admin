@@ -37,7 +37,7 @@
                                                 @foreach ($cat as $cats)
                                                 <option value="{{ $cats->id }}"
                                                     {{ old('category', $editdata->category_id) == $cats->id ? 'selected' : '' }}>
-                                                    {{ $cats->display_name }}
+                                                    {{ $cats->name }}
                                                 </option>
                                                 @endforeach
                                             </select>
@@ -50,14 +50,6 @@
                                             <input type="text" class="form-control" name="name"
                                                 value="{{ $editdata->name }}">
                                             @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Display Name<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="display_name"
-                                                value="{{ $editdata->display_name }}">
-                                            @error('display_name')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -96,7 +88,7 @@
                                                 @foreach ($cat as $cats)
                                                 <option value="{{ $cats->id }}"
                                                     {{ old('category') == $cats->id ? 'selected' : '' }}>
-                                                    {{ $cats->display_name }}
+                                                    {{ $cats->name }}
                                                 </option>
                                                 @endforeach
                                             </select>
@@ -109,14 +101,6 @@
                                             <input type="text" class="form-control" name="name"
                                                 value="{{ old('name') }}">
                                             @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 mb-3">
-                                            <label>Display Name<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="display_name"
-                                                value="{{ old('display_name') }}">
-                                            @error('display_name')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -155,6 +139,7 @@
             </div>
         </main>
     </x-slot>
-</x-layout><div>
+</x-layout>
+<div>
     <!-- An unexamined life is not worth living. - Socrates -->
 </div>

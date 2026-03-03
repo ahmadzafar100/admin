@@ -99,20 +99,22 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
-                <div class="navbar-nav mx-auto py-0">
+                <div class="navbar-nav mr-auto py-0">
                     <a href="{{url('/')}}" class="nav-item nav-link active">Home</a>
                     @php
-                    $visibleCategories = $categories->take(12);
-                    $moreCategories = $categories->slice(6);
+                    $visibleCategories = $categories->take(11);
+                    $moreCategories = $categories->slice(1);
                     @endphp
-                    @if(count($visibleCategories) > 0)
+                    @if($visibleCategories->count())
                     @foreach($visibleCategories as $category)
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{$category->name}}</a>
                         <div class="dropdown-menu rounded-0 m-0">
-                            <a href="#" class="dropdown-item">Menu item 1</a>
-                            <a href="#" class="dropdown-item">Menu item 2</a>
-                            <a href="#" class="dropdown-item">Menu item 3</a>
+                            @if($category->subcategories->count())
+                            @foreach($category->subcategories as $subcategory)
+                            <a href="#" class="dropdown-item">{{$subcategory->name}}</a>
+                            @endforeach
+                            @endif
                         </div>
                     </div>
                     @endforeach

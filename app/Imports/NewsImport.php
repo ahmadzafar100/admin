@@ -26,7 +26,7 @@ class NewsImport implements ToModel, WithHeadingRow
             ],
             [
                 'name' => $row['category'],
-                'display_name' => $row['category'],
+                'slug' => Str::slug($row['category']),
             ]
         );
 
@@ -37,7 +37,7 @@ class NewsImport implements ToModel, WithHeadingRow
             ],
             [
                 'name' => $row['subcategory'],
-                'display_name' => $row['subcategory'],
+                'slug' => Str::slug($row['subcategory']),
                 'category_id' => $category?->id,
             ]
         );

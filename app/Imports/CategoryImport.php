@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class CategoryImport implements ToModel
@@ -20,7 +21,7 @@ class CategoryImport implements ToModel
 
         return new Category([
             'name' => $row[0],
-            'display_name' => $row[1],
+            'slug' => Str::slug($row[0]),
         ]);
     }
 }
