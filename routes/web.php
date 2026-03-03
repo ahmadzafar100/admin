@@ -8,9 +8,10 @@ use App\Http\Controllers\Admin\NewsImageController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'homepage');
+Route::get('/', [HomeController::class, 'index']);
 Route::view('/contact-us', 'contact');
 
 Route::controller(AuthController::class)->group(function () {

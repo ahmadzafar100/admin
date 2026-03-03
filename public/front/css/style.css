@@ -3195,9 +3195,10 @@ input[type="button"].btn-block {
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  padding: 0.25rem 0.5rem;
   clear: both;
   font-weight: 400;
+  font-size: 10px;
   color: #212529;
   text-align: inherit;
   white-space: nowrap;
@@ -9506,9 +9507,10 @@ h6,
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  padding: 20px 15px;
+  padding: 10px 15px;
   color: #FFFFFF;
   font-weight: 500;
+  font-size: 10px;
   text-transform: uppercase;
   outline: none;
 }

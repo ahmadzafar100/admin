@@ -12,7 +12,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" href="{{asset('img/icons/icon-48x48.png')}}" />
 
-	<title>Admin Login</title>
+	<title>Login</title>
 
 	<link href="{{asset('css/app.css')}}" rel="stylesheet">
 	<link href="{{asset('css/alert.css')}}" rel="stylesheet">
@@ -27,7 +27,7 @@
 					<div class="d-table-cell align-middle">
 
 						<div class="text-center mt-4">
-							<h1 class="h2">Admin Login</h1>
+							<h1 class="h2">Login</h1>
 							<p class="lead"></p>
 						</div>
 
