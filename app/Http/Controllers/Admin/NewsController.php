@@ -7,6 +7,7 @@ use App\Imports\NewsImport;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
+use App\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -94,7 +95,7 @@ class NewsController extends Controller
         $news->category_id = $data['category_id'];
         $news->subcategory_id = $data['subcategory_id'];
         $news->title = $data['title'];
-        $news->slug = $this->generateUniqueSlug($request->title);
+        $news->slug = SlugService::generateNewsUniqueSlug($request->title);
         $news->summary = $data['summary'];
         $news->content = $data['content'];
         // $news->featured_image = $imageName;
@@ -210,7 +211,7 @@ class NewsController extends Controller
         $news->category_id = $data['category_id'];
         $news->subcategory_id = $data['subcategory_id'];
         $news->title = $data['title'];
-        $news->slug = $this->generateUniqueSlug($request->title);
+        $news->slug = SlugService::generateNewsUniqueSlug($request->title);
         $news->summary = $data['summary'];
         $news->content = $data['content'];
         $news->featured_image = $imageName;

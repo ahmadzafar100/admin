@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Services\SlugService;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
 
@@ -28,12 +29,12 @@ class SubcategoryImport implements ToModel
 
         $category = Category::firstOrCreate(
             ['name' => $row[0]],
-            ['name' => $row[0], 'slug' => Str::slug($row[0])]
+            ['name' => $row[0], 'slug' => SlugService::generateCategoryUniqueSlug($row[0])]
         );
 
         return new Subcategory([
             'name' => $row[1],
-            'slug' => Str::slug($row[0]),
+            'slug' => SlugService::generateSubcategoryUniqueSlug($row[1]),
             'category_id' => $category->id,
         ]);
     }

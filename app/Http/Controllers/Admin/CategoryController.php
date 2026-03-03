@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Imports\CategoryImport;
 use App\Models\Category;
+use App\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -48,7 +49,7 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->name = $request->name;
-        $category->slug = $this->generateUniqueSlug($request->name);
+        $category->slug = SlugService::generateCategoryUniqueSlug($request->name);
         if (!$category->save()) {
             Alert::toast('Category not saved.', 'error');
             // Session::flash('err_msg', 'Category not saved.');
@@ -87,7 +88,7 @@ class CategoryController extends Controller
 
         $category = Category::find($id);
         $category->name = $request->name;
-        $category->slug = $this->generateUniqueSlug($request->name);
+        $category->slug = SlugService::generateCategoryUniqueSlug($request->name);
         if (!$category->save()) {
             // Session::flash('err_msg', 'Category not updated.');
             Alert::toast('Category not updated.', 'error');

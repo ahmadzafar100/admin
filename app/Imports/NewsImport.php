@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\Subcategory;
+use App\Services\SlugService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -26,7 +27,7 @@ class NewsImport implements ToModel, WithHeadingRow
             ],
             [
                 'name' => $row['category'],
-                'slug' => Str::slug($row['category']),
+                'slug' => SlugService::generateCategoryUniqueSlug($row['category']),
             ]
         );
 
@@ -37,7 +38,7 @@ class NewsImport implements ToModel, WithHeadingRow
             ],
             [
                 'name' => $row['subcategory'],
-                'slug' => Str::slug($row['subcategory']),
+                'slug' => SlugService::generateSubcategoryUniqueSlug($row['subcategory']),
                 'category_id' => $category?->id,
             ]
         );
@@ -46,7 +47,7 @@ class NewsImport implements ToModel, WithHeadingRow
 
         return new News([
             'title' => $row['title'],
-            'slug' => Str::slug($row['title']),
+            'slug' => SlugService::generateNewsUniqueSlug($row['title']),
             'summary' => $row['summary'],
             'content' => $row['content'],
             'featured_image' => '',

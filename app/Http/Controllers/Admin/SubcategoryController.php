@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Imports\SubcategoryImport;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -50,7 +51,7 @@ class SubcategoryController extends Controller
         $subcategory = new Subcategory();
         $subcategory->category_id = $request->category;
         $subcategory->name = $request->name;
-        $subcategory->slug = $this->generateUniqueSlug($request->name);
+        $subcategory->slug = SlugService::generateSubcategoryUniqueSlug($request->name);
         if (!$subcategory->save()) {
             // Session::flash('err_msg', 'Subcategory not saved.');
             Alert::toast('Subcategory not saved.', 'error');
@@ -92,7 +93,7 @@ class SubcategoryController extends Controller
         $subcategory = Subcategory::find($id);
         $subcategory->category_id = $request->category;
         $subcategory->name = $request->name;
-        $subcategory->slug = $this->generateUniqueSlug($request->name);
+        $subcategory->slug = SlugService::generateSubcategoryUniqueSlug($request->name);
         if (!$subcategory->save()) {
             // Session::flash('err_msg', 'Subcategory not updated.');
             Alert::toast('Subcategory not updated.', 'error');
