@@ -23,7 +23,9 @@ class HomeController
         $latestNews2 = $latestNews->slice(4, 2);
         $latestNews3 = $latestNews->slice(6, 2);
         $latestNews4 = $latestNews->slice(8, 1);
-        $latestNews5 = $latestNews->slice(9, 4);
-        return view('homepage', compact('newsSliders', 'featuredNews', 'breakingNews', 'featuredNewsAll', 'latestNews1', 'latestNews2', 'latestNews3', 'latestNews4', 'latestNews5'));
+        $latestNews5 = $latestNews->slice(9, 2);
+        $latestNews6 = $latestNews->slice(11, 2);
+
+        return view('homepage', compact('newsSliders', 'featuredNews', 'breakingNews', 'featuredNewsAll', 'latestNews1', 'latestNews2', 'latestNews3', 'latestNews4', 'latestNews5', 'latestNews6'));
     }
 }
