@@ -81,7 +81,7 @@
                 </a>
             </div>
             <div class="col-lg-8 text-center text-lg-right">
-                <a href="{{ url('/') }}"><img class="img-fluid" src="front/img/logo.png" alt=""></a>
+                <a href="{{ url('/') }}"><img class="img-fluid" src="{{asset('front/img/logo.png')}}" alt=""></a>
             </div>
         </div>
     </div>
@@ -102,25 +102,25 @@
                 <div class="navbar-nav mr-auto py-0">
                     <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
                     @php
-                        /* $visibleCategories = $categories->take(11);
-                        $moreCategories = $categories->slice(1); */
+                    /* $visibleCategories = $categories->take(11);
+                    $moreCategories = $categories->slice(1); */
                     @endphp
                     @if ($categories->count())
-                        @foreach ($categories as $category)
-                            <div class="nav-item dropdown">
-                                <a href="{{ url('/category/' . $category->slug) }}" class="nav-link"
-                                    data-toggle="dropdown"
-                                    onclick="window.location=this.href">{{ $category->name }}</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    @if ($category->subcategories->count())
-                                        @foreach ($category->subcategories as $subcategory)
-                                            <a href="{{ url('/subcategory/' . $subcategory->slug) }}"
-                                                class="dropdown-item">{{ $subcategory->name }}</a>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-                        @endforeach
+                    @foreach ($categories as $category)
+                    <div class="nav-item dropdown">
+                        <a href="{{ url('/news/' . $category->slug) }}" class="nav-link"
+                            data-toggle="dropdown"
+                            onclick="window.location=this.href">{{ $category->name }}</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            @if ($category->subcategories->count())
+                            @foreach ($category->subcategories as $subcategory)
+                            <a href="{{ url('/news/'.$category->slug.'/' . $subcategory->slug) }}"
+                                class="dropdown-item">{{ $subcategory->name }}</a>
+                            @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    @endforeach
                     @endif
                 </div>
                 <!-- <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">

@@ -8,10 +8,13 @@ use App\Http\Controllers\Admin\NewsImageController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SubcategoryController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [FrontController::class, 'index']);
+Route::get('/news/{category}', [FrontController::class, 'categoryWise']);
+Route::get('/news/{category}/{subcategory}', [FrontController::class, 'subcategoryWise']);
+Route::get('/news/{category}/{subcategory}/{news}', [FrontController::class, 'newsDetail']);
 Route::view('/contact-us', 'contact');
 
 Route::controller(AuthController::class)->group(function () {

@@ -50,22 +50,22 @@
     </div>
     <div class="bg-white border border-top-0 p-3">
         @if ($trendingNews->count())
-            @foreach ($trendingNews as $trending)
-                <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                    <img class="img-fluid" src="{{ asset('uploads/' . $trending->featured_image) }}"
-                        style="height: 110px;" alt="">
-                    <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                        <div class="mb-2">
-                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                href="">{{ $trending->category->name }}</a>
-                            <a class="text-body"
-                                href=""><small>{{ date('M d, Y', strtotime($trending->published_at)) }}</small></a>
-                        </div>
-                        <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
-                            href="{{ url('/news-detail/' . $trending->slug) }}">{{ $trending->title }}</a>
-                    </div>
+        @foreach ($trendingNews as $trending)
+        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+            <img class="img-fluid" src="{{ asset('uploads/' . $trending->featured_image) }}"
+                style="height: 110px;" alt="">
+            <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                <div class="mb-2">
+                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                        href="">{{ $trending->category->name }}</a>
+                    <a class="text-body"
+                        href=""><small>{{ date('M d, Y', strtotime($trending->published_at)) }}</small></a>
                 </div>
-            @endforeach
+                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
+                    href="{{ url('/news/'.$trending->category->slug.'/'.$trending->subcategory->slug.'/'.$trending->slug) }}">{{ $trending->title }}</a>
+            </div>
+        </div>
+        @endforeach
         @endif
     </div>
 </div>
