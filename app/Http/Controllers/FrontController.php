@@ -59,7 +59,11 @@ class FrontController
     {
         $categoryName = $category;
         $subcategoryName = $subcategory;
-        $news = News::where('slug', $news)->with(['category', 'subcategory'])->first();
+        $news = News::where('slug', $news)->with(['category', 'subcategory'])->firstOrFail();
+        if (!session()->has('news_' . $news->id)) {
+            $news->increment('views');
+            session()->put('news_' . $news->id, true);
+        }
         return view('news-detail', compact('news', 'categoryName', 'subcategoryName'));
     }
 

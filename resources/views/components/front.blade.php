@@ -102,11 +102,11 @@
                 <div class="navbar-nav mr-auto py-0">
                     <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
                     @php
-                    /* $visibleCategories = $categories->take(11);
-                    $moreCategories = $categories->slice(1); */
+                    $visibleCategories = $categories->take(10);
+                    $moreCategories = $categories->slice(10);
                     @endphp
-                    @if ($categories->count())
-                    @foreach ($categories as $category)
+                    @if ($visibleCategories->count())
+                    @foreach ($visibleCategories as $category)
                     <div class="nav-item dropdown">
                         <a href="{{ url('/news/' . $category->slug) }}" class="nav-link"
                             data-toggle="dropdown"
@@ -122,9 +122,22 @@
                     </div>
                     @endforeach
                     @endif
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link"
+                            data-toggle="dropdown">More</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            @if ($moreCategories->count())
+                            @foreach ($moreCategories as $category)
+                            <a href="{{ url('/news/'.$category->slug) }}"
+                                class="dropdown-item">{{ $category->name }}</a>
+                            @endforeach
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 <form action="{{url('/search')}}" method="get">
-                    <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
+                    <div class="input-group input-group-sm ml-auto d-none d-lg-flex" style="width: 100%; max-width: 220px;">
                         <input type="text" class="form-control border-0" placeholder="Search" name="search" required>
                         <div class="input-group-append">
                             <button class="input-group-text bg-primary text-dark border-0 px-3"><i
@@ -215,12 +228,7 @@
         </div>
     </div>
     <div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
-        <p class="m-0 text-center">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.
-
-            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-            Design by <a href="https://htmlcodex.com">HTML Codex</a><br>
-            Distributed by <a href="https://themewagon.com">ThemeWagon</a>
-        </p>
+        <p class="m-0 text-center">&copy; <a href="{{url('/')}}">BharatBrief</a>. All Rights Reserved.</p>
     </div>
     <!-- Footer End -->
 

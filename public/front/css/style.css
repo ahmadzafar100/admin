@@ -9678,6 +9678,8 @@ h6,
   list-style-type: none;
 }
 
+/* @media screen and (min-width: 992px) { */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
 }
+/* } */
