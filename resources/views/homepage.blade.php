@@ -7,47 +7,47 @@
                 <div class="col-lg-7 px-0">
                     <div class="owl-carousel main-carousel position-relative">
                         @if ($newsSliders->count())
-                        @foreach ($newsSliders as $slider)
-                        <div class="position-relative overflow-hidden" style="height: 500px;">
-                            <img class="img-fluid h-100" src="{{ asset('uploads/' . $slider->featured_image) }}"
-                                style="object-fit: cover;">
-                            <div class="overlay">
-                                <div class="mb-2">
-                                    <span
-                                        class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2">{{ $slider->category->name }}</span>
-                                    <span
-                                        class="text-white">{{ date('M d, Y', strtotime($slider->published_at)) }}</span>
+                            @foreach ($newsSliders as $slider)
+                                <div class="position-relative overflow-hidden" style="height: 500px;">
+                                    <img class="img-fluid h-100" src="{{ asset('uploads/' . $slider->featured_image) }}"
+                                        style="object-fit: cover;">
+                                    <div class="overlay">
+                                        <div class="mb-2">
+                                            <span
+                                                class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2">{{ $slider->category->name }}</span>
+                                            <span
+                                                class="text-white">{{ date('M d, Y', strtotime($slider->published_at)) }}</span>
+                                        </div>
+                                        <a class="h2 m-0 text-white text-uppercase font-weight-bold"
+                                            href="{{ url('/news/' . $slider->category->slug . '/' . $slider->subcategory->slug . '/' . $slider->slug) }}">{{ $slider->title }}</a>
+                                    </div>
                                 </div>
-                                <a class="h2 m-0 text-white text-uppercase font-weight-bold"
-                                    href="{{ url('/news/'.$slider->category->slug.'/'.$slider->subcategory->slug.'/'.$slider->slug) }}">{{ $slider->title }}</a>
-                            </div>
-                        </div>
-                        @endforeach
+                            @endforeach
                         @endif
                     </div>
                 </div>
                 <div class="col-lg-5 px-0">
                     <div class="row mx-0">
                         @if ($featuredNews->count())
-                        @foreach ($featuredNews as $featured)
-                        <div class="col-md-6 px-0">
-                            <div class="position-relative overflow-hidden" style="height: 250px;">
-                                <img class="img-fluid w-100 h-100"
-                                    src="{{ asset('uploads/' . $featured->featured_image) }}"
-                                    style="object-fit: cover;">
-                                <div class="overlay">
-                                    <div class="mb-2">
-                                        <span
-                                            class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2">{{ $featured->category->name }}</span>
-                                        <span
-                                            class="text-white"><small>{{ date('M d, Y', strtotime($featured->published_at)) }}</small></span>
+                            @foreach ($featuredNews as $featured)
+                                <div class="col-md-6 px-0">
+                                    <div class="position-relative overflow-hidden" style="height: 250px;">
+                                        <img class="img-fluid w-100 h-100"
+                                            src="{{ asset('uploads/' . $featured->featured_image) }}"
+                                            style="object-fit: cover;">
+                                        <div class="overlay">
+                                            <div class="mb-2">
+                                                <span
+                                                    class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2">{{ $featured->category->name }}</span>
+                                                <span
+                                                    class="text-white"><small>{{ date('M d, Y', strtotime($featured->published_at)) }}</small></span>
+                                            </div>
+                                            <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold"
+                                                href="{{ url('/news/' . $featured->category->slug . '/' . $featured->subcategory->slug . '/' . $featured->slug) }}">{{ $featured->title }}</a>
+                                        </div>
                                     </div>
-                                    <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold"
-                                        href="{{ url('/news/'.$featured->category->slug.'/'.$featured->subcategory->slug.'/'.$featured->slug) }}">{{ $featured->title }}</a>
                                 </div>
-                            </div>
-                        </div>
-                        @endforeach
+                            @endforeach
                         @endif
                     </div>
                 </div>
@@ -67,12 +67,12 @@
                             <div class="owl-carousel tranding-carousel position-relative d-inline-flex align-items-center ml-3"
                                 style="width: calc(100% - 170px); padding-right: 90px;">
                                 @if ($breakingNews->count())
-                                @foreach ($breakingNews as $breaking)
-                                <div class="text-truncate"><a
-                                        class="text-white text-uppercase font-weight-semi-bold"
-                                        href="{{ url('/news/'.$breaking->category->slug.'/'.$breaking->subcategory->slug.'/'.$breaking->slug) }}">{{ $breaking->title }}</a>
-                                </div>
-                                @endforeach
+                                    @foreach ($breakingNews as $breaking)
+                                        <div class="text-truncate"><a
+                                                class="text-white text-uppercase font-weight-semi-bold"
+                                                href="{{ url('/news/' . $breaking->category->slug . '/' . $breaking->subcategory->slug . '/' . $breaking->slug) }}">{{ $breaking->title }}</a>
+                                        </div>
+                                    @endforeach
                                 @endif
                             </div>
                         </div>
@@ -91,22 +91,22 @@
                 </div>
                 <div class="owl-carousel news-carousel carousel-item-4 position-relative">
                     @if ($featuredNewsAll->count())
-                    @foreach ($featuredNewsAll as $featuredAll)
-                    <div class="position-relative overflow-hidden" style="height: 300px;">
-                        <img class="img-fluid h-100" src="{{ asset('uploads/' . $featured->featured_image) }}"
-                            style="object-fit: cover;">
-                        <div class="overlay">
-                            <div class="mb-2">
-                                <span
-                                    class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2">{{ $slider->category->name }}</span>
-                                <span
-                                    class="text-white"><small>{{ date('M d, Y', strtotime($featured->published_at)) }}</small></span>
+                        @foreach ($featuredNewsAll as $featuredAll)
+                            <div class="position-relative overflow-hidden" style="height: 300px;">
+                                <img class="img-fluid h-100" src="{{ asset('uploads/' . $featured->featured_image) }}"
+                                    style="object-fit: cover;">
+                                <div class="overlay">
+                                    <div class="mb-2">
+                                        <span
+                                            class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2">{{ $slider->category->name }}</span>
+                                        <span
+                                            class="text-white"><small>{{ date('M d, Y', strtotime($featured->published_at)) }}</small></span>
+                                    </div>
+                                    <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold"
+                                        href="{{ url('/news/' . $featured->category->slug . '/' . $featured->subcategory->slug . '/' . $featured->slug) }}">{{ $featured->title }}</a>
+                                </div>
                             </div>
-                            <a class="h6 m-0 text-white text-uppercase font-weight-semi-bold"
-                                href="{{ url('/news/'.$featured->category->slug.'/'.$featured->subcategory->slug.'/'.$featured->slug) }}">{{ $featured->title }}</a>
-                        </div>
-                    </div>
-                    @endforeach
+                        @endforeach
                     @endif
                 </div>
             </div>
@@ -124,174 +124,179 @@
                                 <div class="section-title">
                                     <h4 class="m-0 text-uppercase font-weight-bold">Latest News</h4>
                                     <a class="text-secondary font-weight-medium text-decoration-none"
-                                        href="">View All</a>
+                                        href="{{ url('/latest-news') }}">View All</a>
                                 </div>
                             </div>
                             @if ($latestNews1->count())
-                            @foreach ($latestNews1 as $latest1)
-                            <div class="col-lg-6">
-                                <div class="position-relative mb-3">
-                                    <img class="img-fluid w-100"
-                                        src="{{ asset('uploads/' . $latest1->featured_image) }}"
-                                        style="object-fit: cover;">
-                                    <div class="bg-white border border-top-0 p-4">
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                href="">{{ $latest1->category->name }}</a>
-                                            <a class="text-body"
-                                                href=""><small>{{ date('M d, Y', strtotime($latest1->published_at)) }}</small></a>
+                                @foreach ($latestNews1 as $latest1)
+                                    <div class="col-lg-6">
+                                        <div class="position-relative mb-3">
+                                            <img class="img-fluid w-100"
+                                                src="{{ asset('uploads/' . $latest1->featured_image) }}"
+                                                style="object-fit: cover;">
+                                            <div class="bg-white border border-top-0 p-4">
+                                                <div class="mb-2">
+                                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                                        href="">{{ $latest1->category->name }}</a>
+                                                    <a class="text-body"
+                                                        href=""><small>{{ date('M d, Y', strtotime($latest1->published_at)) }}</small></a>
+                                                </div>
+                                                <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"
+                                                    href="{{ url('/news/' . $latest1->category->slug . '/' . $latest1->subcategory->slug . '/' . $latest1->slug) }}">{{ $latest1->title }}</a>
+                                                <p class="m-0">{{ $latest1->summary }}</p>
+                                            </div>
+                                            <div
+                                                class="d-flex justify-content-between bg-white border border-top-0 p-4">
+                                                <div class="d-flex align-items-center">
+                                                    <img class="rounded-circle mr-2" src="front/img/user.jpg"
+                                                        width="25" height="25" alt="">
+                                                    <small>{{ $latest1->user->name }}</small>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <small class="ml-3"><i
+                                                            class="far fa-eye mr-2"></i>{{ $latest1->views }}</small>
+                                                    <small class="ml-3"><i
+                                                            class="far fa-thumbs-up mr-2"></i>{{ $latest1->likes }}</small>
+                                                    <small class="ml-3"><i class="far fa-comment mr-2"></i>123</small>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"
-                                            href="{{ url('/news/'.$latest1->category->slug.'/'.$latest1->subcategory->slug.'/'.$latest1->slug) }}">{{ $latest1->title }}</a>
-                                        <p class="m-0">{{ $latest1->summary }}</p>
                                     </div>
-                                    <div
-                                        class="d-flex justify-content-between bg-white border border-top-0 p-4">
-                                        <div class="d-flex align-items-center">
-                                            <img class="rounded-circle mr-2" src="front/img/user.jpg"
-                                                width="25" height="25" alt="">
-                                            <small>John Doe</small>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <small class="ml-3"><i class="far fa-eye mr-2"></i>12345</small>
-                                            <small class="ml-3"><i class="far fa-comment mr-2"></i>123</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
+                                @endforeach
                             @endif
 
                             <div class="col-lg-6">
                                 @if ($latestNews2->count())
-                                @foreach ($latestNews2 as $latest2)
-                                <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                    <img class="img-fluid"
-                                        src="{{ asset('uploads/' . $latest2->featured_image) }}"
-                                        style="height: 110px;" alt="">
-                                    <div
-                                        class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                                href="">{{ $latest2->category->name }}</a>
-                                            <a class="text-body"
-                                                href=""><small>{{ date('M d, Y', strtotime($latest2->published_at)) }}</small></a>
+                                    @foreach ($latestNews2 as $latest2)
+                                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+                                            <img class="img-fluid"
+                                                src="{{ asset('uploads/' . $latest2->featured_image) }}"
+                                                style="height: 110px;" alt="">
+                                            <div
+                                                class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                                <div class="mb-2">
+                                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                                        href="">{{ $latest2->category->name }}</a>
+                                                    <a class="text-body"
+                                                        href=""><small>{{ date('M d, Y', strtotime($latest2->published_at)) }}</small></a>
+                                                </div>
+                                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
+                                                    href="{{ url('/news/' . $latest2->category->slug . '/' . $latest2->subcategory->slug . '/' . $latest2->slug) }}">{{ $latest2->title }}</a>
+                                            </div>
                                         </div>
-                                        <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
-                                            href="{{ url('/news/'.$latest2->category->slug.'/'.$latest2->subcategory->slug.'/'.$latest2->slug) }}">{{ $latest2->title }}</a>
-                                    </div>
-                                </div>
-                                @endforeach
+                                    @endforeach
                                 @endif
                             </div>
 
                             <div class="col-lg-6">
                                 @if ($latestNews3->count())
-                                @foreach ($latestNews3 as $latest3)
-                                <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                    <img class="img-fluid"
-                                        src="{{ asset('uploads/' . $latest3->featured_image) }}"
-                                        style="height: 110px;" alt="">
-                                    <div
-                                        class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                                href="">{{ $latest3->category->name }}</a>
-                                            <a class="text-body"
-                                                href=""><small>{{ date('M d, Y', strtotime($latest3->published_at)) }}</small></a>
+                                    @foreach ($latestNews3 as $latest3)
+                                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+                                            <img class="img-fluid"
+                                                src="{{ asset('uploads/' . $latest3->featured_image) }}"
+                                                style="height: 110px;" alt="">
+                                            <div
+                                                class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                                <div class="mb-2">
+                                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                                        href="">{{ $latest3->category->name }}</a>
+                                                    <a class="text-body"
+                                                        href=""><small>{{ date('M d, Y', strtotime($latest3->published_at)) }}</small></a>
+                                                </div>
+                                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
+                                                    href="{{ url('/news/' . $latest3->category->slug . '/' . $latest3->subcategory->slug . '/' . $latest3->slug) }}">{{ $latest3->title }}</a>
+                                            </div>
                                         </div>
-                                        <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
-                                            href="{{ url('/news/'.$latest3->category->slug.'/'.$latest3->subcategory->slug.'/'.$latest3->slug) }}">{{ $latest3->title }}</a>
-                                    </div>
-                                </div>
-                                @endforeach
+                                    @endforeach
                                 @endif
                             </div>
 
                             @if ($latestNews4->count())
-                            @foreach ($latestNews4 as $latest4)
-                            <div class="col-lg-12">
-                                <div class="row news-lg mx-0 mb-3">
-                                    <div class="col-md-6 h-100 px-0">
-                                        <img class="img-fluid h-100"
-                                            src="{{ asset('uploads/' . $latest4->featured_image) }}"
-                                            style="object-fit: cover;">
-                                    </div>
-                                    <div class="col-md-6 d-flex flex-column border bg-white h-100 px-0">
-                                        <div class="mt-auto p-4">
-                                            <div class="mb-2">
-                                                <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                                    href="">{{ $latest4->category->name }}</a>
-                                                <a class="text-body"
-                                                    href=""><small>{{ date('M d, Y', strtotime($latest4->published_at)) }}</small></a>
+                                @foreach ($latestNews4 as $latest4)
+                                    <div class="col-lg-12">
+                                        <div class="row news-lg mx-0 mb-3">
+                                            <div class="col-md-6 h-100 px-0">
+                                                <img class="img-fluid h-100"
+                                                    src="{{ asset('uploads/' . $latest4->featured_image) }}"
+                                                    style="object-fit: cover;">
                                             </div>
-                                            <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"
-                                                href="">{{ $latest4->title }}</a>
-                                            <p class="m-0">{{ $latest4->summary }}</p>
+                                            <div class="col-md-6 d-flex flex-column border bg-white h-100 px-0">
+                                                <div class="mt-auto p-4">
+                                                    <div class="mb-2">
+                                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                                                            href="">{{ $latest4->category->name }}</a>
+                                                        <a class="text-body"
+                                                            href=""><small>{{ date('M d, Y', strtotime($latest4->published_at)) }}</small></a>
+                                                    </div>
+                                                    <a class="h4 d-block mb-3 text-secondary text-uppercase font-weight-bold"
+                                                        href="">{{ $latest4->title }}</a>
+                                                    <p class="m-0">{{ $latest4->summary }}</p>
+                                                </div>
+                                                <div
+                                                    class="d-flex justify-content-between bg-white border-top mt-auto p-4">
+                                                    <div class="d-flex align-items-center">
+                                                        <img class="rounded-circle mr-2" src="front/img/user.jpg"
+                                                            width="25" height="25" alt="">
+                                                        <small>{{ $latest4->user->name }}</small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <small class="ml-3"><i
+                                                                class="far fa-eye mr-2"></i>{{ $latest4->views }}</small>
+                                                        <small class="ml-3"><i
+                                                                class="far fa-thumbs-up mr-2"></i>{{ $latest4->likes }}</small>
+                                                        <small class="ml-3"><i
+                                                                class="far fa-comment mr-2"></i>123</small>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div
-                                            class="d-flex justify-content-between bg-white border-top mt-auto p-4">
-                                            <div class="d-flex align-items-center">
-                                                <img class="rounded-circle mr-2" src="front/img/user.jpg"
-                                                    width="25" height="25" alt="">
-                                                <small>John Doe</small>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <small class="ml-3"><i
-                                                        class="far fa-eye mr-2"></i>12345</small>
-                                                <small class="ml-3"><i
-                                                        class="far fa-comment mr-2"></i>123</small>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            @endforeach
+                                @endforeach
                             @endif
 
                             <div class="col-lg-6">
                                 @if ($latestNews5->count())
-                                @foreach ($latestNews5 as $latest5)
-                                <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                    <img class="img-fluid"
-                                        src="{{ asset('uploads/' . $latest5->featured_image) }}"
-                                        style="height: 110px;" alt="">
-                                    <div
-                                        class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                                href="">{{ $latest5->category->name }}</a>
-                                            <a class="text-body"
-                                                href=""><small>{{ date('M d, Y', strtotime($latest5->published_at)) }}</small></a>
+                                    @foreach ($latestNews5 as $latest5)
+                                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+                                            <img class="img-fluid"
+                                                src="{{ asset('uploads/' . $latest5->featured_image) }}"
+                                                style="height: 110px;" alt="">
+                                            <div
+                                                class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                                <div class="mb-2">
+                                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                                        href="">{{ $latest5->category->name }}</a>
+                                                    <a class="text-body"
+                                                        href=""><small>{{ date('M d, Y', strtotime($latest5->published_at)) }}</small></a>
+                                                </div>
+                                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
+                                                    href="{{ url('/news/' . $latest5->category->slug . '/' . $latest5->subcategory->slug . '/' . $latest5->slug) }}">{{ $latest5->title }}</a>
+                                            </div>
                                         </div>
-                                        <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
-                                            href="{{ url('/news/'.$latest5->category->slug.'/'.$latest5->subcategory->slug.'/'.$latest5->slug) }}">{{ $latest5->title }}</a>
-                                    </div>
-                                </div>
-                                @endforeach
+                                    @endforeach
                                 @endif
                             </div>
 
                             <div class="col-lg-6">
                                 @if ($latestNews6->count())
-                                @foreach ($latestNews6 as $latest6)
-                                <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
-                                    <img class="img-fluid"
-                                        src="{{ asset('uploads/' . $latest6->featured_image) }}"
-                                        style="height: 110px;" alt="">
-                                    <div
-                                        class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
-                                        <div class="mb-2">
-                                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                                                href="">{{ $latest6->category->name }}</a>
-                                            <a class="text-body"
-                                                href=""><small>{{ date('M d, Y', strtotime($latest6->published_at)) }}</small></a>
+                                    @foreach ($latestNews6 as $latest6)
+                                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+                                            <img class="img-fluid"
+                                                src="{{ asset('uploads/' . $latest6->featured_image) }}"
+                                                style="height: 110px;" alt="">
+                                            <div
+                                                class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                                <div class="mb-2">
+                                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                                        href="">{{ $latest6->category->name }}</a>
+                                                    <a class="text-body"
+                                                        href=""><small>{{ date('M d, Y', strtotime($latest6->published_at)) }}</small></a>
+                                                </div>
+                                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
+                                                    href="{{ url('/news/' . $latest6->category->slug . '/' . $latest6->subcategory->slug . '/' . $latest6->slug) }}">{{ $latest6->title }}</a>
+                                            </div>
                                         </div>
-                                        <a class="h6 m-0 text-secondary text-uppercase font-weight-bold"
-                                            href="{{ url('/news/'.$latest6->category->slug.'/'.$latest6->subcategory->slug.'/'.$latest6->slug) }}">{{ $latest6->title }}</a>
-                                    </div>
-                                </div>
-                                @endforeach
+                                    @endforeach
                                 @endif
                             </div>
                         </div>

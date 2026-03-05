@@ -81,7 +81,8 @@
                 </a>
             </div>
             <div class="col-lg-8 text-center text-lg-right">
-                <a href="{{ url('/') }}"><img class="img-fluid" src="{{asset('front/img/logo.png')}}" alt=""></a>
+                <a href="{{ url('/') }}"><img class="img-fluid" src="{{ asset('front/img/logo.png') }}"
+                        alt=""></a>
             </div>
         </div>
     </div>
@@ -102,43 +103,43 @@
                 <div class="navbar-nav mr-auto py-0">
                     <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
                     @php
-                    $visibleCategories = $categories->take(10);
-                    $moreCategories = $categories->slice(10);
+                        $visibleCategories = $categories->take(10);
+                        $moreCategories = $categories->slice(10);
                     @endphp
                     @if ($visibleCategories->count())
-                    @foreach ($visibleCategories as $category)
-                    <div class="nav-item dropdown">
-                        <a href="{{ url('/news/' . $category->slug) }}" class="nav-link"
-                            data-toggle="dropdown"
-                            onclick="window.location=this.href">{{ $category->name }}</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            @if ($category->subcategories->count())
-                            @foreach ($category->subcategories as $subcategory)
-                            <a href="{{ url('/news/'.$category->slug.'/' . $subcategory->slug) }}"
-                                class="dropdown-item">{{ $subcategory->name }}</a>
-                            @endforeach
-                            @endif
-                        </div>
-                    </div>
-                    @endforeach
+                        @foreach ($visibleCategories as $category)
+                            <div class="nav-item dropdown">
+                                <a href="{{ url('/news/' . $category->slug) }}" class="nav-link" data-toggle="dropdown"
+                                    onclick="window.location=this.href">{{ $category->name }}</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    @if ($category->subcategories->count())
+                                        @foreach ($category->subcategories as $subcategory)
+                                            <a href="{{ url('/news/' . $category->slug . '/' . $subcategory->slug) }}"
+                                                class="dropdown-item">{{ $subcategory->name }}</a>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
                     @endif
 
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link"
-                            data-toggle="dropdown">More</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            @if ($moreCategories->count())
-                            @foreach ($moreCategories as $category)
-                            <a href="{{ url('/news/'.$category->slug) }}"
-                                class="dropdown-item">{{ $category->name }}</a>
-                            @endforeach
-                            @endif
+                    @if ($moreCategories->count())
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link" data-toggle="dropdown">More</a>
+                            <div class="dropdown-menu rounded-0 m-0">
+                                @foreach ($moreCategories as $category)
+                                    <a href="{{ url('/news/' . $category->slug) }}"
+                                        class="dropdown-item">{{ $category->name }}</a>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
-                <form action="{{url('/search')}}" method="get">
-                    <div class="input-group input-group-sm ml-auto d-none d-lg-flex" style="width: 100%; max-width: 220px;">
-                        <input type="text" class="form-control border-0" placeholder="Search" name="search" required>
+                <form action="{{ url('/search') }}" method="get">
+                    <div class="input-group input-group-sm ml-auto d-none d-lg-flex"
+                        style="width: 100%; max-width: 220px;">
+                        <input type="text" class="form-control border-0" placeholder="Search" name="search"
+                            required>
                         <div class="input-group-append">
                             <button class="input-group-text bg-primary text-dark border-0 px-3"><i
                                     class="fa fa-search"></i></button>
@@ -177,28 +178,31 @@
             <div class="col-lg-3 col-md-6 mb-5">
                 <h5 class="mb-4 text-white text-uppercase font-weight-bold">Popular News</h5>
                 @php
-                $trendingNews = $trendingNews->take(3);
+                    $trendingNews = $trendingNews->take(3);
                 @endphp
                 @if ($trendingNews->count())
-                @foreach ($trendingNews as $trending)
-                <div class="mb-3">
-                    <div class="mb-2">
-                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
-                            href="">{{ $trending->category->name }}</a>
-                        <a class="text-body" href=""><small>{{ date('M d, Y', strtotime($trending->published_at)) }}</small></a>
-                    </div>
-                    <a class="small text-body text-uppercase font-weight-medium" href="{{ url('/news/'.$trending->category->slug.'/'.$trending->subcategory->slug.'/'.$trending->slug) }}">{{ $trending->title }}</a>
-                </div>
-                @endforeach
+                    @foreach ($trendingNews as $trending)
+                        <div class="mb-3">
+                            <div class="mb-2">
+                                <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2"
+                                    href="">{{ $trending->category->name }}</a>
+                                <a class="text-body"
+                                    href=""><small>{{ date('M d, Y', strtotime($trending->published_at)) }}</small></a>
+                            </div>
+                            <a class="small text-body text-uppercase font-weight-medium"
+                                href="{{ url('/news/' . $trending->category->slug . '/' . $trending->subcategory->slug . '/' . $trending->slug) }}">{{ $trending->title }}</a>
+                        </div>
+                    @endforeach
                 @endif
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
                 <h5 class="mb-4 text-white text-uppercase font-weight-bold">Categories</h5>
                 <div class="m-n1">
-                    @if($categoriesFooter->count())
-                    @foreach($categoriesFooter as $cat)
-                    <a href="{{ url('/news/' . $category->slug) }}" class="btn btn-sm btn-secondary m-1">{{$cat->name}}</a>
-                    @endforeach
+                    @if ($categoriesFooter->count())
+                        @foreach ($categoriesFooter as $cat)
+                            <a href="{{ url('/news/' . $category->slug) }}"
+                                class="btn btn-sm btn-secondary m-1">{{ $cat->name }}</a>
+                        @endforeach
                     @endif
                 </div>
             </div>
@@ -228,7 +232,7 @@
         </div>
     </div>
     <div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
-        <p class="m-0 text-center">&copy; <a href="{{url('/')}}">BharatBrief</a>. All Rights Reserved.</p>
+        <p class="m-0 text-center">&copy; <a href="{{ url('/') }}">BharatBrief</a>. All Rights Reserved.</p>
     </div>
     <!-- Footer End -->
 

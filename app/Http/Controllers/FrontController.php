@@ -14,7 +14,7 @@ class FrontController
         $featuredNews = News::where('status', 'published')->where('is_featured', 1)->with(['category', 'subcategory'])->latest()->take(4)->get();
         $featuredNewsAll = News::where('status', 'published')->where('is_featured', 1)->with(['category', 'subcategory'])->latest()->get();
         $latestNews = News::where('status', 'published')
-            ->with(['category', 'subcategory'])
+            ->with(['category', 'subcategory', 'user'])
             ->latest()
             ->take(13) // total needed: 4+2+2+1+4 = 13
             ->get();
@@ -86,5 +86,14 @@ class FrontController
             ->get();
 
         return view('news', compact('news', 'keyword'));
+    }
+
+    function latestNews()
+    {
+        $news = News::where('status', 'published')
+            ->with(['category', 'subcategory', 'user'])
+            ->latest()
+            ->paginate(9);
+        return view('news', compact('news'));
     }
 }

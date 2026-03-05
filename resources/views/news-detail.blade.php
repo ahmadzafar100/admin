@@ -13,11 +13,12 @@
                             <div class="owl-carousel tranding-carousel position-relative d-inline-flex align-items-center bg-white border border-left-0"
                                 style="width: calc(100% - 180px); padding-right: 100px;">
                                 @if ($trendingNews->count())
-                                @foreach ($trendingNews as $trending)
-                                <div class="text-truncate">
-                                    <a class="text-secondary text-uppercase font-weight-semi-bold" href="{{ url('/news/'.$trending->category->slug.'/'.$trending->subcategory->slug.'/'.$trending->slug) }}">{{ $trending->title }}</a>
-                                </div>
-                                @endforeach
+                                    @foreach ($trendingNews as $trending)
+                                        <div class="text-truncate">
+                                            <a class="text-secondary text-uppercase font-weight-semi-bold"
+                                                href="{{ url('/news/' . $trending->category->slug . '/' . $trending->subcategory->slug . '/' . $trending->slug) }}">{{ $trending->title }}</a>
+                                        </div>
+                                    @endforeach
                                 @endif
                             </div>
                         </div>
@@ -34,24 +35,27 @@
                     <div class="col-lg-12">
                         <!-- News Detail Start -->
                         <div class="position-relative mb-3">
-                            <img class="img-fluid w-100" src="{{ asset('uploads/' . $news->featured_image) }}" style="object-fit: cover;">
+                            <img class="img-fluid w-100" src="{{ asset('uploads/' . $news->featured_image) }}"
+                                style="object-fit: cover;">
                             <div class="bg-white border border-top-0 p-4">
                                 <div class="mb-3">
                                     <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                        href="">{{$categoryName}} {!! (isset($subcategoryName)) ? '<i class="fas fa-arrow-right"></i> '.$subcategoryName : '' !!}</a>
-                                    <a class="text-body" href="">{{ date('M d, Y', strtotime($news->published_at)) }}</a>
+                                        href="">{{ $categoryName }} {!! isset($subcategoryName) ? '<i class="fas fa-arrow-right"></i> ' . $subcategoryName : '' !!}</a>
+                                    <a class="text-body"
+                                        href="">{{ date('M d, Y', strtotime($news->published_at)) }}</a>
                                 </div>
-                                <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{$news->title}}</h1>
+                                <h1 class="mb-3 text-secondary text-uppercase font-weight-bold">{{ $news->title }}</h1>
                                 {!! $news->content !!}
                             </div>
                             <div class="d-flex justify-content-between bg-white border border-top-0 p-4">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle mr-2" src="img/user.jpg" width="25" height="25" alt="">
-                                    <span>John Doe</span>
+                                    <img class="rounded-circle mr-2" src="{{ asset('front/img/user.jpg') }}"
+                                        width="25" height="25" alt="">
+                                    <span>{{ $news->user->name }}</span>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <span class="ml-3"><i class="far fa-eye mr-2"></i>{{$news->views}}</span>
-                                    <span class="ml-3"><i class="far fa-thumbs-up mr-2"></i>{{$news->likes}}</span>
+                                    <span class="ml-3"><i class="far fa-eye mr-2"></i>{{ $news->views }}</span>
+                                    <span class="ml-3"><i class="far fa-thumbs-up mr-2"></i>{{ $news->likes }}</span>
                                     <span class="ml-3"><i class="far fa-comment mr-2"></i>123</span>
                                 </div>
                             </div>
@@ -65,28 +69,41 @@
                             </div>
                             <div class="bg-white border border-top-0 p-4">
                                 <div class="media mb-4">
-                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
+                                        style="width: 45px;">
                                     <div class="media-body">
-                                        <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                                        <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                            accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                        <h6><a class="text-secondary font-weight-bold" href="">John Doe</a>
+                                            <small><i>01 Jan 2045</i></small>
+                                        </h6>
+                                        <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor
+                                            labore
+                                            accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod
+                                            ipsum.</p>
                                         <button class="btn btn-sm btn-outline-secondary">Reply</button>
                                     </div>
                                 </div>
                                 <div class="media">
-                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
+                                        style="width: 45px;">
                                     <div class="media-body">
-                                        <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                                        <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                            accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                        <h6><a class="text-secondary font-weight-bold" href="">John Doe</a>
+                                            <small><i>01 Jan 2045</i></small>
+                                        </h6>
+                                        <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor
+                                            labore
+                                            accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod
+                                            ipsum.</p>
                                         <button class="btn btn-sm btn-outline-secondary">Reply</button>
                                         <div class="media mt-4">
                                             <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
                                                 style="width: 45px;">
                                             <div class="media-body">
-                                                <h6><a class="text-secondary font-weight-bold" href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                                                <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor
-                                                    labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed
+                                                <h6><a class="text-secondary font-weight-bold" href="">John
+                                                        Doe</a> <small><i>01 Jan 2045</i></small></h6>
+                                                <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua,
+                                                    tempor
+                                                    labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores
+                                                    sed sed
                                                     eirmod ipsum.</p>
                                                 <button class="btn btn-sm btn-outline-secondary">Reply</button>
                                             </div>
