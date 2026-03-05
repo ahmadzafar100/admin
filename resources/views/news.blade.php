@@ -9,7 +9,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="section-title">
+                                    @if(isset($categoryName))
                                     <h4 class="m-0 text-uppercase font-weight-bold">{{$categoryName}} {!! (isset($subcategoryName)) ? '<i class="fas fa-arrow-right"></i> '.$subcategoryName : '' !!}</h4>
+                                    @elseif(isset($keyword))
+                                    <h4 class="m-0 text-uppercase font-weight-bold">Result for: "<strong>{{$keyword}}</strong>" ({{ $news->count() }} results)</h4>
+                                    @endif
                                     <!-- <a class="text-secondary font-weight-medium text-decoration-none" href="">View All</a> -->
                                 </div>
                             </div>

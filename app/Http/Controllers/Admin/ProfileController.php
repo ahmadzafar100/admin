@@ -53,7 +53,10 @@ class ProfileController extends Controller
                 'confirm_pass.required' => 'Password confirmation is required.',
             ]
         );
-        if (!Hash::check($r->current_pass, session('user')->password)) {
+
+        $user = Auth::user();
+
+        if (!Hash::check($r->current_pass, $user->password)) {
             Session::flash('err_msg', 'Your current password is incorrect.');
             return redirect('/admin/change-password');
         }
@@ -63,9 +66,7 @@ class ProfileController extends Controller
         }
         $newPassword = Hash::make($r->new_pass);
 
-        $user = Auth::user();
-
-        $user->password = $r->newPassword;
+        $user->password = $newPassword;
         $update = $user->save();
 
         if (!$update) {

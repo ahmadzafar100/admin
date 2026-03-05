@@ -31,17 +31,22 @@ class AppServiceProvider extends ServiceProvider
                 ->orderBy('name')
                 ->get();
 
+            $categoriesFooter = Category::where('status', 1)
+                ->latest()
+                ->take(21)
+                ->get();
+
             $trendingNews = cache()->remember('trending_news', 60, function () {
                 return News::where('status', 'published')
                     ->with(['category', 'subcategory'])
                     ->orderBy('views', 'desc')   // based on views
-                    ->take(5)
                     ->get();
             });
 
             $view->with([
                 'categories'   => $categories,
                 'trendingNews' => $trendingNews,
+                'categoriesFooter' => $categoriesFooter
             ]);
         });
     }

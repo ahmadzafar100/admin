@@ -60,12 +60,27 @@ class FrontController
         $categoryName = $category;
         $subcategoryName = $subcategory;
         $news = News::where('slug', $news)->with(['category', 'subcategory'])->first();
-        $trendingNews = cache()->remember('trending_news', 60, function () {
-            return News::where('status', 'published')
-                ->with(['category', 'subcategory'])
-                ->orderBy('views', 'desc')
-                ->get();
-        });
-        return view('news-detail', compact('news', 'categoryName', 'subcategoryName', 'trendingNews'));
+        return view('news-detail', compact('news', 'categoryName', 'subcategoryName'));
+    }
+
+    function search(Request $request)
+    {
+        $keyword = $request->search;
+
+        $news = News::where('status', 'published')
+            ->where('title', 'LIKE', "%{$keyword}%")
+            ->orWhere('summary', 'LIKE', "%{$keyword}%")
+            ->orWhere('content', 'LIKE', "%{$keyword}%")
+            ->orWhereHas('category', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%{$keyword}%");
+            })
+            ->orWhereHas('subcategory', function ($q) use ($keyword) {
+                $q->where('name', 'LIKE', "%$keyword%");
+            })
+            ->with(['category', 'subcategory'])
+            ->latest()
+            ->get();
+
+        return view('news', compact('news', 'keyword'));
     }
 }

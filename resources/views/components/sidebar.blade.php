@@ -49,6 +49,9 @@
         <h4 class="m-0 text-uppercase font-weight-bold">Tranding News</h4>
     </div>
     <div class="bg-white border border-top-0 p-3">
+        @php
+        $trendingNews = $trendingNews->take(5);
+        @endphp
         @if ($trendingNews->count())
         @foreach ($trendingNews as $trending)
         <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
