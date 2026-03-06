@@ -15,6 +15,8 @@
                                     @elseif(isset($keyword))
                                     <h4 class="m-0 text-uppercase font-weight-bold">Result for:
                                         "<strong>{{ $keyword }}</strong>" ({{ $news->count() }} results)</h4>
+                                    @elseif(isset($today))
+                                    <h4 class="m-0 text-uppercase font-weight-bold">Today News</h4>
                                     @else
                                     <h4 class="m-0 text-uppercase font-weight-bold">Latest News</h4>
                                     @endif
@@ -24,6 +26,7 @@
                         <input type="hidden" id="category" value="{{ $categoryName ?? '' }}">
                         <input type="hidden" id="subcategory" value="{{ $subcategoryName ?? '' }}">
                         <input type="hidden" id="keyword" value="{{ $keyword ?? '' }}">
+                        <input type="hidden" id="today" value="{{ $today ?? '' }}">
                         <div class="row" id="news-container">
                             @if ($news->count())
                             @foreach ($news as $row)
@@ -99,7 +102,8 @@
                 offset: offset,
                 category: $("#category").val(),
                 subcategory: $("#subcategory").val(),
-                keyword: $("#keyword").val()
+                keyword: $("#keyword").val(),
+                today: $("#today").val()
             },
             success: function(data) {
                 $("#news-container").append(data.html);

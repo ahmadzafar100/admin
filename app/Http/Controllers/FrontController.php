@@ -105,7 +105,7 @@ class FrontController
     {
         $offset = $request->offset;
 
-        $query = News::with(['category', 'subcategory'])
+        $query = News::with(['category', 'subcategory', 'user'])
             ->where('status', 'published');
 
         if ($request->category) {
@@ -132,14 +132,31 @@ class FrontController
                 });
         }
 
+        if ($request->today) {
+            $query->whereDate('created_at', today())
+                ->orderBy('created_at', 'desc');
+        }
+
         $news = $query->latest()
             ->offset($request->offset)
-            ->limit(12)
+            ->limit(9)
             ->get();
 
         return response()->json([
             'html' => view('news-items', compact('news'))->render(),
             'count' => $news->count()
         ]);
+    }
+
+    function todayNews()
+    {
+        $news = News::where('status', 'published')
+            ->with(['category', 'subcategory', 'user'])
+            ->whereDate('created_at', today())
+            ->orderBy('created_at', 'desc')
+            ->limit(9)
+            ->get();
+        $today = 1;
+        return view('news', compact('news', 'today'));
     }
 }
