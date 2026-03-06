@@ -16,6 +16,7 @@ Route::get('/news/{category}', [FrontController::class, 'categoryWise']);
 Route::get('/news/{category}/{subcategory}', [FrontController::class, 'subcategoryWise']);
 Route::get('/news/{category}/{subcategory}/{news}', [FrontController::class, 'newsDetail']);
 Route::get('/latest-news/', [FrontController::class, 'latestNews']);
+Route::get('/load-more-news', [FrontController::class, 'loadMoreNews'])->name('news.load.more');
 Route::get('/search', [FrontController::class, 'search']);
 Route::view('/contact-us', 'contact');
 

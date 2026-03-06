@@ -38,6 +38,7 @@ class FrontController
             })
             ->with(['category', 'subcategory'])
             ->latest()
+            ->take(9)
             ->get();
         return view('news', compact('news', 'categoryName'));
     }
@@ -52,6 +53,7 @@ class FrontController
             })
             ->with(['category', 'subcategory'])
             ->latest()
+            ->take(9)
             ->get();
         return view('news', compact('news', 'categoryName', 'subcategoryName'));
     }
@@ -83,6 +85,7 @@ class FrontController
             })
             ->with(['category', 'subcategory'])
             ->latest()
+            ->take(9)
             ->get();
 
         return view('news', compact('news', 'keyword'));
@@ -93,7 +96,50 @@ class FrontController
         $news = News::where('status', 'published')
             ->with(['category', 'subcategory', 'user'])
             ->latest()
-            ->paginate(9);
+            ->take(9)
+            ->get();
         return view('news', compact('news'));
+    }
+
+    function loadMoreNews(Request $request)
+    {
+        $offset = $request->offset;
+
+        $query = News::with(['category', 'subcategory'])
+            ->where('status', 'published');
+
+        if ($request->category) {
+            $query->whereHas('category', function ($query) use ($request) {
+                $query->where('slug', $request->category);
+            });
+        }
+
+        if ($request->subcategory) {
+            $query->whereHas('subcategory', function ($query) use ($request) {
+                $query->where('slug', $request->subcategory);
+            });
+        }
+
+        if ($request->keyword) {
+            $query->where('title', 'LIKE', "%{$request->keyword}%")
+                ->orWhere('summary', 'LIKE', "%{$request->keyword}%")
+                ->orWhere('content', 'LIKE', "%{$request->keyword}%")
+                ->orWhereHas('category', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', "%{$request->keyword}%");
+                })
+                ->orWhereHas('subcategory', function ($q) use ($request) {
+                    $q->where('name', 'LIKE', "%$request->keyword%");
+                });
+        }
+
+        $news = $query->latest()
+            ->offset($request->offset)
+            ->limit(12)
+            ->get();
+
+        return response()->json([
+            'html' => view('news-items', compact('news'))->render(),
+            'count' => $news->count()
+        ]);
     }
 }
