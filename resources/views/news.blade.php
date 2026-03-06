@@ -62,6 +62,12 @@
                                 </div>
                             </div>
                             @endforeach
+                            @else
+                            <div class="col-lg-12">
+                                <div class="d-flex justify-content-center">
+                                    <img src="{{asset('front/img/no-data.png')}}" class="img-fluid" alt="">
+                                </div>
+                            </div>
                             @endif
                         </div>
                         @if(($news->count() !== 0) && ($news->count() === 9))
