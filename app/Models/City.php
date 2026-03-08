@@ -15,4 +15,9 @@ class City extends Model
     {
         return $this->belongsTo(State::class);
     }
+
+    function news()
+    {
+        return $this->hasMany(News::class);
+    }
 }

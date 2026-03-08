@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\NewsExport;
 use App\Imports\NewsImport;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Country;
 use App\Models\News;
+use App\Models\State;
 use App\Models\Subcategory;
 use App\Services\SlugService;
 use Illuminate\Http\Request;
@@ -96,6 +98,9 @@ class NewsController extends Controller
         $news = new News();
         $news->category_id = $data['category_id'];
         $news->subcategory_id = $data['subcategory_id'];
+        $news->country_id = $data['country_id'];
+        $news->state_id = $data['state_id'];
+        $news->city_id = $data['city_id'];
         $news->title = $data['title'];
         $news->slug = SlugService::generateNewsUniqueSlug($request->title);
         $news->summary = $data['summary'];
@@ -154,7 +159,10 @@ class NewsController extends Controller
         $cat = Category::orderBy('name')->get();
         $editdata = News::findOrFail($id);
         $subcat = Subcategory::where('category_id', $editdata->category_id)->orderBy('name')->get();
-        return view('admin.post-news', compact('editdata', 'cat', 'subcat'));
+        $countries = Country::where('flag', 1)->orderBy('name')->get();
+        $states = State::where('country_id', $editdata->country_id)->where('flag', 1)->orderBy('name')->get();
+        $cities = City::where('state_id', $editdata->state_id)->where('flag', 1)->orderBy('name')->get();
+        return view('admin.post-news', compact('editdata', 'cat', 'subcat', 'countries', 'states', 'cities'));
     }
 
     /**
@@ -217,6 +225,9 @@ class NewsController extends Controller
 
         $news->category_id = $data['category_id'];
         $news->subcategory_id = $data['subcategory_id'];
+        $news->country_id = $data['country_id'];
+        $news->state_id = $data['state_id'];
+        $news->city_id = $data['city_id'];
         $news->title = $data['title'];
         $news->slug = SlugService::generateNewsUniqueSlug($request->title);
         $news->summary = $data['summary'];
@@ -257,9 +268,23 @@ class NewsController extends Controller
 
     public function getSubcategories($categoryId)
     {
-        $subcategories = Subcategory::where(['category_id' => $categoryId, 'status' => 1])->get();
+        $subcategories = Subcategory::where(['category_id' => $categoryId, 'status' => 1])->orderBy('name')->get();
 
         return response()->json($subcategories);
+    }
+
+    public function getStates($countryId)
+    {
+        $states = State::where(['country_id' => $countryId, 'flag' => 1])->orderBy('name')->get();
+
+        return response()->json($states);
+    }
+
+    public function getCities($stateId)
+    {
+        $cities = City::where(['state_id' => $stateId, 'flag' => 1])->orderBy('name')->get();
+
+        return response()->json($cities);
     }
 
     public function updateStatus(Request $request)

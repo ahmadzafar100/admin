@@ -61,6 +61,8 @@ Route::middleware(['auth', 'nocache'])->group(function () {
     Route::controller(NewsController::class)->group(function () {
         Route::post('/admin/news-import', 'import');
         Route::get('/get-subcategories/{category}',  'getSubcategories');
+        Route::get('/get-states/{country}',  'getStates');
+        Route::get('/get-cities/{state}',  'getCities');
         Route::post('/news/update-status', 'updateStatus')->name('news.updateStatus');
         Route::get('/admin/news-export', 'export');
     });
