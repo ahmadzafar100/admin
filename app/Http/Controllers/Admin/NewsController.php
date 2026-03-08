@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\NewsExport;
 use App\Imports\NewsImport;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\News;
 use App\Models\Subcategory;
 use App\Services\SlugService;
@@ -56,7 +57,8 @@ class NewsController extends Controller
     public function create()
     {
         $cat = Category::where('status', 1)->orderBy('name')->get();
-        return view('admin.post-news', compact('cat'));
+        $countries = Country::where('flag', 1)->orderBy('name')->get();
+        return view('admin.post-news', compact('cat', 'countries'));
     }
 
     /**

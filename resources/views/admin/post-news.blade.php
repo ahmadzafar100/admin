@@ -182,6 +182,30 @@
                                         @endif
                                         <div class="row">
                                             <div class="col-md-4 col-sm-6 mb-3">
+                                                <label>Country<span class="text-danger">*</span></label>
+                                                <select name="country_id" id="country" class="form-select">
+                                                    <option value="">Select Country</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->id }}"
+                                                            {{ old('country_id') == $country->id ? 'selected' : '' }}>
+                                                            {{ $country->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 mb-3">
+                                                <label>State<span class="text-danger">*</span></label>
+                                                <select name="state_id" id="state" class="form-select">
+                                                    <option value="">Select State</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 mb-3">
+                                                <label>City<span class="text-danger">*</span></label>
+                                                <select name="city_id" id="city" class="form-select">
+                                                    <option value="">Select City</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6 mb-3">
                                                 <label>Category<span class="text-danger">*</span></label>
                                                 <select name="category_id" id="category" class="form-select">
                                                     <option value="">Select Category</option>
