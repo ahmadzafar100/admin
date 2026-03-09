@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ asset('css/select2.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -33,13 +35,13 @@
                 <a class="sidebar-brand" href="{{ url('/admin/dashboard') }}">
                     <span class="align-middle">
                         @role('admin')
-                            {{ 'Admin' }}
+                        {{ 'Admin' }}
                         @endrole
                         @role('user')
-                            {{ 'User' }}
+                        {{ 'User' }}
                         @endrole
                         @role('editor')
-                            {{ 'Editor' }}
+                        {{ 'Editor' }}
                         @endrole
                         Panel
                     </span>
@@ -87,7 +89,10 @@
     <script src="https://cdn.tiny.cloud/1/ayet7xh26mtheph8psgildwxc5tlyi9wetq8gjm3f9qf63tm/tinymce/6/tinymce.min.js">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $('.form-select').select2();
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
